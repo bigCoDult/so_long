@@ -5,7 +5,6 @@ void so_long(int fd)
 	t_win_data	*win_data;
 
 
-	validate_map();
 	win_data = malloc(sizeof(t_win_data));
 	if (win_data == NULL)
 		return ;

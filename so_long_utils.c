@@ -106,50 +106,60 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 void	deal_map(t_win_data *win_data)
 {
 	t_tile	*tile_data;
-	void	***map;
+	void	***tile_map;
+	char	**td_arr_map;
 	tile_data = malloc(sizeof(t_tile));
 	if (tile_data == NULL)
 		return ;
-	tile_data = init_tile(win_data);
-	map = set_map(win_data, tile_data);
-	draw_map(win_data, tile_data, map);
+	td_arr_map = validate_map();
+	tile_data = init_tiles(win_data);
+	tile_map = set_tile_map(win_data, tile_data, td_arr_map);
+	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
 
-void	***set_map(t_win_data *win_data, t_tile *tile_data)
+void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, char **td_arr_map)
 {
-	void	***map;
+	void	***tile_map;
 	int		row;
 	int		col;
 
-	map = malloc(sizeof(void **) * 10);
-	if (map == NULL)
+	tile_map = malloc(sizeof(void **) * 10);
+	if (tile_map == NULL)
 		return (NULL);
 
 	row = 0;
 	while (row < 10)
 	{
-		map[row] = malloc(sizeof(void *) * 10);
-		if (map[row] == NULL)
+		tile_map[row] = malloc(sizeof(void *) * 10);
+		if (tile_map[row] == NULL)
 		{
 			while (--row >= 0)
-				free(map[row]);
-			free(map);
+				free(tile_map[row]);
+			free(tile_map);
 			return (NULL);
 		}
 
 		col = 0;
 		while (col < 10)
 		{
-			map[row][col] = tile_data->rock;
+			if (td_arr_map[row][col] == '1')
+				tile_map[row][col] = tile_data->rock;
+			else if (td_arr_map[row][col] == '0')
+				tile_map[row][col] = tile_data->grass;
+			else if (td_arr_map[row][col] == 'E')
+				tile_map[row][col] = tile_data->door;
+			else if (td_arr_map[row][col] == 'P')
+				tile_map[row][col] = tile_data->rock;
+			// tile_map[row][col] = tile_data->rock;
 			col++;
 		}
 		row++;
 	}
-	return (map);
+	return (tile_map);
 }
 
-void draw_map(t_win_data *win_data, t_tile *tile_data, void ***map)
+void draw_tile_map(t_win_data *win_data, t_tile *tile_data, void ***tile_map)
 {
 	int row;
 	int col;
@@ -160,15 +170,15 @@ void draw_map(t_win_data *win_data, t_tile *tile_data, void ***map)
 		col = 0;
 		while (col <= 9)
 		{
+			// mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_map[row][col], tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
 			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
-			map[row][col] = tile_data->rock;
 			col++;
 		}
 		row++;
 	}
 }
 
-t_tile	*init_tile(t_win_data *win_data)
+t_tile	*init_tiles(t_win_data *win_data)
 {
 	t_tile	*tile_data;
 	tile_data = malloc(sizeof(t_tile));
@@ -247,17 +257,6 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 	return (single_tile);
 }
 
-
-
-
-
-
-
-
-
-
-
-
 char	**validate_map(void)
 {
 	int fd;
@@ -265,7 +264,7 @@ char	**validate_map(void)
 	char	*single_line;
 	char	*map_str;
 	char buf[5];
-	char **map_2d_arr;
+	char **td_arr_map;
 
 	fd = open("map.ber", O_RDONLY);
 	map_str = malloc(sizeof(char) * 1);
@@ -278,48 +277,46 @@ char	**validate_map(void)
 		map_str = join_s(map_str, buf);
 	}
 	printf("%s\n", map_str);
-	if (!is_square(map_str))
-		return (NULL);
-	if (is_wall(map_str))
-		return (NULL);
-	if (is_possible(map_str))
-		return (NULL);
-	map_2d_arr = set_str_to_2d_arr(map_str);
-	return (map_2d_arr);
+	// if (!is_square(map_str))
+	// 	return (NULL);
+	// if (is_wall(map_str))
+	// 	return (NULL);
+	// if (is_possible(map_str))
+	// 	return (NULL);
+	td_arr_map = set_str_to_2d_arr(map_str);
+	return (td_arr_map);
 }
 
 char	**set_str_to_2d_arr(char *map_str)
 {
-	char **map_2d_arr;
-	int row_len;
-	int col_len;
+	t_arr_map_data	*arr_map_data;
 	int row;
 	int col;
 	int index;
 
-	row_len = 0;
-	col_len = 0;
+	arr_map_data->row_len = 0;
+	arr_map_data->col_len = 0;
 	row = 0;
 	col = 0;
 	index = 0;
 	while (map_str[index] != '\0')
 	{
 		if(map_str[index] == '\n')
-			row_len++;
+			arr_map_data->row_len++;
 		index++;
 	}
-	col_len = index / row_len;
-	map_2d_arr = malloc(sizeof(char *) * row_len);
-	if (map_2d_arr == NULL)
+	arr_map_data->col_len = index / arr_map_data->row_len;
+	arr_map_data->td_arr_map = malloc(sizeof(char *) * row_len);
+	if (td_arr_map == NULL)
 		return (NULL);
 	while (row < row_len)
 	{
-		map_2d_arr[row] = malloc(sizeof(char) * col_len);
-		if (map_2d_arr[row] == NULL)
+		arr_map_data->td_arr_map[row] = malloc(sizeof(char) * arr_map_data->col_len);
+		if (arr_map_data->td_arr_map[row] == NULL)
 		{
 			while (row-- >= 0)
-				free(map_2d_arr[row]);
-			free(map_2d_arr);
+				free(arr_map_data->td_arr_map[row]);
+			free(arr_map_data->td_arr_map);
 			return (NULL);
 		}
 		row++;
@@ -331,17 +328,17 @@ char	**set_str_to_2d_arr(char *map_str)
 		col = 0;
 		while (map_str[index] != '\n')
 		{
-			map_2d_arr[row][col] = map_str[index];
+			arr_map_data->td_arr_map[row][col] = map_str[index];
 			index++;
 			col++;
 		}
 		index++;
 		row++;
 	}
-	return (map_2d_arr);
+	return (arr_map_data);
 }
 
-bool is_square(char *map_str)
+bool	is_square(char *map_str)
 {
 	int index;
 	int	line_len;
@@ -369,7 +366,7 @@ bool is_square(char *map_str)
 	return (true);
 }
 
-bool is_wall(char *map_str)
+bool	is_wall(char *map_str)
 {
 	int index;
 	int	line_len;

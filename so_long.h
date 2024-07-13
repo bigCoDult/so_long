@@ -28,15 +28,22 @@ typedef struct s_tile
 	int		***tile_location;
 }	t_tile;
 
+typedef struct s_arr_map_data
+{
+	char	**arr_map;
+	size_t	row_len;
+	size_t	col_ren;
+}	t_arr_map_data;
+
 void		so_long(int fd);
 
 void		init_win_data(t_win_data *win_data);
 
 void		deal_map(t_win_data *win_data);
-void		***set_map(t_win_data *win_data, t_tile *tile_data);
-void		draw_map(t_win_data *win_data, t_tile *tile_data, void	***map);
+void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, char **td_arr_map);
+void		draw_tile_map(t_win_data *win_data, t_tile *tile_data, void	***map);
 
-t_tile	*init_tile(t_win_data *win_data);
+t_tile	*init_tiles(t_win_data *win_data);
 int			***set_tile_location(void);
 void		*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
