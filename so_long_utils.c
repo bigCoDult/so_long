@@ -1,5 +1,4 @@
 #include "so_long.h"
-
 void	init_win_data(t_win_data*win_data)
 {
 	win_data->title = "so_long";
@@ -9,6 +8,100 @@ void	init_win_data(t_win_data*win_data)
 	win_data->win_ptr = mlx_new_window(win_data->mlx_ptr, win_data->size_x, win_data->size_y, win_data->title);
 	return ;
 }
+
+
+
+
+
+
+
+
+char	*template_literal(char *line, char *word, int location)
+{
+	char		*str;
+	size_t	str_i;
+	size_t	line_i;
+	size_t	word_i;
+
+	str = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(word) + 1));
+	if (str == NULL)
+		return (NULL);
+	str_i = 0;
+	line_i = 0;
+	word_i = 0;
+	if (ft_strlen(line) < location)
+		return ("wrong location");
+	while (line_i < location)
+	{
+		str[str_i] = line[line_i];
+		str_i++;
+		line_i++;
+	}
+	while (word_i < ft_strlen(word))
+	{
+		str[str_i] = word[word_i];
+		str_i++;
+		word_i++;
+	}
+	while (line[line_i] != '\0')
+	{
+		str[str_i] = line[line_i];
+		str_i++;
+		line_i++;
+	}
+	str[str_i] = '\0';
+	return (str);
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t	length;
+
+	length = 0;
+	while (s && s[length] != '\0')
+		length++;
+	return (length);
+}
+
+char	*join_s(char *st_s, char *buf)
+{
+	char	*new_line;
+
+	new_line = join_s_till_c(st_s, buf, '\0');
+	if (new_line == NULL)
+	{
+		return (NULL);
+	}
+	free(st_s);
+	st_s = new_line;
+	return (st_s);
+}
+
+char	*join_s_till_c(char *s1, char *s2, char c)
+{
+	char	*out_s;
+	size_t	i_in_s1;
+	size_t	i_in_s2;
+	size_t	i_out;
+
+	i_in_s1 = 0;
+	i_in_s2 = 0;
+	i_out = 0;
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	out_s = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (out_s == NULL)
+		return (NULL);
+	while (s1 && s1[i_in_s1] != c)
+		out_s[i_out++] = s1[i_in_s1++];
+	while (s2 && s2[i_in_s2] != c)
+		out_s[i_out++] = s2[i_in_s2++];
+	out_s[i_out] = '\0';
+	return (out_s);
+}
+
+
+
 
 void	deal_map(t_win_data *win_data)
 {
@@ -162,127 +255,34 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 
 
 
-char	*template_literal(char *line, char *word, int location)
-{
-	char		*str;
-	size_t	str_i;
-	size_t	line_i;
-	size_t	word_i;
-
-	str = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(word) + 1));
-	if (str == NULL)
-		return (NULL);
-	str_i = 0;
-	line_i = 0;
-	word_i = 0;
-	if (ft_strlen(line) < location)
-		return ("wrong location");
-	while (line_i < location)
-	{
-		str[str_i] = line[line_i];
-		str_i++;
-		line_i++;
-	}
-	while (word_i < ft_strlen(word))
-	{
-		str[str_i] = word[word_i];
-		str_i++;
-		word_i++;
-	}
-	while (line[line_i] != '\0')
-	{
-		str[str_i] = line[line_i];
-		str_i++;
-		line_i++;
-	}
-	str[str_i] = '\0';
-	return (str);
-}
-
-size_t	ft_strlen(char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s && s[length] != '\0')
-		length++;
-	return (length);
-}
-
-char	*join_s(char *st_s, char *buf)
-{
-	char	*new_line;
-
-	new_line = join_s_till_c(st_s, buf, '\0');
-	if (new_line == NULL)
-	{
-		return (NULL);
-	}
-	free(st_s);
-	st_s = new_line;
-	return (st_s);
-}
-
-char	*join_s_till_c(char *s1, char *s2, char c)
-{
-	char	*out_s;
-	size_t	i_in_s1;
-	size_t	i_in_s2;
-	size_t	i_out;
-
-	i_in_s1 = 0;
-	i_in_s2 = 0;
-	i_out = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	out_s = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (out_s == NULL)
-		return (NULL);
-	while (s1 && s1[i_in_s1] != c)
-		out_s[i_out++] = s1[i_in_s1++];
-	while (s2 && s2[i_in_s2] != c)
-		out_s[i_out++] = s2[i_in_s2++];
-	out_s[i_out] = '\0';
-	return (out_s);
-}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-void	validate_map(void)
+bool	validate_map(void)
 {
 	int fd;
 	char	*total_line;
 	char	*single_line;
-	char	*map_contents;
+	char	*map_str;
 	char buf[5];
 	fd = open("map.ber", O_RDONLY);
-	map_contents = malloc(sizeof(char) * 1);
-	if (map_contents == NULL)
-		return ;
-	map_contents[0] = '\0';
+	map_str = malloc(sizeof(char) * 1);
+	if (map_str == NULL)
+		return (false);
+	map_str[0] = '\0';
 	while (read(fd, buf, 5) > 0)
 	{
 		buf[5] = '\0';
-		map_contents = join_s(map_contents, buf);
+		map_str = join_s(map_str, buf);
 	}
-	printf("%s\n", map_contents);
-	is_square(map_contents);
-	is_wall(map_contents);
-	is_possible(map_contents);
+	printf("%s\n", map_str);
+	is_square(map_str);
+	is_wall(map_str);
+	is_possible(map_str);
+	return (true);
 }
 
-bool is_square(char *map_contents)
+bool is_square(char *map_str)
 {
 	int index;
 	int	line_len;
@@ -290,49 +290,53 @@ bool is_square(char *map_contents)
 	index = 0;
 	line_len = 0;
 	count_newline = 0;
-	while (map_contents[index] != '\0')
+	while (map_str[index] != '\0')
 	{
-		if (map_contents[index] == '\n')
+		if (map_str[index] == '\n')
 			count_newline++;
 		index++;
 	}
 	if (count_newline < 3)
 		return (false);
 	index = 0;
-	while (map_contents[line_len++] != '\n')
+	while (map_str[line_len++] != '\n')
 		;
-	while (map_contents[index] != '\0')
+	while (map_str[index] != '\0')
 	{
-		if (index % line_len == 0 && (map_contents[index] != '\n' || map_contents[index] != '\0'))
+		if (index % line_len == 0 && (map_str[index] != '\n' || map_str[index] != '\0'))
 				return (false);
 		index++;
 	}
 	return (true);
 }
 
-bool is_wall(char *map_contents)
+bool is_wall(char *map_str)
 {
 	int index;
 	int	line_len;
 	index = 0;
 	line_len = 0;
-	while (map_contents[line_len++] != '\n')
+	while (map_str[line_len++] != '\n')
 		;
 	while (index < line_len)
 	{
-		if (map_contents[index++] != '1')
+		if (map_str[index++] != '1')
 			return (false);
 	}
-	while (map_contents[index] != '\0')
+	while (map_str[index] != '\0')
 	{
 		index++;
-		if (map_contents[index] != '1' || map_contents[index + line_len] != '1')
+		if (map_str[index] != '1' || map_str[index + line_len] != '1')
 			return (false);
 		index += line_len;
 	}
 	return (true);
 }
 
+bool	is_possible(char *map_str)
+{
+	return (true);
+}
 
 
 
