@@ -7,9 +7,9 @@ void so_long(int fd)
 	if (win_data == NULL)
 		return ;
 	init_win_data(win_data);
-	init_tile(win_data);
-	// set_map(win_data, init_tile(win_data));
-	// int tile = 0;
+	deal_map(win_data);
+	mlx_loop(win_data->mlx_ptr);
+
 
 }
 

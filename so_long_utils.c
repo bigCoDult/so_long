@@ -3,13 +3,73 @@
 void	init_win_data(t_win_data*win_data)
 {
 	win_data->title = "so_long";
-	win_data->size_x = 200;
-	win_data->size_y = 200;
+	win_data->size_x = 500;
+	win_data->size_y = 500;
 	win_data->mlx_ptr = mlx_init();
 	win_data->win_ptr = mlx_new_window(win_data->mlx_ptr, win_data->size_x, win_data->size_y, win_data->title);
-	mlx_loop(win_data);
 	return ;
 }
+
+
+
+
+
+void	deal_map(t_win_data *win_data)
+{
+	t_tile	*tile_data;
+	void	***map;
+	tile_data = malloc(sizeof(t_tile));
+	if (tile_data == NULL)
+		return ;
+	tile_data = init_tile(win_data);
+	map = set_map(win_data, tile_data);
+	draw_map(win_data, tile_data, map);
+	return ;
+}
+
+void	***set_map(t_win_data *win_data, t_tile *tile_data)
+{
+	void	***map;
+	map = malloc(sizeof(void *) * 10 * 10);
+	if (map == NULL)
+		return (NULL);
+	int row;
+	int col;
+	row = 0;
+	col = 0;
+	while (col < 10)
+	{
+		row = 0;
+		while (row < 10)
+		{
+			map[row][col] = tile_data->rock;
+			row++;
+		}
+		col++;
+	}
+	return (map);
+}
+
+void draw_map(t_win_data *win_data, t_tile *tile_data, void ***map)
+{
+	int row;
+	int col;
+	row = 0;
+	col = 0;
+	while (col <= 9)
+	{
+		row = 0;
+		while (row <= 9)
+		{
+			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
+			map[row][col] = tile_data->rock;
+			row++;
+		}
+		col++;
+	}
+}
+
+
 
 t_tile	*init_tile(t_win_data *win_data)
 {
@@ -17,47 +77,47 @@ t_tile	*init_tile(t_win_data *win_data)
 	tile_data = malloc(sizeof(t_tile));
 	if (tile_data == NULL)
 		return (NULL);
-	printf("%s\n", NAME_TO_STRING(door));
-	set_tile(win_data, tile_data->door, NAME_TO_STRING(door));
+	tile_data->tile_location = set_tile_location();
+	tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
+	tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
+	tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
+	tile_data->rock = open_xpm(win_data, NULL, NAME_TO_STRING(rock));
 	return (tile_data);
 }
 
-
-void	*set_tile(t_win_data *win_data, void *box, char *str)
+int	***set_tile_location(void)
 {
-	int tile_len = 20;
-	box = mlx_xpm_file_to_image(win_data->mlx_ptr, template_literal("./tile/.xpm", str, 7), &tile_len, &tile_len);
+	int	***tile_location;
+	tile_location = malloc(sizeof(int) * 10 * 10 * 2);
+	int row;
+	int col;
+	row = 0;
+	col = 0;
 
-	return (box);
+	while (col <= 9)
+	{
+		row = 0;
+		while (row <= 9)
+		{
+			tile_location[row][col][0] = 20 * row;
+			tile_location[row][col][1] = 20 * col;
+			row++;
+		}
+		col++;
+	}
+	return (tile_location);
 }
 
-// void	set_map(t_win_data *win_data, t_tile *tile)
-// {
-// 	size_t map[10][10][2];
-// 	size_t row;
-// 	size_t col;
-// 	row = 0;
-// 	col = 0;
-// 	while (col <= 9)
-// 	{
-// 		row = 0;
-// 		while (row <= 9)
-// 		{
-// 			map[row][col][0] = row * tile->tile_len;
-// 			map[row][col][1] = col * tile->tile_len;
-// 			row++;
-// 		}
-// 		col++;
-// 	}
-// 	size_t is_error;
-// 	is_error = mlx_put_image_to_window(win_data->mlx_ptr, win_data->win_ptr, tile->door, map[0][0][0], map[0][0][1]);
-// 	// is_error = mlx_put_image_to_window(mlx_ptr, win_ptr, chest, map[1][0][0], map[1][0][1]);
-// 	// is_error = mlx_put_image_to_window(mlx_ptr, win_ptr, grass, map[0][2][0], map[0][2][1]);
-// 	// is_error = mlx_put_image_to_window(mlx_ptr, win_ptr, rock, map[2][1][0], map[2][1][1]);
+void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
+{
+	int tile_len = 20;
+	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
+	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, &tile_len, &tile_len);
+	free(file_path);
+	return (single_tile);
+}
 
-// }
-
-char	*template_literal(char *line, char *word, size_t location)
+char	*template_literal(char *line, char *word, int location)
 {
 	char		*str;
 	size_t	str_i;

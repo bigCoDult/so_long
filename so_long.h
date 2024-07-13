@@ -14,28 +14,30 @@ typedef struct s_win_data
 	size_t	size_y;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	size_t	map[10][10];
 }	t_win_data;
 
 typedef struct s_tile
 {
-	void		*door;
-	void		*chest;
-	void		*grass;
-	void		*rock;
+	void	*door;
+	void	*chest;
+	void	*grass;
+	void	*rock;
+	int		***tile_location;
 }	t_tile;
 
-void 		so_long(int fd);
+void		so_long(int fd);
+
 void		init_win_data(t_win_data *win_data);
+
+void		deal_map(t_win_data *win_data);
+void		***set_map(t_win_data *win_data, t_tile *tile_data);
+void		draw_map(t_win_data *win_data, t_tile *tile_data, void	***map);
+
 t_tile	*init_tile(t_win_data *win_data);
-void		*set_tile(t_win_data *win_data, void *box, char *str);
+int			***set_tile_location(void);
+void		*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+
 size_t	ft_strlen(char *s);
 char		*template_literal(char *line, char *word, int location);
-
-
-
-
-
-
 
 #endif /* SO_LONG_H */
