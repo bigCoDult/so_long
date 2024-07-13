@@ -155,16 +155,16 @@ void draw_map(t_win_data *win_data, t_tile *tile_data, void ***map)
 	int col;
 	row = 0;
 	col = 0;
-	while (col <= 9)
+	while (row <= 9)
 	{
-		row = 0;
-		while (row <= 9)
+		col = 0;
+		while (col <= 9)
 		{
 			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
 			map[row][col] = tile_data->rock;
-			row++;
+			col++;
 		}
-		col++;
+		row++;
 	}
 }
 
@@ -258,17 +258,19 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 
 
 
-bool	validate_map(void)
+char	**validate_map(void)
 {
 	int fd;
 	char	*total_line;
 	char	*single_line;
 	char	*map_str;
 	char buf[5];
+	char **map_2d_arr;
+
 	fd = open("map.ber", O_RDONLY);
 	map_str = malloc(sizeof(char) * 1);
 	if (map_str == NULL)
-		return (false);
+		return (NULL);
 	map_str[0] = '\0';
 	while (read(fd, buf, 5) > 0)
 	{
@@ -279,8 +281,22 @@ bool	validate_map(void)
 	is_square(map_str);
 	is_wall(map_str);
 	is_possible(map_str);
-	return (true);
+	// set_map_to_2d_arr(map_str);
+	return (map_2d_arr);
 }
+
+// char	**set_map_to_2d_arr(char *map_str)
+// {
+// 	char **map_2d_arr;
+// 	int col;
+// 	int row;
+// 	while (map_str != '\0')
+
+// 			vert_len++;
+// 	map_2d_arr = malloc(sizeof(char *) * hori_len);
+
+
+// }
 
 bool is_square(char *map_str)
 {
@@ -337,6 +353,5 @@ bool	is_possible(char *map_str)
 {
 	return (true);
 }
-
 
 

@@ -45,7 +45,7 @@ char		*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 
-bool	validate_map(void);
+char 	**validate_map(void);
 bool is_square(char *map_str);
 bool is_wall(char *map_str);
 bool	is_possible(char *map_str);
