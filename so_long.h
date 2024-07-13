@@ -49,5 +49,6 @@ char 	**validate_map(void);
 bool is_square(char *map_str);
 bool is_wall(char *map_str);
 bool	is_possible(char *map_str);
+char	**set_str_to_2d_arr(char *map_str);
 
 #endif /* SO_LONG_H */

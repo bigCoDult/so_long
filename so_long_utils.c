@@ -278,25 +278,68 @@ char	**validate_map(void)
 		map_str = join_s(map_str, buf);
 	}
 	printf("%s\n", map_str);
-	is_square(map_str);
-	is_wall(map_str);
-	is_possible(map_str);
-	// set_map_to_2d_arr(map_str);
+	if (!is_square(map_str))
+		return (NULL);
+	if (is_wall(map_str))
+		return (NULL);
+	if (is_possible(map_str))
+		return (NULL);
+	map_2d_arr = set_str_to_2d_arr(map_str);
 	return (map_2d_arr);
 }
 
-// char	**set_map_to_2d_arr(char *map_str)
-// {
-// 	char **map_2d_arr;
-// 	int col;
-// 	int row;
-// 	while (map_str != '\0')
+char	**set_str_to_2d_arr(char *map_str)
+{
+	char **map_2d_arr;
+	int row_len;
+	int col_len;
+	int row;
+	int col;
+	int index;
 
-// 			vert_len++;
-// 	map_2d_arr = malloc(sizeof(char *) * hori_len);
-
-
-// }
+	row_len = 0;
+	col_len = 0;
+	row = 0;
+	col = 0;
+	index = 0;
+	while (map_str[index] != '\0')
+	{
+		if(map_str[index] == '\n')
+			row_len++;
+		index++;
+	}
+	col_len = index / row_len;
+	map_2d_arr = malloc(sizeof(char *) * row_len);
+	if (map_2d_arr == NULL)
+		return (NULL);
+	while (row < row_len)
+	{
+		map_2d_arr[row] = malloc(sizeof(char) * col_len);
+		if (map_2d_arr[row] == NULL)
+		{
+			while (row-- >= 0)
+				free(map_2d_arr[row]);
+			free(map_2d_arr);
+			return (NULL);
+		}
+		row++;
+	}
+	row = 0;
+	index = 0;
+	while (map_str[index] != '\0')
+	{
+		col = 0;
+		while (map_str[index] != '\n')
+		{
+			map_2d_arr[row][col] = map_str[index];
+			index++;
+			col++;
+		}
+		index++;
+		row++;
+	}
+	return (map_2d_arr);
+}
 
 bool is_square(char *map_str)
 {
