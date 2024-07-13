@@ -3,6 +3,21 @@
 void so_long(int fd)
 {
 	t_win_data	*win_data;
+
+	int fd;
+	fd = open("map.ber", O_RDONLY);
+	validate_map(fd);
+
+
+
+
+
+
+
+
+
+
+
 	win_data = malloc(sizeof(t_win_data));
 	if (win_data == NULL)
 		return ;
