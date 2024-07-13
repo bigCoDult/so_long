@@ -30,22 +30,32 @@ void	deal_map(t_win_data *win_data)
 void	***set_map(t_win_data *win_data, t_tile *tile_data)
 {
 	void	***map;
-	map = malloc(sizeof(void *) * 10 * 10);
+	int		row;
+	int		col;
+
+	map = malloc(sizeof(void **) * 10);
 	if (map == NULL)
 		return (NULL);
-	int row;
-	int col;
+
 	row = 0;
-	col = 0;
-	while (col < 10)
+	while (row < 10)
 	{
-		row = 0;
-		while (row < 10)
+		map[row] = malloc(sizeof(void *) * 10);
+		if (map[row] == NULL)
+		{
+			while (--row >= 0)
+				free(map[row]);
+			free(map);
+			return (NULL);
+		}
+
+		col = 0;
+		while (col < 10)
 		{
 			map[row][col] = tile_data->rock;
-			row++;
+			col++;
 		}
-		col++;
+		row++;
 	}
 	return (map);
 }
@@ -69,8 +79,6 @@ void draw_map(t_win_data *win_data, t_tile *tile_data, void ***map)
 	}
 }
 
-
-
 t_tile	*init_tile(t_win_data *win_data)
 {
 	t_tile	*tile_data;
@@ -88,22 +96,55 @@ t_tile	*init_tile(t_win_data *win_data)
 int	***set_tile_location(void)
 {
 	int	***tile_location;
-	tile_location = malloc(sizeof(int) * 10 * 10 * 2);
 	int row;
 	int col;
-	row = 0;
-	col = 0;
 
-	while (col <= 9)
+	tile_location = malloc(sizeof(int **) * 10);
+	if (tile_location == NULL)
+		return (NULL);
+	row = 0;
+	while (row < 10)
 	{
-		row = 0;
-		while (row <= 9)
+		tile_location[row] = malloc(sizeof(int *) * 10);
+		if (tile_location[row] == NULL)
 		{
+			while (--row >= 0)
+			{
+				col = 0;
+				while (col < 10)
+				{
+					free(tile_location[row][col]);
+					col++;
+				}
+				free(tile_location[row]);
+			}
+			free(tile_location);
+			return (NULL);
+		}
+		col = 0;
+		while (col < 10)
+		{
+			tile_location[row][col] = malloc(sizeof(int) * 2);
+			if (tile_location[row][col] == NULL)
+			{
+				while (--row >= 0)
+				{
+					col = 0;
+					while (col < 10)
+					{
+						free(tile_location[row][col]);
+						col++;
+					}
+					free(tile_location[row]);
+				}
+				free(tile_location);
+				return (NULL);
+			}
 			tile_location[row][col][0] = 20 * row;
 			tile_location[row][col][1] = 20 * col;
-			row++;
+			col++;
 		}
-		col++;
+		row++;
 	}
 	return (tile_location);
 }
