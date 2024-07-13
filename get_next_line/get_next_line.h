@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:18:39 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/06/23 14:18:40 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/07/13 15:31:50 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define GET_NEXT_LINE_H
 
 # include <unistd.h>
-# include <stdlib.h>
 # include <stddef.h>
 # include <stdbool.h>
-# include <stdio.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -44,6 +42,5 @@ size_t	set_buf(t_etc *etc, int fd);
 char	*set_one_s(t_etc *etc);
 char	*join_s(t_etc *etc);
 char	*join_s_till_c(char *s1, char *s2, char c);
-size_t	ft_strlen(char *s);
 
 #endif /* GET_NEXT_LINE_H */

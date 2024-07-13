@@ -2,10 +2,12 @@
 # define SO_LONG_H
 # define NAME_TO_STRING(x) #x
 
+#	include "./minilibx-linux/mlx.h"
 # include <stdio.h>
 #	include <stdlib.h>
 # include <fcntl.h>
-#	include "./minilibx-linux/mlx.h"
+# include <unistd.h>
+# include <stdbool.h>
 
 
 typedef struct s_win_data
@@ -40,5 +42,9 @@ void		*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
 size_t	ft_strlen(char *s);
 char		*template_literal(char *line, char *word, int location);
+char	*join_s_till_c(char *s1, char *s2, char c);
+char	*join_s(char *st_s, char *buf);
+
+void	validate_map(void);
 
 #endif /* SO_LONG_H */

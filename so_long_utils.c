@@ -10,10 +10,6 @@ void	init_win_data(t_win_data*win_data)
 	return ;
 }
 
-
-
-
-
 void	deal_map(t_win_data *win_data)
 {
 	t_tile	*tile_data;
@@ -158,6 +154,14 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 	return (single_tile);
 }
 
+
+
+
+
+
+
+
+
 char	*template_literal(char *line, char *word, int location)
 {
 	char		*str;
@@ -204,3 +208,131 @@ size_t	ft_strlen(char *s)
 		length++;
 	return (length);
 }
+
+char	*join_s(char *st_s, char *buf)
+{
+	char	*new_line;
+
+	new_line = join_s_till_c(st_s, buf, '\0');
+	if (new_line == NULL)
+	{
+		return (NULL);
+	}
+	free(st_s);
+	st_s = new_line;
+	return (st_s);
+}
+
+char	*join_s_till_c(char *s1, char *s2, char c)
+{
+	char	*out_s;
+	size_t	i_in_s1;
+	size_t	i_in_s2;
+	size_t	i_out;
+
+	i_in_s1 = 0;
+	i_in_s2 = 0;
+	i_out = 0;
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	out_s = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (out_s == NULL)
+		return (NULL);
+	while (s1 && s1[i_in_s1] != c)
+		out_s[i_out++] = s1[i_in_s1++];
+	while (s2 && s2[i_in_s2] != c)
+		out_s[i_out++] = s2[i_in_s2++];
+	out_s[i_out] = '\0';
+	return (out_s);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void	validate_map(void)
+{
+	int fd;
+	char	*total_line;
+	char	*single_line;
+	char	*map_contents;
+	char buf[5];
+	fd = open("map.ber", O_RDONLY);
+	map_contents = malloc(sizeof(char) * 1);
+	if (map_contents == NULL)
+		return ;
+	map_contents[0] = '\0';
+	while (read(fd, buf, 5) > 0)
+	{
+		buf[5] = '\0';
+		map_contents = join_s(map_contents, buf);
+	}
+	printf("%s\n", map_contents);
+	is_square(map_contents);
+	is_wall(map_contents);
+	is_possible(map_contents);
+}
+
+bool is_square(char *map_contents)
+{
+	int index;
+	int	line_len;
+	int	count_newline;
+	index = 0;
+	line_len = 0;
+	count_newline = 0;
+	while (map_contents[index] != '\0')
+	{
+		if (map_contents[index] == '\n')
+			count_newline++;
+		index++;
+	}
+	if (count_newline < 3)
+		return (false);
+	index = 0;
+	while (map_contents[line_len++] != '\n')
+		;
+	while (map_contents[index] != '\0')
+	{
+		if (index % line_len == 0 && (map_contents[index] != '\n' || map_contents[index] != '\0'))
+				return (false);
+		index++;
+	}
+	return (true);
+}
+
+bool is_wall(char *map_contents)
+{
+	int index;
+	int	line_len;
+	index = 0;
+	line_len = 0;
+	while (map_contents[line_len++] != '\n')
+		;
+	while (index < line_len)
+	{
+		if (map_contents[index++] != '1')
+			return (false);
+	}
+	while (map_contents[index] != '\0')
+	{
+		index++;
+		if (map_contents[index] != '1' || map_contents[index + line_len] != '1')
+			return (false);
+		index += line_len;
+	}
+	return (true);
+}
+
+
+
+
