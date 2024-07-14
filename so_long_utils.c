@@ -105,33 +105,36 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 
 void	deal_map(t_win_data *win_data)
 {
-	t_tile	*tile_data;
 	void	***tile_map;
-	char	**td_arr_map;
+	t_tile	*tile_data;
+	t_arr_map_data *arr_map_data;
 	tile_data = malloc(sizeof(t_tile));
 	if (tile_data == NULL)
 		return ;
-	td_arr_map = validate_map();
+	arr_map_data = malloc(sizeof(t_arr_map_data));
+	if (arr_map_data == NULL)
+		return ;
+	arr_map_data = validate_map();
 	tile_data = init_tiles(win_data);
-	tile_map = set_tile_map(win_data, tile_data, td_arr_map);
+	tile_map = set_tile_map(win_data, tile_data, arr_map_data);
 	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
 
-void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, char **td_arr_map)
+void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *arr_map_data)
 {
 	void	***tile_map;
 	int		row;
 	int		col;
 
-	tile_map = malloc(sizeof(void **) * 10);
+	tile_map = malloc(sizeof(void **) * arr_map_data->row_len);
 	if (tile_map == NULL)
 		return (NULL);
 
 	row = 0;
 	while (row < 10)
 	{
-		tile_map[row] = malloc(sizeof(void *) * 10);
+		tile_map[row] = malloc(sizeof(void *) * arr_map_data->col_len);
 		if (tile_map[row] == NULL)
 		{
 			while (--row >= 0)
@@ -143,13 +146,13 @@ void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, char **td_arr_map)
 		col = 0;
 		while (col < 10)
 		{
-			if (td_arr_map[row][col] == '1')
+			if (arr_map_data->arr_map[row][col] == '1')
 				tile_map[row][col] = tile_data->rock;
-			else if (td_arr_map[row][col] == '0')
+			else if (arr_map_data->arr_map[row][col] == '0')
 				tile_map[row][col] = tile_data->grass;
-			else if (td_arr_map[row][col] == 'E')
+			else if (arr_map_data->arr_map[row][col] == 'E')
 				tile_map[row][col] = tile_data->door;
-			else if (td_arr_map[row][col] == 'P')
+			else if (arr_map_data->arr_map[row][col] == 'P')
 				tile_map[row][col] = tile_data->rock;
 			// tile_map[row][col] = tile_data->rock;
 			col++;
@@ -257,15 +260,17 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 	return (single_tile);
 }
 
-char	**validate_map(void)
+t_arr_map_data *validate_map(void)
 {
 	int fd;
 	char	*total_line;
 	char	*single_line;
 	char	*map_str;
 	char buf[5];
-	char **td_arr_map;
-
+	t_arr_map_data *arr_map_data;
+	arr_map_data = malloc(sizeof(t_arr_map_data));
+	if (arr_map_data == NULL)
+		return (NULL);
 	fd = open("map.ber", O_RDONLY);
 	map_str = malloc(sizeof(char) * 1);
 	if (map_str == NULL)
@@ -283,17 +288,19 @@ char	**validate_map(void)
 	// 	return (NULL);
 	// if (is_possible(map_str))
 	// 	return (NULL);
-	td_arr_map = set_str_to_2d_arr(map_str);
-	return (td_arr_map);
+	arr_map_data->arr_map = set_str_to_2d_arr(map_str)->arr_map;
+	return (arr_map_data);
 }
 
-char	**set_str_to_2d_arr(char *map_str)
+t_arr_map_data	*set_str_to_2d_arr(char *map_str)
 {
 	t_arr_map_data	*arr_map_data;
 	int row;
 	int col;
 	int index;
-
+	arr_map_data = malloc(sizeof(t_arr_map_data));
+	if (arr_map_data == NULL)
+		return (NULL);
 	arr_map_data->row_len = 0;
 	arr_map_data->col_len = 0;
 	row = 0;
@@ -306,17 +313,17 @@ char	**set_str_to_2d_arr(char *map_str)
 		index++;
 	}
 	arr_map_data->col_len = index / arr_map_data->row_len;
-	arr_map_data->td_arr_map = malloc(sizeof(char *) * row_len);
-	if (td_arr_map == NULL)
+	arr_map_data->arr_map = malloc(sizeof(char *) * arr_map_data->row_len);
+	if (arr_map_data->arr_map == NULL)
 		return (NULL);
-	while (row < row_len)
+	while (row < arr_map_data->row_len)
 	{
-		arr_map_data->td_arr_map[row] = malloc(sizeof(char) * arr_map_data->col_len);
-		if (arr_map_data->td_arr_map[row] == NULL)
+		arr_map_data->arr_map[row] = malloc(sizeof(char) * arr_map_data->col_len);
+		if (arr_map_data->arr_map[row] == NULL)
 		{
 			while (row-- >= 0)
-				free(arr_map_data->td_arr_map[row]);
-			free(arr_map_data->td_arr_map);
+				free(arr_map_data->arr_map[row]);
+			free(arr_map_data->arr_map);
 			return (NULL);
 		}
 		row++;
@@ -328,7 +335,7 @@ char	**set_str_to_2d_arr(char *map_str)
 		col = 0;
 		while (map_str[index] != '\n')
 		{
-			arr_map_data->td_arr_map[row][col] = map_str[index];
+			arr_map_data->arr_map[row][col] = map_str[index];
 			index++;
 			col++;
 		}

@@ -32,7 +32,7 @@ typedef struct s_arr_map_data
 {
 	char	**arr_map;
 	size_t	row_len;
-	size_t	col_ren;
+	size_t	col_len;
 }	t_arr_map_data;
 
 void		so_long(int fd);
@@ -40,7 +40,7 @@ void		so_long(int fd);
 void		init_win_data(t_win_data *win_data);
 
 void		deal_map(t_win_data *win_data);
-void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, char **td_arr_map);
+void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *arr_map_data);
 void		draw_tile_map(t_win_data *win_data, t_tile *tile_data, void	***map);
 
 t_tile	*init_tiles(t_win_data *win_data);
@@ -52,10 +52,10 @@ char		*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 
-char 	**validate_map(void);
+t_arr_map_data *validate_map(void);
 bool is_square(char *map_str);
 bool is_wall(char *map_str);
 bool	is_possible(char *map_str);
-char	**set_str_to_2d_arr(char *map_str);
+t_arr_map_data	*set_str_to_2d_arr(char *map_str);
 
 #endif /* SO_LONG_H */
