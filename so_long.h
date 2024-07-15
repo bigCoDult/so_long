@@ -1,6 +1,11 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define NAME_TO_STRING(x) #x
+# define WALL '1'
+# define EMPTY '0'
+# define PERSON 'E'
+# define COLLECT 'C'
+# define EXIT 'E'
 
 # include <stdio.h>
 #	include <stdlib.h>
@@ -21,10 +26,11 @@ typedef struct s_win_data
 
 typedef struct s_tile
 {
-	void	*door;
-	void	*chest;
-	void	*grass;
 	void	*rock;
+	void	*grass;
+	void	*person;
+	void	*chest;
+	void	*door;
 	int		***tile_location;
 }	t_tile;
 
@@ -56,6 +62,6 @@ t_arr_map_data *validate_map(void);
 bool is_square(char *map_str);
 bool is_wall(char *map_str);
 bool	is_possible(char *map_str);
-t_arr_map_data	*set_str_to_2d_arr(char *map_str);
+t_arr_map_data	*set_map_str_to_arr(char *map_str);
 
 #endif /* SO_LONG_H */

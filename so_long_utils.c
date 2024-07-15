@@ -1,20 +1,4 @@
 #include "so_long.h"
-void	init_win_data(t_win_data*win_data)
-{
-	win_data->title = "so_long";
-	win_data->size_x = 500;
-	win_data->size_y = 500;
-	win_data->mlx_ptr = mlx_init();
-	win_data->win_ptr = mlx_new_window(win_data->mlx_ptr, win_data->size_x, win_data->size_y, win_data->title);
-	return ;
-}
-
-
-
-
-
-
-
 
 char	*template_literal(char *line, char *word, int location)
 {
@@ -103,6 +87,21 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 
 
 
+
+void	init_win_data(t_win_data*win_data)
+{
+	win_data->title = "so_long";
+	win_data->size_x = 500;
+	win_data->size_y = 500;
+	win_data->mlx_ptr = mlx_init();
+	win_data->win_ptr = mlx_new_window(win_data->mlx_ptr, win_data->size_x, win_data->size_y, win_data->title);
+	return ;
+}
+
+
+
+
+
 void	deal_map(t_win_data *win_data)
 {
 	void	***tile_map;
@@ -150,11 +149,12 @@ void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *ar
 				tile_map[row][col] = tile_data->rock;
 			else if (arr_map_data->arr_map[row][col] == '0')
 				tile_map[row][col] = tile_data->grass;
+			else if (arr_map_data->arr_map[row][col] == 'P')
+				tile_map[row][col] = tile_data->person;
+			else if (arr_map_data->arr_map[row][col] == 'C')
+				tile_map[row][col] = tile_data->chest;
 			else if (arr_map_data->arr_map[row][col] == 'E')
 				tile_map[row][col] = tile_data->door;
-			else if (arr_map_data->arr_map[row][col] == 'P')
-				tile_map[row][col] = tile_data->rock;
-			// tile_map[row][col] = tile_data->rock;
 			col++;
 		}
 		row++;
@@ -173,7 +173,6 @@ void draw_tile_map(t_win_data *win_data, t_tile *tile_data, void ***tile_map)
 		col = 0;
 		while (col <= 9)
 		{
-			// mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_map[row][col], tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
 			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[row][col][0], tile_data->tile_location[row][col][1]);
 			col++;
 		}
@@ -188,10 +187,11 @@ t_tile	*init_tiles(t_win_data *win_data)
 	if (tile_data == NULL)
 		return (NULL);
 	tile_data->tile_location = set_tile_location();
-	tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
-	tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
-	tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
 	tile_data->rock = open_xpm(win_data, NULL, NAME_TO_STRING(rock));
+	tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
+	tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
+	tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
+	tile_data->person = open_xpm(win_data, NULL, NAME_TO_STRING(person));
 	return (tile_data);
 }
 
@@ -260,6 +260,10 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 	return (single_tile);
 }
 
+
+
+
+
 t_arr_map_data *validate_map(void)
 {
 	int fd;
@@ -288,11 +292,11 @@ t_arr_map_data *validate_map(void)
 	// 	return (NULL);
 	// if (is_possible(map_str))
 	// 	return (NULL);
-	arr_map_data->arr_map = set_str_to_2d_arr(map_str)->arr_map;
+	arr_map_data->arr_map = set_map_str_to_arr(map_str)->arr_map;
 	return (arr_map_data);
 }
 
-t_arr_map_data	*set_str_to_2d_arr(char *map_str)
+t_arr_map_data	*set_map_str_to_arr(char *map_str)
 {
 	t_arr_map_data	*arr_map_data;
 	int row;
