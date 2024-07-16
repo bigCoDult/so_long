@@ -41,6 +41,12 @@ typedef struct s_arr_map_data
 	size_t	col_len;
 }	t_arr_map_data;
 
+typedef struct s_cordi
+{
+	int	row;
+	int	col;
+}	t_cordi;
+
 void		so_long(int fd);
 
 void		init_win_data(t_win_data *win_data);
@@ -67,7 +73,7 @@ t_arr_map_data	*set_map_str_to_arr(char *map_str);
 
 bool	backtracking(t_arr_map_data *arr_map_data);
 int	*get_cordi(t_arr_map_data *arr_map_data, char c);
-bool	is_possible(char *map_str, int *person, int *exit);
+bool	is_possible(t_arr_map_data *arr_map_data, int *person, int *exit);
 
 
 #endif /* SO_LONG_H */

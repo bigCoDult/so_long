@@ -123,6 +123,7 @@ void	deal_map(t_win_data *win_data)
 	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
+
 //타일_맵 사이즈에 문제있다
 void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *arr_map_data)
 {
@@ -191,16 +192,10 @@ t_tile	*init_tiles(t_win_data *win_data)
 	if (tile_data == NULL)
 		return (NULL);
 	tile_data->tile_location = set_tile_location();
-	// tile_data->rock = open_xpm(win_data, NULL, NAME_TO_STRING(rock));
-	//미래의 나에게 맡긴다
 	tile_data->rock = open_xpm(win_data, NULL, "rock");
-	// tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
 	tile_data->grass = open_xpm(win_data, NULL, "grass");
-	// tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
 	tile_data->door = open_xpm(win_data, NULL, "door");
-	// tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
 	tile_data->chest = open_xpm(win_data, NULL, "chest");
-	// tile_data->person = open_xpm(win_data, NULL, NAME_TO_STRING(person));
 	tile_data->person = open_xpm(win_data, NULL, "person");
 	return (tile_data);
 }
