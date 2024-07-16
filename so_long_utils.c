@@ -84,6 +84,10 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 	return (out_s);
 }
 
+char	*name_to_string(x)
+{
+	return (#x);
+} 
 
 
 
@@ -119,7 +123,7 @@ void	deal_map(t_win_data *win_data)
 	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
-
+//타일_맵 사이즈에 문제있다
 void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *arr_map_data)
 {
 	void	***tile_map;
@@ -187,11 +191,17 @@ t_tile	*init_tiles(t_win_data *win_data)
 	if (tile_data == NULL)
 		return (NULL);
 	tile_data->tile_location = set_tile_location();
-	tile_data->rock = open_xpm(win_data, NULL, NAME_TO_STRING(rock));
-	tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
-	tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
-	tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
-	tile_data->person = open_xpm(win_data, NULL, NAME_TO_STRING(person));
+	// tile_data->rock = open_xpm(win_data, NULL, NAME_TO_STRING(rock));
+	//미래의 나에게 맡긴다
+	tile_data->rock = open_xpm(win_data, NULL, "rock");
+	// tile_data->grass = open_xpm(win_data, NULL, NAME_TO_STRING(grass));
+	tile_data->grass = open_xpm(win_data, NULL, "grass");
+	// tile_data->door = open_xpm(win_data, NULL, NAME_TO_STRING(door));
+	tile_data->door = open_xpm(win_data, NULL, "door");
+	// tile_data->chest = open_xpm(win_data, NULL, NAME_TO_STRING(chest));
+	tile_data->chest = open_xpm(win_data, NULL, "chest");
+	// tile_data->person = open_xpm(win_data, NULL, NAME_TO_STRING(person));
+	tile_data->person = open_xpm(win_data, NULL, "person");
 	return (tile_data);
 }
 
@@ -286,12 +296,14 @@ t_arr_map_data *validate_map(void)
 		map_str = join_s(map_str, buf);
 	}
 	printf("%s\n", map_str);
-	// if (!is_square(map_str))
-	// 	return (NULL);
-	// if (is_wall(map_str))
-	// 	return (NULL);
-	// if (is_possible(map_str))
-	// 	return (NULL);
+	if (!is_square(map_str))
+		return (NULL);
+	if (is_wall(map_str))
+		return (NULL);
+	if (is_there(map_str, EXIT) != 1)
+		return (NULL);
+	if (is_there(map_str, PERSON) != 1)
+		return (NULL);
 	arr_map_data->arr_map = set_map_str_to_arr(map_str)->arr_map;
 	return (arr_map_data);
 }
@@ -400,9 +412,19 @@ bool	is_wall(char *map_str)
 	return (true);
 }
 
-bool	is_possible(char *map_str)
+int	is_there(char *map_str, char c)
 {
-	return (true);
+	int index;
+	int	count_c;
+	index = 0;
+	count_c = 0;
+	while (map_str[index] != '\0')
+	{
+		if (map_str[index] == c)
+			count_c++;
+		index++;
+	}
+	return (count_c);
 }
 
 
