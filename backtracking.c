@@ -2,76 +2,59 @@
 
 bool	backtracking(t_arr_map_data *arr_map_data)
 {
-	int person[2];
-	int exit[2];
-	// int collect[2];
-	//벡터 구조체
-	//xy좌표를 저장하는 구조체
-	//가독성을 높일 수 있다
-	*person = get_cordi(arr_map_data, PERSON);
-	*exit = get_cordi(arr_map_data, EXIT);
-	// *collect = get_cordi(arr_map_data, COLLECT);
-	return (is_possible(arr_map_data, person, exit));
+	t_cordi	*person;
+	person = get_cordi(arr_map_data, PERSON);
+	return (is_possible(arr_map_data, person));
 }
 
-int	*get_cordi(t_arr_map_data *arr_map_data, char c)
+t_cordi	*get_cordi(t_arr_map_data *arr_map_data, char c)
 {
-	int row;
-	int col;
-	int	cordi[2];
+	t_cordi	*cordi;
 
-	row = 0;
-	while (row < arr_map_data->row_len)
+	cordi->row = 0;
+	while (cordi->row < arr_map_data->row_len)
 	{
-		col = 0;
-		while (col < 10)
+		cordi->col = 0;
+		while (cordi->col < arr_map_data->col_len)
 		{
-			if (arr_map_data->arr_map[row][col] == c)
-			{
-				cordi[0] = row;
-				cordi[1] = col;
+			if (arr_map_data->arr_map[cordi->row][cordi->col] == c)
 				return (cordi);
-			}
-			col++;
+			cordi->col++;
 		}
-		row++;
+		cordi->row++;
 	}
 	return (NULL);
 }
 
-bool	is_possible(t_arr_map_data *arr_map_data, int *person, int *exit)
+bool	is_possible(t_arr_map_data *arr_map_data, t_cordi *person)
 {
-	int	person_row;
-	int	person_col;
-	person_row = person[0];
-	person_col = person[1];
-	if (arr_map_data->arr_map[person_row + 1][person_col] == EXIT)
+	if (arr_map_data->arr_map[person->row + 1][person->col] == EXIT)
 		return (true);
-	else if (arr_map_data->arr_map[person_row - 1][person_col] == EXIT)
+	else if (arr_map_data->arr_map[person->row - 1][person->col] == EXIT)
 		return (true);
-	else if (arr_map_data->arr_map[person_row][person_col + 1] == EXIT)
+	else if (arr_map_data->arr_map[person->row][person->col + 1] == EXIT)
 		return (true);
-	else if (arr_map_data->arr_map[person_row][person_col - 1] == EXIT)
+	else if (arr_map_data->arr_map[person->row][person->col - 1] == EXIT)
 		return (true);
-	else if (arr_map_data->arr_map[person_row + 1][person_col] == EMPTY)
+	else if (arr_map_data->arr_map[person->row + 1][person->col] == EMPTY)
 	{
-		person[0] = person_row + 1;
-		return (is_possible(arr_map_data, person, exit));
+		person->row += 1;
+		return (is_possible(arr_map_data, person));
 	}
-	else if (arr_map_data->arr_map[person_row - 1][person_col] == EMPTY)
+	else if (arr_map_data->arr_map[person->row - 1][person->col] == EMPTY)
 	{
-		person[0] = person_row - 1;
-		return (is_possible(arr_map_data, person, exit));
+		person->row -= 1;
+		return (is_possible(arr_map_data, person));
 	}
-	else if (arr_map_data->arr_map[person_row][person_col + 1] == EMPTY)
+	else if (arr_map_data->arr_map[person->row][person->col + 1] == EMPTY)
 	{
-		person[1] = person_col + 1;
-		return (is_possible(arr_map_data, person, exit));
+		person->col += 1;
+		return (is_possible(arr_map_data, person));
 	}
-	else if (arr_map_data->arr_map[person_row][person_col - 1] == EMPTY)
+	else if (arr_map_data->arr_map[person->row][person->col - 1] == EMPTY)
 	{
-		person[1] = person_col + 1;
-		return (is_possible(arr_map_data, person, exit));
+		person->col += 1;
+		return (is_possible(arr_map_data, person));
 	}
 	return (false);
 }

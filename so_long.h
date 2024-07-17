@@ -72,8 +72,8 @@ t_arr_map_data	*set_map_str_to_arr(char *map_str);
 
 
 bool	backtracking(t_arr_map_data *arr_map_data);
-int	*get_cordi(t_arr_map_data *arr_map_data, char c);
-bool	is_possible(t_arr_map_data *arr_map_data, int *person, int *exit);
+t_cordi	*get_cordi(t_arr_map_data *arr_map_data, char c);
+bool	is_possible(t_arr_map_data *arr_map_data, t_cordi *person)
 
 
 #endif /* SO_LONG_H */
