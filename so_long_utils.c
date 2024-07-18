@@ -108,34 +108,33 @@ void	deal_map(t_win_data *win_data)
 {
 	void	***tile_map;
 	t_tile	*tile_data;
-	t_arr_map_data *arr_map_data;
+	t_char_map *char_map;
 	tile_data = malloc(sizeof(t_tile));
 	if (tile_data == NULL)
 		return ;
-	arr_map_data = malloc(sizeof(t_arr_map_data));
-	if (arr_map_data == NULL)
+	char_map = malloc(sizeof(t_char_map));
+	if (char_map == NULL)
 		return ;
-	arr_map_data = validate_map();
+	char_map = validate_map();
 	tile_data = init_tiles(win_data);
-	tile_map = set_tile_map(win_data, tile_data, arr_map_data);
+	tile_map = set_tile_map(win_data, tile_data, char_map);
 	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
 
-//타일_맵 사이즈에 문제있다
-void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *arr_map_data)
+void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map)
 {
 	void	***tile_map;
 	t_cordi	*map;
 
-	tile_map = malloc(sizeof(void **) * arr_map_data->row_len);
+	tile_map = malloc(sizeof(void **) * char_map->row_size);
 	if (tile_map == NULL)
 		return (NULL);
 
 	map->row = 0;
-	while (map->row < arr_map_data->row_len)
+	while (map->row < char_map->row_size)
 	{
-		tile_map[map->row] = malloc(sizeof(void *) * arr_map_data->col_len);
+		tile_map[map->row] = malloc(sizeof(void *) * char_map->col_size);
 		if (tile_map[map->row] == NULL)
 		{
 			while (--map->row >= 0)
@@ -145,17 +144,17 @@ void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_arr_map_data *ar
 		}
 
 		map->col = 0;
-		while (map->col < arr_map_data->col_len)
+		while (map->col < char_map->col_size)
 		{
-			if (arr_map_data->arr_map[map->row][map->col] == '1')
+			if (char_map->arr_map[map->row][map->col] == '1')
 				tile_map[map->row][map->col] = tile_data->rock;
-			else if (arr_map_data->arr_map[map->row][map->col] == '0')
+			else if (char_map->arr_map[map->row][map->col] == '0')
 				tile_map[map->row][map->col] = tile_data->grass;
-			else if (arr_map_data->arr_map[map->row][map->col] == 'P')
+			else if (char_map->arr_map[map->row][map->col] == 'P')
 				tile_map[map->row][map->col] = tile_data->person;
-			else if (arr_map_data->arr_map[map->row][map->col] == 'C')
+			else if (char_map->arr_map[map->row][map->col] == 'C')
 				tile_map[map->row][map->col] = tile_data->chest;
-			else if (arr_map_data->arr_map[map->row][map->col] == 'E')
+			else if (char_map->arr_map[map->row][map->col] == 'E')
 				tile_map[map->row][map->col] = tile_data->door;
 			map->col++;
 		}
@@ -169,7 +168,7 @@ void draw_tile_map(t_win_data *win_data, t_tile *tile_data, void ***tile_map)
 	t_cordi *map;
 	map->row = 0;
 	map->col = 0;
-	while (map->row <= arr_map_data->row_len)
+	while (map->row <= char_map->row_size)
 	{
 		map->col = 0;
 		while (map->col <= 9)
@@ -265,16 +264,16 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 
 
 
-t_arr_map_data *validate_map(void)
+t_char_map *validate_map(void)
 {
 	int fd;
 	char	*total_line;
 	char	*single_line;
 	char	*map_str;
 	char buf[5];
-	t_arr_map_data *arr_map_data;
-	arr_map_data = malloc(sizeof(t_arr_map_data));
-	if (arr_map_data == NULL)
+	t_char_map *char_map;
+	char_map = malloc(sizeof(t_char_map));
+	if (char_map == NULL)
 		return (NULL);
 	fd = open("map.ber", O_RDONLY);
 	map_str = malloc(sizeof(char) * 1);
@@ -295,42 +294,42 @@ t_arr_map_data *validate_map(void)
 		return (NULL);
 	if (is_there(map_str, PERSON) != 1)
 		return (NULL);
-	arr_map_data->arr_map = set_map_str_to_arr(map_str)->arr_map;
-	return (arr_map_data);
+	char_map->arr_map = set_map_str_to_arr(map_str)->arr_map;
+	return (char_map);
 }
 
-t_arr_map_data	*set_map_str_to_arr(char *map_str)
+t_char_map	*set_map_str_to_arr(char *map_str)
 {
-	t_arr_map_data	*arr_map_data;
+	t_char_map	*char_map;
 	int row;
 	int col;
 	int index;
-	arr_map_data = malloc(sizeof(t_arr_map_data));
-	if (arr_map_data == NULL)
+	char_map = malloc(sizeof(t_char_map));
+	if (char_map == NULL)
 		return (NULL);
-	arr_map_data->row_len = 0;
-	arr_map_data->col_len = 0;
+	char_map->row_size = 0;
+	char_map->col_size = 0;
 	row = 0;
 	col = 0;
 	index = 0;
 	while (map_str[index] != '\0')
 	{
 		if(map_str[index] == '\n')
-			arr_map_data->row_len++;
+			char_map->row_size++;
 		index++;
 	}
-	arr_map_data->col_len = index / arr_map_data->row_len;
-	arr_map_data->arr_map = malloc(sizeof(char *) * arr_map_data->row_len);
-	if (arr_map_data->arr_map == NULL)
+	char_map->col_size = index / char_map->row_size;
+	char_map->arr_map = malloc(sizeof(char *) * char_map->row_size);
+	if (char_map->arr_map == NULL)
 		return (NULL);
-	while (row < arr_map_data->row_len)
+	while (row < char_map->row_size)
 	{
-		arr_map_data->arr_map[row] = malloc(sizeof(char) * arr_map_data->col_len);
-		if (arr_map_data->arr_map[row] == NULL)
+		char_map->arr_map[row] = malloc(sizeof(char) * char_map->col_size);
+		if (char_map->arr_map[row] == NULL)
 		{
 			while (row-- >= 0)
-				free(arr_map_data->arr_map[row]);
-			free(arr_map_data->arr_map);
+				free(char_map->arr_map[row]);
+			free(char_map->arr_map);
 			return (NULL);
 		}
 		row++;
@@ -342,14 +341,14 @@ t_arr_map_data	*set_map_str_to_arr(char *map_str)
 		col = 0;
 		while (map_str[index] != '\n')
 		{
-			arr_map_data->arr_map[row][col] = map_str[index];
+			char_map->arr_map[row][col] = map_str[index];
 			index++;
 			col++;
 		}
 		index++;
 		row++;
 	}
-	return (arr_map_data);
+	return (char_map);
 }
 
 bool	is_square(char *map_str)
