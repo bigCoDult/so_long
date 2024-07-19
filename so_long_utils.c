@@ -168,7 +168,7 @@ void draw_tile_map(t_win_data *win_data, t_tile *tile_data, t_tile_map	*tile_map
 	t_cordi *cordi;
 	cordi->row = 0;
 	cordi->col = 0;
-	while (cordi->row <= char_map->row_size)
+	while (cordi->row <= tile_map->row_size)
 	{
 		cordi->col = 0;
 		while (cordi->col <= 9)
