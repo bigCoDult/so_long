@@ -116,69 +116,67 @@ void	deal_map(t_win_data *win_data)
 		return ;
 	char_map = validate_map();
 	tile_data = init_tiles(win_data);
-	tile_map = set_tile_map(win_data, tile_data, char_map);
-	draw_tile_map(win_data, tile_data, tile_map);
+	draw_tile_map(win_data, tile_data, set_tile_map(win_data, tile_data, char_map));
 	return ;
 }
 
-void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map)
+t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map)
 {
-	t_cordi	*map;
 	t_tile_map *tile_map;
+	t_cordi	*cordi;
+
 	tile_map = malloc(sizeof(t_tile_map));
 	if (tile_map == NULL)
 		return ;
-	
-	tile_map = malloc(sizeof(void **) * char_map->row_size);
-	if (tile_map == NULL)
-		return (NULL);
-
-	map->row = 0;
-	while (map->row < char_map->row_size)
+	cordi = malloc(sizeof(t_cordi));
+	if (cordi == NULL)
+		return ;
+	cordi->row = 0;
+	while (cordi->row < char_map->row_size)
 	{
-		tile_map[map->row] = malloc(sizeof(void *) * char_map->col_size);
-		if (tile_map[map->row] == NULL)
+		tile_map->map_cordi[cordi->row] = malloc(sizeof(void *) * char_map->col_size);
+		if (tile_map->map_cordi[cordi->row] == NULL)
 		{
-			while (--map->row >= 0)
-				free(tile_map[map->row]);
+			while (--cordi->row >= 0)
+				free(tile_map->map_cordi[cordi->row]);
 			free(tile_map);
 			return (NULL);
 		}
 
-		map->col = 0;
-		while (map->col < char_map->col_size)
+		cordi->col = 0;
+		while (cordi->col < char_map->col_size)
 		{
-			if (char_map->arr_map[map->row][map->col] == '1')
-				tile_map[map->row][map->col] = tile_data->rock;
-			else if (char_map->arr_map[map->row][map->col] == '0')
-				tile_map[map->row][map->col] = tile_data->grass;
-			else if (char_map->arr_map[map->row][map->col] == 'P')
-				tile_map[map->row][map->col] = tile_data->person;
-			else if (char_map->arr_map[map->row][map->col] == 'C')
-				tile_map[map->row][map->col] = tile_data->chest;
-			else if (char_map->arr_map[map->row][map->col] == 'E')
-				tile_map[map->row][map->col] = tile_data->door;
-			map->col++;
+			if (char_map->map_cordi[cordi->row][cordi->col] == '1')
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+			else if (char_map->map_cordi[cordi->row][cordi->col] == '0')
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+			else if (char_map->map_cordi[cordi->row][cordi->col] == 'P')
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+			else if (char_map->map_cordi[cordi->row][cordi->col] == 'C')
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+			else if (char_map->map_cordi[cordi->row][cordi->col] == 'E')
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+			cordi->col++;
 		}
-		map->row++;
+		cordi->row++;
 	}
 	return (tile_map);
 }
 
-void draw_tile_map(t_win_data *win_data, t_tile *tile_data, void ***tile_map)
+void draw_tile_map(t_win_data *win_data, t_tile *tile_data, t_tile_map	*tile_map)
 {
-	t_cordi *map;
-	map->row = 0;
-	map->col = 0;
-	while (map->row <= char_map->row_size)
+	t_cordi *cordi;
+	cordi->row = 0;
+	cordi->col = 0;
+	while (cordi->row <= char_map->row_size)
 	{
-		map->col = 0;
-		while (map->col <= 9)
+		cordi->col = 0;
+		while (cordi->col <= 9)
 		{
-			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[map->row][map->col][0], tile_data->tile_location[map->row][map->col][1]);
-			map->col++;
+			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[cordi->row][cordi->col][0], tile_data->tile_location[cordi->row][cordi->col][1]);
+			cordi->col++;
 		}
-		map->row++;
+		cordi->row++;
 	}
 }
 

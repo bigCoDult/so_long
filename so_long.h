@@ -57,9 +57,9 @@ void		so_long(int fd);
 
 void		init_win_data(t_win_data *win_data);
 
-void		deal_map(t_win_data *win_data);
-void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map);
-void		draw_tile_map(t_win_data *win_data, t_tile *tile_data, void	***map);
+void				deal_map(t_win_data *win_data);
+t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map);
+void				draw_tile_map(t_win_data *win_data, t_tile *tile_data, void	***map);
 
 t_tile	*init_tiles(t_win_data *win_data);
 int			***set_tile_location(void);
