@@ -106,7 +106,6 @@ void	init_win_data(t_win_data*win_data)
 
 void	deal_map(t_win_data *win_data)
 {
-	void	***tile_map;
 	t_tile	*tile_data;
 	t_char_map *char_map;
 	tile_data = malloc(sizeof(t_tile));
@@ -124,9 +123,12 @@ void	deal_map(t_win_data *win_data)
 
 void	***set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map)
 {
-	void	***tile_map;
 	t_cordi	*map;
-
+	t_tile_map *tile_map;
+	tile_map = malloc(sizeof(t_tile_map));
+	if (tile_map == NULL)
+		return ;
+	
 	tile_map = malloc(sizeof(void **) * char_map->row_size);
 	if (tile_map == NULL)
 		return (NULL);

@@ -1,6 +1,5 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
-// # define NAME_TO_STRING(x) #x
 # define WALL '1'
 # define EMPTY '0'
 # define PERSON 'E'
@@ -49,7 +48,7 @@ typedef struct s_char_map
 
 typedef struct s_tile_map
 {
-	void	***tile_map;
+	void	***map_cordi;
 	size_t	row_size;
 	size_t	col_size;
 }	t_tile_map;
