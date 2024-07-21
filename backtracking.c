@@ -38,24 +38,29 @@ bool	is_possible(t_char_map *char_map, t_cordi *person)
 		return (true);
 	else if (char_map->map_cordi[person->row + 1][person->col] == EMPTY)
 	{
+		char_map->map_cordi[person->row][person->col] == WALL;
 		person->row += 1;
 		return (is_possible(char_map, person));
 	}
 	else if (char_map->map_cordi[person->row - 1][person->col] == EMPTY)
 	{
+		char_map->map_cordi[person->row][person->col] == WALL;
 		person->row -= 1;
 		return (is_possible(char_map, person));
 	}
 	else if (char_map->map_cordi[person->row][person->col + 1] == EMPTY)
 	{
+		char_map->map_cordi[person->row][person->col] == WALL;
 		person->col += 1;
 		return (is_possible(char_map, person));
 	}
 	else if (char_map->map_cordi[person->row][person->col - 1] == EMPTY)
 	{
+		char_map->map_cordi[person->row][person->col] == WALL;
 		person->col += 1;
 		return (is_possible(char_map, person));
 	}
-	return (false);
+	else
+		return (false);
 }
 
