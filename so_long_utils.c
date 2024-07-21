@@ -149,13 +149,13 @@ t_tile_map	*set_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_char_ma
 			if (char_map->map_cordi[cordi->row][cordi->col] == '1')
 				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
 			else if (char_map->map_cordi[cordi->row][cordi->col] == '0')
-				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->grass;
 			else if (char_map->map_cordi[cordi->row][cordi->col] == 'P')
-				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->person;
 			else if (char_map->map_cordi[cordi->row][cordi->col] == 'C')
-				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->chest;
 			else if (char_map->map_cordi[cordi->row][cordi->col] == 'E')
-				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->rock;
+				tile_map->map_cordi[cordi->row][cordi->col] = tile_data->door;
 			cordi->col++;
 		}
 		cordi->row++;
@@ -182,7 +182,7 @@ t_tile_data	*init_tiles(t_win_data *win_data)
 	tile_data = malloc(sizeof(t_tile_data));
 	if (tile_data == NULL)
 		return (NULL);
-	tile_data->tile_location = set_tile_location();
+	tile_data->tile_location = set_tile_location(tile_data);
 	tile_data->rock = open_xpm(win_data, NULL, "rock");
 	tile_data->grass = open_xpm(win_data, NULL, "grass");
 	tile_data->door = open_xpm(win_data, NULL, "door");
@@ -191,14 +191,13 @@ t_tile_data	*init_tiles(t_win_data *win_data)
 	return (tile_data);
 }
 
-int	***set_tile_location(void)
+int	***set_tile_location(t_tile_data *tile_data)
 {
-	int	***tile_location;
 	int row;
 	int col;
 
-	tile_location = malloc(sizeof(int **) * 10);
-	if (tile_location == NULL)
+	tile_data->tile_location = malloc(sizeof(int **) * 10);
+	if (tile_data == NULL)
 		return (NULL);
 	row = 0;
 	while (row < 10)
