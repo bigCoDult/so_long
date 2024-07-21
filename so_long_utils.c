@@ -286,7 +286,7 @@ t_char_map *validate_map(void)
 		return (NULL);
 	if (is_there(map_str, PERSON) != 1)
 		return (NULL);
-	char_map->arr_map = set_map_str_to_arr(map_str)->arr_map;
+	char_map->map_cordi = set_map_str_to_arr(map_str)->map_cordi;
 	return (char_map);
 }
 
@@ -311,17 +311,17 @@ t_char_map	*set_map_str_to_arr(char *map_str)
 		index++;
 	}
 	char_map->col_size = index / char_map->row_size;
-	char_map->arr_map = malloc(sizeof(char *) * char_map->row_size);
-	if (char_map->arr_map == NULL)
+	char_map->map_cordi = malloc(sizeof(char *) * char_map->row_size);
+	if (char_map->map_cordi == NULL)
 		return (NULL);
 	while (row < char_map->row_size)
 	{
-		char_map->arr_map[row] = malloc(sizeof(char) * char_map->col_size);
-		if (char_map->arr_map[row] == NULL)
+		char_map->map_cordi[row] = malloc(sizeof(char) * char_map->col_size);
+		if (char_map->map_cordi[row] == NULL)
 		{
 			while (row-- >= 0)
-				free(char_map->arr_map[row]);
-			free(char_map->arr_map);
+				free(char_map->map_cordi[row]);
+			free(char_map->map_cordi);
 			return (NULL);
 		}
 		row++;
@@ -333,7 +333,7 @@ t_char_map	*set_map_str_to_arr(char *map_str)
 		col = 0;
 		while (map_str[index] != '\n')
 		{
-			char_map->arr_map[row][col] = map_str[index];
+			char_map->map_cordi[row][col] = map_str[index];
 			index++;
 			col++;
 		}
