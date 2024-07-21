@@ -5,6 +5,7 @@
 # define PERSON 'E'
 # define COLLECT 'C'
 # define EXIT 'E'
+# define TILE_LEN 20
 
 # include <stdio.h>
 #	include <stdlib.h>
@@ -29,7 +30,7 @@ typedef struct s_cordi
 	int	col;
 }	t_cordi;
 
-typedef struct s_tile
+typedef struct s_tile_data
 {
 	void	*rock;
 	void	*grass;
@@ -37,7 +38,7 @@ typedef struct s_tile
 	void	*chest;
 	void	*door;
 	int		***tile_location;
-}	t_tile;
+}	t_tile_data;
 
 typedef struct s_char_map
 {

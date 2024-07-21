@@ -106,9 +106,9 @@ void	init_win_data(t_win_data*win_data)
 
 void	deal_map(t_win_data *win_data)
 {
-	t_tile	*tile_data;
+	t_tile_data	*tile_data;
 	t_char_map *char_map;
-	tile_data = malloc(sizeof(t_tile));
+	tile_data = malloc(sizeof(t_tile_data));
 	if (tile_data == NULL)
 		return ;
 	char_map = malloc(sizeof(t_char_map));
@@ -120,7 +120,7 @@ void	deal_map(t_win_data *win_data)
 	return ;
 }
 
-t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map)
+t_tile_map	*set_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_char_map *char_map)
 {
 	t_tile_map *tile_map;
 	t_cordi	*cordi;
@@ -137,8 +137,8 @@ t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *ch
 		tile_map->map_cordi[cordi->row] = malloc(sizeof(void *) * char_map->col_size);
 		if (tile_map->map_cordi[cordi->row] == NULL)
 		{
-			while (--cordi->row >= 0)
-				free(tile_map->map_cordi[cordi->row]);
+			while (cordi->row >= 0)
+				free(tile_map->map_cordi[cordi->row--]);
 			free(tile_map);
 			return (NULL);
 		}
@@ -163,27 +163,23 @@ t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *ch
 	return (tile_map);
 }
 
-void draw_tile_map(t_win_data *win_data, t_tile *tile_data, t_tile_map	*tile_map)
+void draw_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_tile_map	*tile_map)
 {
 	t_cordi *cordi;
 	cordi->row = 0;
-	cordi->col = 0;
 	while (cordi->row <= tile_map->row_size)
 	{
 		cordi->col = 0;
-		while (cordi->col <= 9)
-		{
-			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_data->rock, tile_data->tile_location[cordi->row][cordi->col][0], tile_data->tile_location[cordi->row][cordi->col][1]);
-			cordi->col++;
-		}
+		while (cordi->col <= tile_map->col_size)
+			mlx_put_image_to_window (win_data->mlx_ptr, win_data->win_ptr, tile_map->map_cordi[cordi->row][cordi->col], tile_data->tile_location[cordi->row][cordi->col][0], tile_data->tile_location[cordi->row][cordi->col++][1]);
 		cordi->row++;
 	}
 }
 
-t_tile	*init_tiles(t_win_data *win_data)
+t_tile_data	*init_tiles(t_win_data *win_data)
 {
-	t_tile	*tile_data;
-	tile_data = malloc(sizeof(t_tile));
+	t_tile_data	*tile_data;
+	tile_data = malloc(sizeof(t_tile_data));
 	if (tile_data == NULL)
 		return (NULL);
 	tile_data->tile_location = set_tile_location();
@@ -210,15 +206,13 @@ int	***set_tile_location(void)
 		tile_location[row] = malloc(sizeof(int *) * 10);
 		if (tile_location[row] == NULL)
 		{
-			while (--row >= 0)
+			while (row >= 0)
 			{
 				col = 0;
 				while (col < 10)
-				{
-					free(tile_location[row][col]);
-					col++;
-				}
+					free(tile_location[row][col++]);
 				free(tile_location[row]);
+				row--;
 			}
 			free(tile_location);
 			return (NULL);
@@ -242,8 +236,8 @@ int	***set_tile_location(void)
 				free(tile_location);
 				return (NULL);
 			}
-			tile_location[row][col][0] = 20 * row;
-			tile_location[row][col][1] = 20 * col;
+			tile_location[row][col][0] = TILE_LEN * row;
+			tile_location[row][col][1] = TILE_LEN * col;
 			col++;
 		}
 		row++;
@@ -253,9 +247,8 @@ int	***set_tile_location(void)
 
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 {
-	int tile_len = 20;
 	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
-	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, &tile_len, &tile_len);
+	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, TILE_LEN, TILE_LEN);
 	free(file_path);
 	return (single_tile);
 }
