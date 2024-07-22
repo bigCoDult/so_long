@@ -54,17 +54,17 @@ typedef struct s_tile_map
 	size_t	col_size;
 }	t_tile_map;
 
-void		so_long(int fd);
+void				so_long(int fd);
 
-void		init_win_data(t_win_data *win_data);
+void				init_win_data(t_win_data *win_data);
 
 void				deal_map(t_win_data *win_data);
-t_tile_map	*set_tile_map(t_win_data *win_data, t_tile *tile_data, t_char_map *char_map);
-void				draw_tile_map(t_win_data *win_data, t_tile *tile_data, void	***map);
+t_tile_map	*set_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_char_map	*char_map);
+void				draw_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_tile_map	*tile_map);
 
-t_tile	*init_tiles(t_win_data *win_data);
-int			***set_tile_location(void);
-void		*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+t_tile_data	*init_tiles(t_win_data *win_data);
+int					***set_tile_location(t_tile_data *tile_data);
+void				*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
 size_t	ft_strlen(char *s);
 char		*template_literal(char *line, char *word, int location);
