@@ -14,6 +14,9 @@
 #define KEY_UP    65362
 #define KEY_RIGHT 65363
 #define KEY_DOWN  65364
+#define KEY_DOWN  65364
+#define KEY_ESC   65307
+#define KEY_SPACE 32
 
 # include <stdio.h>
 #	include <stdlib.h>
@@ -25,11 +28,11 @@
 
 typedef struct s_win_data
 {
+	void		*mlx_ptr;
+	void		*win_ptr;
 	char		*title;
 	size_t	size_x;
 	size_t	size_y;
-	void		*mlx_ptr;
-	void		*win_ptr;
 }	t_win_data;
 
 typedef struct s_cordi
