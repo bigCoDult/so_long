@@ -108,6 +108,7 @@ void	deal_map(t_win_data *win_data)
 {
 	t_tile_data	*tile_data;
 	t_char_map *char_map;
+	t_tile_map *tile_map;
 	tile_data = malloc(sizeof(t_tile_data));
 	if (tile_data == NULL)
 		return ;
@@ -116,7 +117,8 @@ void	deal_map(t_win_data *win_data)
 		return ;
 	char_map = validate_map();
 	tile_data = init_tiles(win_data);
-	draw_tile_map(win_data, tile_data, set_tile_map(win_data, tile_data, char_map));
+	tile_map = set_tile_map(win_data, tile_data, char_map);
+	draw_tile_map(win_data, tile_data, tile_map);
 	return ;
 }
 
@@ -196,7 +198,7 @@ t_tile_data	*init_tiles(t_win_data *win_data)
 
 
 
-
+//수정필요
 int	***set_tile_location(t_tile_data *tile_data)
 {
 	int row;
@@ -249,14 +251,6 @@ int	***set_tile_location(t_tile_data *tile_data)
 	}
 	return (tile_location);
 }
-
-
-
-
-
-
-
-
 
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 {

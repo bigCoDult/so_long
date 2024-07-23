@@ -26,6 +26,14 @@
 #	include "./minilibx-linux/mlx.h"
 
 
+typedef struct s_total_data
+{
+	t_win_data	*win_data;
+	t_tile_data	*tile_data;
+	t_char_map	*char_map;
+	t_tile_map	*tile_map;
+}	t_total_data;
+
 typedef struct s_win_data
 {
 	void		*mlx_ptr;
@@ -34,12 +42,6 @@ typedef struct s_win_data
 	size_t	size_x;
 	size_t	size_y;
 }	t_win_data;
-
-typedef struct s_cordi
-{
-	int	row;
-	int	col;
-}	t_cordi;
 
 typedef struct s_tile_data
 {
@@ -64,6 +66,12 @@ typedef struct s_tile_map
 	size_t	row_size;
 	size_t	col_size;
 }	t_tile_map;
+
+typedef struct s_cordi
+{
+	int	row;
+	int	col;
+}	t_cordi;
 
 void				so_long(int fd);
 

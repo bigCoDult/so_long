@@ -1,25 +1,23 @@
 #include "so_long.h"
 
-
-key_hook(t_win_data *win_data)
+key_hook(t_total_data *total_data)
 {
 	void *param;
-	param = (void *)win_data;
-	mlx_key_hook(win_data->win_ptr, &move_person, param);
+	param = (void *)total_data;
+	mlx_key_hook(total_data->win_data->win_ptr, &move_person, param);
 }
 
-// int move_person(int key, void *param)
 int move_person(int key, void *param)
 {
-	t_win_data *win_data;
-	win_data = (t_win_data *)param;
-
-
+	t_total_data *total_data;
+	total_data = (t_total_data *)param;
+	
 	if (key == KEY_ESC)
 	{
-		// destroy_tiles(win_data, tile_data);
-		mlx_destroy_window(win_data->mlx_ptr, win_data->win_ptr);
+		destroy_tiles(total_data);
+		mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
 		exit(0);
+		mlx_loop_end(total_data->win_data->mlx_ptr);
 	}
 	else if (key == KEY_W || key == KEY_UP)
 	{
@@ -41,12 +39,12 @@ int move_person(int key, void *param)
 	return (0);
 }
 
-void	destroy_tiles(t_win_data *win_data, t_tile_data *tile_data)
+void	destroy_tiles(t_total_data *total_data)
 {
-	mlx_destroy_image (win_data->mlx_ptr, tile_data->rock);
-	mlx_destroy_image (win_data->mlx_ptr, tile_data->grass);
-	mlx_destroy_image (win_data->mlx_ptr, tile_data->person);
-	mlx_destroy_image (win_data->mlx_ptr, tile_data->chest);
-	mlx_destroy_image (win_data->mlx_ptr, tile_data->door);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->rock);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->grass);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->person);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->chest);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->door);
 }
 // mouse_hook(int button,int x,int y,void *param);
