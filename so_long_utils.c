@@ -191,6 +191,12 @@ t_tile_data	*init_tiles(t_win_data *win_data)
 	return (tile_data);
 }
 
+
+
+
+
+
+
 int	***set_tile_location(t_tile_data *tile_data)
 {
 	int row;
@@ -243,6 +249,14 @@ int	***set_tile_location(t_tile_data *tile_data)
 	}
 	return (tile_location);
 }
+
+
+
+
+
+
+
+
 
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 {

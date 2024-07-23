@@ -6,6 +6,14 @@
 # define COLLECT 'C'
 # define EXIT 'E'
 # define TILE_LEN 20
+#define KEY_W     119
+#define KEY_S     115
+#define KEY_A     97
+#define KEY_D     100
+#define KEY_LEFT  65361
+#define KEY_UP    65362
+#define KEY_RIGHT 65363
+#define KEY_DOWN  65364
 
 # include <stdio.h>
 #	include <stdlib.h>
@@ -80,7 +88,11 @@ t_char_map	*set_map_str_to_arr(char *map_str);
 
 bool	backtracking(t_char_map *char_map);
 t_cordi	*get_cordi(t_char_map *char_map, char c);
-bool	is_possible(t_char_map *char_map, t_cordi *person)
+bool	is_possible(t_char_map *char_map, t_cordi *person);
+
+
+
+int (*move_person)(int key, void *param);
 
 
 #endif /* SO_LONG_H */
