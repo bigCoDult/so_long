@@ -39,8 +39,8 @@ typedef struct s_win_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	char		*title;
-	size_t	size_x;
 	size_t	size_y;
+	size_t	size_x;
 }	t_win_data;
 
 typedef struct s_tile_data
@@ -77,23 +77,23 @@ void				so_long(int fd);
 
 void				init_win_data(t_win_data *win_data);
 
-void				deal_map(t_win_data *win_data);
-t_tile_map	*set_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_char_map	*char_map);
-void				draw_tile_map(t_win_data *win_data, t_tile_data *tile_data, t_tile_map	*tile_map);
+void	deal_map(t_total_data	*total_data);
+void	*set_tile_map(t_total_data	*total_data);
+void draw_tile_map(t_total_data	*total_data);
 
-t_tile_data	*init_tiles(t_win_data *win_data);
-int					***set_tile_location(t_tile_data *tile_data);
-void				*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+void	*init_tiles(t_total_data	*total_data);
+void	*set_tile_location(t_total_data	*total_data);
+void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
 size_t	ft_strlen(char *s);
 char		*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 
-t_char_map *validate_map(void);
+bool	validate_map(total_data);
 bool	is_square(char *map_str);
 bool	is_wall(char *map_str);
-int		is_there(char *map_str, char c);
+int	is_there(char *map_str, char c);
 t_char_map	*set_map_str_to_arr(char *map_str);
 
 
