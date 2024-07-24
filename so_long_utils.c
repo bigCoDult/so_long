@@ -90,13 +90,16 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 
 
 
-void	init_win_data(t_win_data*win_data)
+void	init_win_data(t_total_data *total_data)
 {
-	win_data->title = "so_long";
-	win_data->size_x = 500;
-	win_data->size_y = 500;
-	win_data->mlx_ptr = mlx_init();
-	win_data->win_ptr = mlx_new_window(win_data->mlx_ptr, win_data->size_x, win_data->size_y, win_data->title);
+	total_data->win_data = malloc(sizeof(t_win_data));
+	if (total_data->win_data == NULL)
+		return ;
+	total_data->win_data->title = "so_long";
+	total_data->win_data->size_x = 500;
+	total_data->win_data->size_y = 500;
+	total_data->win_data->mlx_ptr = mlx_init();
+	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
 	return ;
 }
 

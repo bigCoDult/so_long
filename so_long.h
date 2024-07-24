@@ -75,13 +75,12 @@ typedef struct s_cordi
 
 void				so_long(int fd);
 
-void				init_win_data(t_win_data *win_data);
 
 void	deal_map(t_total_data	*total_data);
 void	*set_tile_map(t_total_data	*total_data);
 void draw_tile_map(t_total_data	*total_data);
 
-void	*init_tiles(t_total_data	*total_data);
+void	init_win_data(t_total_data *total_data);
 void	*set_tile_location(t_total_data	*total_data);
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 

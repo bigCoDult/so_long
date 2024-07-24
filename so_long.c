@@ -17,7 +17,7 @@ void so_long(int fd)
 	// total_data->win_data = malloc(sizeof(t_win_data));
 	// if (total_data->win_data == NULL)
 	// 	return ;
-	init_win_data(total_data->win_data);
+	init_win_data(total_data);
 	deal_map(total_data);
 
 
