@@ -73,6 +73,7 @@ typedef struct s_cordi
 	int	col;
 }	t_cordi;
 
+
 void				so_long(int fd);
 void				init_win_data(t_total_data *total_data);
 void				deal_map(t_total_data	*total_data);

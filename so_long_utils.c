@@ -109,6 +109,7 @@ void	init_win_data(t_total_data *total_data)
 
 void	deal_map(t_total_data	*total_data)
 {
+	set_char_map(total_data);
 	validate_map(total_data);
 	init_tiles(total_data);
 	set_tile_map(total_data);
@@ -256,27 +257,29 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 
 
 
-
-
-bool	validate_map(total_data)
+void	*set_char_map(t_total_data *total_data)
 {
 	int fd;
-	char	*total_line;
-	char	*single_line;
+	int	read_return;
+	// char	*total_line;
+	// char	*single_line;
 	char	*map_str;
 	char buf[5];
-	t_char_map *char_map;
-	char_map = malloc(sizeof(t_char_map));
-	if (char_map == NULL)
+	// t_char_map *char_map;
+	total_data->char_map = malloc(sizeof(t_char_map));
+	if (total_data->char_map == NULL)
 		return (NULL);
 	fd = open("map.ber", O_RDONLY);
 	map_str = malloc(sizeof(char) * 1);
 	if (map_str == NULL)
 		return (NULL);
 	map_str[0] = '\0';
-	while (read(fd, buf, 5) > 0)
+	while (1)
 	{
-		buf[5] = '\0';
+		read_return = read(fd, buf, 5);
+		if (read_return < 5)
+			break;
+		buf[read_return] = '\0';
 		map_str = join_s(map_str, buf);
 	}
 	printf("%s\n", map_str);
@@ -290,6 +293,11 @@ bool	validate_map(total_data)
 		return (false);
 	char_map->map_cordi = set_map_str_to_arr(map_str)->map_cordi;
 	return (true);
+
+}
+
+bool	validate_map(total_data)
+{
 }
 
 t_char_map	*set_map_str_to_arr(char *map_str)
