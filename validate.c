@@ -17,27 +17,25 @@ bool	is_square(t_map_data *map_data)
 {	
 	int index;
 	int	line_len;
-	int current_len;
+	int current;
 	
 	index = 0;
 	line_len = 0;
-	current_len = 0;
+	current = 0;
 	
-	while (map_data->map_str[index++] != '\n' && map_data->map_str[line_len++] != '\0')
-		;
+	while (map_data->map_str[line_len] != '\n' && map_data->map_str[line_len] != '\0')
+		line_len++;
+	index = line_len + 1;
 	while (map_data->map_str[index] != '\0')
 	{
-		current_len = index;
-		printf("%d\n", current_len);
-		while (map_data->map_str[current_len] != '\n' && map_data->map_str[current_len++] != '\0')
-			;
-		printf("%d\n", current_len);
-		current_len -= index;
-		if (current_len != line_len)
+		current = index;
+		while (map_data->map_str[current] != '\n' && map_data->map_str[current] != '\0')
+			current++;
+		if (current - index != line_len)
 			return (false);
 		index += line_len;
-		// if (map_data->map_str[index] == '\n')
-		// 	index++;
+		if (map_data->map_str[index] == '\n')
+			index++;
 	}
 	return (true);
 }
