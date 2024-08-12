@@ -5,6 +5,7 @@ int	main(int argc, char **argv)
 	int fd;
 	fd = open(argv[1], O_RDONLY);
 	so_long(fd);
+	close(fd);
 	return (0);
 }
 
@@ -19,6 +20,7 @@ void so_long(int fd)
 	// 	return ;
 	init_win_data(total_data);
 	deal_map(total_data);
+	set_map_str(fd, total_data);
 
 
 
@@ -28,8 +30,16 @@ void so_long(int fd)
 	// mlx_loop_end(win_data->mlx_ptr);
 }
 
-int	main(void)
+
+void	init_win_data(t_total_data *total_data)
 {
-	so_long(0);
-	return (0);
+	total_data->win_data = malloc(sizeof(t_win_data));
+	if (total_data->win_data == NULL)
+		return ;
+	total_data->win_data->title = "so_long";
+	total_data->win_data->size_x = 500;
+	total_data->win_data->size_y = 500;
+	total_data->win_data->mlx_ptr = mlx_init();
+	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
+	return ;
 }
