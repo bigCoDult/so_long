@@ -1,16 +1,5 @@
 #include "so_long.h"
 
-
-// void	deal_map(t_total_data	*total_data)
-// {
-// 	validate_map(total_data);
-// 	set_char_map(total_data);
-// 	init_tiles(total_data);
-// 	set_tile_map(total_data);
-// 	draw_tile_map(total_data);
-// 	return ;
-// }
-
 void	*set_map_str(int fd, t_map_data *map_data)
 {
 	int	read_return;
@@ -29,6 +18,67 @@ void	*set_map_str(int fd, t_map_data *map_data)
 	}
 	return (NULL);
 }
+
+void	deal_map(t_total_data	*total_data)
+{
+	if (!validate_map(total_data->map_data))
+		return ;
+	set_char_map(total_data->map_data);
+	// init_tiles(total_data);
+	// set_tile_map(total_data);
+	// draw_tile_map(total_data);
+	return ;
+}
+
+void	*set_char_map(t_map_data *map_data)
+{
+	int row;
+	int col;
+	int index;
+	map_data->row_size = 0;
+	map_data->col_size = 0;
+	row = 0;
+	col = 0;
+	index = 0;
+	while (map_data->map_str[index] != '\0')
+	{
+		if(map_data->map_str[index] == '\n')
+			map_data->row_size++;
+		index++;
+	}
+	map_data->col_size = index / map_data->row_size;
+	map_data->char_map = malloc(sizeof(char *) * map_data->row_size);
+	if (map_data->char_map == NULL)
+		return (NULL);
+	while (row < map_data->row_size)
+	{
+		map_data->char_map[row] = malloc(sizeof(char) * map_data->col_size);
+		if (map_data->char_map[row] == NULL)
+		{
+			while (row-- >= 0)
+				free(map_data->char_map[row]);
+			free(map_data->char_map);
+			return (NULL);
+		}
+		row++;
+	}
+	row = 0;
+	index = 0;
+	while (map_data->map_str[index] != '\0')
+	{
+		col = 0;
+		while (map_data->map_str[index] != '\n')
+		{
+			map_data->char_map[row][col] = map_data->map_str[index];
+			index++;
+			col++;
+		}
+		index++;
+		row++;
+	}
+	return (NULL);
+}
+
 
 // void draw_tile_map(t_total_data	*total_data)
 // {
@@ -112,73 +162,51 @@ void	*set_map_str(int fd, t_map_data *map_data)
 // 	return (NULL);
 // }
 
-
-// bool	validate_map(total_data)
+// void	*set_tile_map(t_total_data	*total_data)
 // {
-// 	if (!is_square(map_str))
-// 		return (false);
-// 	if (is_wall(map_str))
-// 		return (false);
-// 	if (is_there(map_str, EXIT) != 1)
-// 		return (false);
-// 	if (is_there(map_str, PERSON) != 1)
-// 		return (false);
-// 	char_map->map_cordi = set_map_str_to_arr(map_str)->map_cordi;
-// 	return (true);
+// 	t_cordi	*cordi;
 
+// 	total_data->tile_map = malloc(sizeof(t_tile_map));
+// 	if (total_data->tile_map == NULL)
+// 		return ;
+// 	cordi = malloc(sizeof(t_cordi));
+// 	if (cordi == NULL)
+// 		return ;
+// 	cordi->row = 0;
+// 	while (cordi->row < total_data->char_map->row_size)
+// 	{
+// 		total_data->tile_map->map_cordi[cordi->row] = malloc(sizeof(void *) * total_data->char_map->col_size);
+// 		if (total_data->tile_map->map_cordi[cordi->row] == NULL)
+// 		{
+// 			while (cordi->row >= 0)
+// 				free(total_data->tile_map->map_cordi[cordi->row--]);
+// 			free(total_data->tile_map);
+// 			return (NULL);
+// 		}
+
+// 		cordi->col = 0;
+// 		while (cordi->col < total_data->char_map->col_size)
+// 		{
+// 			if (total_data->char_map->map_cordi[cordi->row][cordi->col] == '1')
+// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->rock;
+// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == '0')
+// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->grass;
+// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'P')
+// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->person;
+// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'C')
+// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->chest;
+// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'E')
+// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->door;
+// 			else
+// 				return (NULL);
+// 			cordi->col++;
+// 		}
+// 		cordi->row++;
+// 	}
+// 	return (NULL);
 // }
 
-void	*set_maps(t_map_data *map_data)
-{
-	int row;
-	int col;
-	int index;
-	map_data->row_size = 0;
-	map_data->col_size = 0;
-	row = 0;
-	col = 0;
-	index = 0;
-	while (map_data->map_str[index] != '\0')
-	{
-		if(map_data->map_str[index] == '\n')
-			map_data->row_size++;
-		index++;
-	}
-	map_data->col_size = index / map_data->row_size;
-	map_data->char_map = malloc(sizeof(char *) * map_data->row_size);
-	if (map_data->char_map == NULL)
-		return (NULL);
-	while (row < map_data->row_size)
-	{
-		map_data->char_map[row] = malloc(sizeof(char) * map_data->col_size);
-		if (map_data->char_map[row] == NULL)
-		{
-			while (row-- >= 0)
-				free(map_data->char_map[row]);
-			free(map_data->char_map);
-			return (NULL);
-		}
-		row++;
-	}
-	row = 0;
-	index = 0;
-	while (map_data->map_str[index] != '\0')
-	{
-		col = 0;
-		while (map_data->map_str[index] != '\n')
-		{
-			map_data->char_map[row][col] = map_data->map_str[index];
-			index++;
-			col++;
-		}
-		index++;
-		row++;
-	}
-	return (NULL);
-}
-
-
-// void	*set_char_map(t_total_data *total_data)
+// void	*set_char_map0(t_total_data *total_data)
 // {
 // 	int row;
 // 	int col;
@@ -229,49 +257,3 @@ void	*set_maps(t_map_data *map_data)
 // 	}
 // 	return (char_map);
 // }
-
-// void	*set_tile_map(t_total_data	*total_data)
-// {
-// 	t_cordi	*cordi;
-
-// 	total_data->tile_map = malloc(sizeof(t_tile_map));
-// 	if (total_data->tile_map == NULL)
-// 		return ;
-// 	cordi = malloc(sizeof(t_cordi));
-// 	if (cordi == NULL)
-// 		return ;
-// 	cordi->row = 0;
-// 	while (cordi->row < total_data->char_map->row_size)
-// 	{
-// 		total_data->tile_map->map_cordi[cordi->row] = malloc(sizeof(void *) * total_data->char_map->col_size);
-// 		if (total_data->tile_map->map_cordi[cordi->row] == NULL)
-// 		{
-// 			while (cordi->row >= 0)
-// 				free(total_data->tile_map->map_cordi[cordi->row--]);
-// 			free(total_data->tile_map);
-// 			return (NULL);
-// 		}
-
-// 		cordi->col = 0;
-// 		while (cordi->col < total_data->char_map->col_size)
-// 		{
-// 			if (total_data->char_map->map_cordi[cordi->row][cordi->col] == '1')
-// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->rock;
-// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == '0')
-// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->grass;
-// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'P')
-// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->person;
-// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'C')
-// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->chest;
-// 			else if (total_data->char_map->map_cordi[cordi->row][cordi->col] == 'E')
-// 				total_data->tile_map->map_cordi[cordi->row][cordi->col] = total_data->tile_data->door;
-// 			else
-// 				return (NULL);
-// 			cordi->col++;
-// 		}
-// 		cordi->row++;
-// 	}
-// 	return (NULL);
-// }
-
-

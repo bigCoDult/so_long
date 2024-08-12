@@ -30,7 +30,7 @@ void so_long(int fd)
 	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
 	
 	// init_win_data(total_data);
-	// deal_map(total_data->map_data);
+	deal_map(total_data);
 	
 
 
@@ -54,3 +54,4 @@ void so_long(int fd)
 // 	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
 // 	return ;
 // }
+

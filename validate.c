@@ -1,5 +1,12 @@
 #include "so_long.h"
 
+bool	validate_map(t_map_data *map_data)
+{
+	if (is_square(map_data) && is_wall(map_data) && is_proper_chars(map_data))
+		return (true);
+	return (false);
+
+}
 bool	is_square(t_map_data *map_data)
 {	
 	int index;
