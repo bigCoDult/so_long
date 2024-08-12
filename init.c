@@ -18,6 +18,9 @@ void	*set_map_str(int fd, t_total_data *total_data)
 {
 	int	read_return;
 	char buf[5];
+	total_data->map_data = malloc(sizeof(t_map_data) * 1);
+	if (total_data->map_data == NULL)
+		return (NULL);
 	total_data->map_data->map_str = malloc(sizeof(char) * 1);
 	if (total_data->map_data->map_str == NULL)
 		return (NULL);
@@ -30,7 +33,6 @@ void	*set_map_str(int fd, t_total_data *total_data)
 		if (read_return < 5)
 			break;
 	}
-	free(buf);
 	printf("%s\n", total_data->map_data->map_str);
 	return (NULL);
 }

@@ -59,6 +59,7 @@ typedef struct s_cordi
 	int	row;
 	int	col;
 }	t_cordi;
+
 typedef struct s_total_data
 {
 	t_win_data	*win_data;
@@ -67,16 +68,14 @@ typedef struct s_total_data
 	}	t_total_data;
 
 
-
 void	so_long(int fd);
 void	init_win_data(t_total_data *total_data);
 void	deal_map(t_total_data	*total_data);
 void	draw_tile_map(t_total_data	*total_data);
 void	*set_tile_map(t_total_data	*total_data);
 void	*set_tile_location(t_total_data	*total_data);
-// t_char_map	*set_map_str_to_arr(char *map_str);
 void	*set_map_str(int fd, t_total_data *total_data);
-void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+// void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);

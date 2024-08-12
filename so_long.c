@@ -19,13 +19,19 @@ void so_long(int fd)
 	// if (total_data->win_data == NULL)
 	// 	return ;
 	init_win_data(total_data);
-	deal_map(total_data);
 	set_map_str(fd, total_data);
+	
+	// printf("is square : %d\n", is_square(total_data->map_data));
+	// printf("is wall : %d\n", is_wall(total_data->map_data));
+	// printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
+	
+	// deal_map(total_data->map_data);
+	
 
 
 
 
-	key_hook(total_data);
+	// key_hook(total_data);
 	mlx_loop(total_data->win_data->mlx_ptr);
 	// mlx_loop_end(win_data->mlx_ptr);
 }
