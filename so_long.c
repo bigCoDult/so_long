@@ -3,7 +3,8 @@
 int	main(int argc, char **argv)
 {
 	int fd;
-	fd = open(argv[1], O_RDONLY);
+	// fd = open(argv[1], O_RDONLY);
+	fd = open("map.ber", O_RDONLY);
 	so_long(fd);
 	close(fd);
 	return (0);
@@ -15,16 +16,20 @@ void so_long(int fd)
 	total_data = malloc(sizeof(t_total_data));
 	if (total_data == NULL)
 		return ;
-	// total_data->win_data = malloc(sizeof(t_win_data));
-	// if (total_data->win_data == NULL)
-	// 	return ;
-	init_win_data(total_data);
-	set_map_str(fd, total_data);
+	total_data->win_data = malloc(sizeof(t_win_data));
+	if (total_data->win_data == NULL)
+		return ;
+	total_data->map_data = malloc(sizeof(t_map_data));
+	if (total_data->map_data == NULL)
+		return ;
+	set_map_str(fd, total_data->map_data);
+
+	printf("%s\n", total_data->map_data->map_str);
+	printf("is square : %d\n", is_square(total_data->map_data));
+	printf("is wall : %d\n", is_wall(total_data->map_data));
+	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
 	
-	// printf("is square : %d\n", is_square(total_data->map_data));
-	// printf("is wall : %d\n", is_wall(total_data->map_data));
-	// printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
-	
+	// init_win_data(total_data);
 	// deal_map(total_data->map_data);
 	
 
@@ -32,20 +37,20 @@ void so_long(int fd)
 
 
 	// key_hook(total_data);
-	mlx_loop(total_data->win_data->mlx_ptr);
+	// mlx_loop(total_data->win_data->mlx_ptr);
 	// mlx_loop_end(win_data->mlx_ptr);
 }
 
 
-void	init_win_data(t_total_data *total_data)
-{
-	total_data->win_data = malloc(sizeof(t_win_data));
-	if (total_data->win_data == NULL)
-		return ;
-	total_data->win_data->title = "so_long";
-	total_data->win_data->size_x = 500;
-	total_data->win_data->size_y = 500;
-	total_data->win_data->mlx_ptr = mlx_init();
-	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
-	return ;
-}
+// void	init_win_data(t_total_data *total_data)
+// {
+// 	total_data->win_data = malloc(sizeof(t_win_data));
+// 	if (total_data->win_data == NULL)
+// 		return ;
+// 	total_data->win_data->title = "so_long";
+// 	total_data->win_data->size_x = 500;
+// 	total_data->win_data->size_y = 500;
+// 	total_data->win_data->mlx_ptr = mlx_init();
+// 	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
+// 	return ;
+// }

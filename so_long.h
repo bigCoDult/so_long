@@ -48,7 +48,7 @@ typedef struct s_tile_data
 typedef struct s_map_data
 {
 	void		***tile_map;
-	char		**char_amp;
+	char		**char_map;
 	char		*map_str;
 	size_t	row_size;
 	size_t	col_size;
@@ -69,12 +69,13 @@ typedef struct s_total_data
 
 
 void	so_long(int fd);
-void	init_win_data(t_total_data *total_data);
-void	deal_map(t_total_data	*total_data);
-void	draw_tile_map(t_total_data	*total_data);
-void	*set_tile_map(t_total_data	*total_data);
-void	*set_tile_location(t_total_data	*total_data);
-void	*set_map_str(int fd, t_total_data *total_data);
+// void	init_win_data(t_total_data *total_data);
+// void	deal_map(t_total_data	*total_data);
+// void	draw_tile_map(t_total_data	*total_data);
+// void	*set_tile_map(t_total_data	*total_data);
+// void	*set_tile_location(t_total_data	*total_data);
+void	*set_map_str(int fd, t_map_data *map_data);
+
 // void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
