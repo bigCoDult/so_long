@@ -81,8 +81,10 @@ size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
-bool	validate_map(total_data);
+// bool	validate_map(t_total_data *total_data);
 bool	is_square(t_map_data *map_data);
+bool	is_wall(t_map_data *map_data);
+
 // bool	is_square(t_total_data *total_data);
 // bool	is_wall(t_map_data *map_data);
 // int					is_there(char *map_str, char c);

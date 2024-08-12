@@ -7,41 +7,74 @@ int main(void)
 	total_data = malloc(sizeof(t_total_data));
 	total_data->map_data = malloc(sizeof(t_map_data));
 	set_map_str(fd, total_data);
-	printf("\n%d\n", is_square(total_data->map_data));
+	printf("is square : %d\n", is_square(total_data->map_data));
+	printf("is wall : %d\n", is_wall(total_data->map_data));
+	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));
 	return (0);	
 }
-
-
 
 bool	is_square(t_map_data *map_data)
 {	
 	int index;
-	int	line_len;
+	int	first_line;
 	int current;
 	
 	index = 0;
-	line_len = 0;
+	first_line = 0;
 	current = 0;
 	
-	while (map_data->map_str[line_len] != '\n' && map_data->map_str[line_len] != '\0')
-		line_len++;
-	index = line_len + 1;
+	while (map_data->map_str[first_line] != '\n' && map_data->map_str[first_line] != '\0')
+		first_line++;
+	index = first_line + 1;
 	while (map_data->map_str[index] != '\0')
 	{
 		current = index;
 		while (map_data->map_str[current] != '\n' && map_data->map_str[current] != '\0')
 			current++;
-		if (current - index != line_len)
+		if (current - index != first_line)
 			return (false);
-		index += line_len;
+		index += first_line;
 		if (map_data->map_str[index] == '\n')
 			index++;
 	}
 	return (true);
 }
 
-
-
+bool	is_wall(t_map_data *map_data)
+{
+	int index;
+	int	first_line;
+	int current;
+	
+	index = 0;
+	first_line = 0;
+	current = 0;
+	
+	while (map_data->map_str[first_line] != '\n' && map_data->map_str[first_line] != '\0')
+		first_line++;
+	while (index < first_line)
+	{
+		if (map_data->map_str[index] != WALL)
+			return (false);
+		index++;
+	}
+	while (map_data->map_str[index] != '\0')
+	{
+		index++;
+		if (map_data->map_str[index] != WALL || map_data->map_str[index + first_line - 1] != WALL)
+			return (false);
+		index += first_line;
+	}
+	index -= first_line;
+	while (map_data->map_str[index] != '\0')
+	{
+		if (map_data->map_str[index] != WALL)
+			return (false);
+		index++;
+	}
+	
+	return (true);
+}
 
 void	*set_map_str(int fd, t_total_data *total_data)
 {
@@ -66,52 +99,33 @@ void	*set_map_str(int fd, t_total_data *total_data)
 
 
 
-
-// bool	is_wall(t_map_data *map_data)
-// {
-// 	int index;
-// 	int	line_len;
-// 	index = 0;
-// 	line_len = 0;
-// 	while (map_data->map_str[line_len++] != '\n')
-// 		;
-// 	while (index < line_len)
-// 	{
-// 		if (map_data->map_str[index] != '1')
-// 			return (false);
-// 		index++;
-// 	}
-// 	while (map_data->map_str[index] != '\0')
-// 	{
-// 		if (map_data->map_str[index] != '1' || map_data->map_str[index + line_len] != '1')
-// 			return (false);
-// 		index += line_len;
-// 	}
-// 	index -= line_len;
-// 	while (map_data->map_str[index] != '\0')
-// 	{
-// 		if (map_data->map_str[index] != '1')
-// 			return (false);
-// 		index++;
-// 	}
-// 	return (true);
-// }
-
-
-
-
-// int	is_proper_char(char *map_str)
-// {
-// 	int index;
-// 	int	count_c;
-// 	index = 0;
-// 	count_c = 0;
-// 	while (map_str[index] != '\0')
-// 	{
-// 		if (map_str[index] == c)
-// 			count_c++;
-// 		index++;
-// 	}
-// 	return (count_c);
-// }
+bool	is_proper_chars(t_map_data *map_data)
+{
+	int index;
+	int	count_person;
+	int	count_exit;
+	int	count_collect;
+	
+	index = 0;
+	count_person = 0;
+	count_exit = 0;
+	count_collect = 0;
+	while (map_data->map_str[index] != '\0')
+	{
+		if (map_data->map_str[index] == PERSON)
+			count_person++;
+		else if (map_data->map_str[index] == EXIT)
+			count_exit++;
+		else if (map_data->map_str[index] == COLLECT)
+			count_collect++;
+		else if (map_data->map_str[index] == WALL || map_data->map_str[index] == EMPTY)
+			;
+		else
+			return (false);
+		index++;
+	}
+	if (count_person != 1 || count_exit != 1 || count_collect < 1)
+		return (false);
+	return (true);
+}
 
