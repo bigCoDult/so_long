@@ -2,7 +2,7 @@
 # define SO_LONG_H
 # define WALL '1'
 # define EMPTY '0'
-# define PERSON 'E'
+# define PERSON 'P'
 # define COLLECT 'C'
 # define EXIT 'E'
 # define TILE_LEN 20
@@ -84,6 +84,7 @@ char	*join_s(char *st_s, char *buf);
 // bool	validate_map(t_total_data *total_data);
 bool	is_square(t_map_data *map_data);
 bool	is_wall(t_map_data *map_data);
+bool	is_proper_chars(t_map_data *map_data);
 
 // bool	is_square(t_total_data *total_data);
 // bool	is_wall(t_map_data *map_data);

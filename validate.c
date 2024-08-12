@@ -10,6 +10,7 @@ int main(void)
 	printf("is square : %d\n", is_square(total_data->map_data));
 	printf("is wall : %d\n", is_wall(total_data->map_data));
 	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));
+	printf("is possible : %d\n", is_possible(total_data->map_data));
 	return (0);	
 }
 
@@ -116,7 +117,7 @@ bool	is_proper_chars(t_map_data *map_data)
 			count_exit++;
 		else if (map_data->map_str[index] == COLLECT)
 			count_collect++;
-		else if (map_data->map_str[index] == WALL || map_data->map_str[index] == EMPTY)
+		else if (map_data->map_str[index] == WALL || map_data->map_str[index] == EMPTY || map_data->map_str[index] == '\n')
 			;
 		else
 			return (false);
@@ -127,7 +128,6 @@ bool	is_proper_chars(t_map_data *map_data)
 	return (true);
 }
 
-#include "so_long.h"
 
 bool	backtracking(t_char_map *char_map)
 {
