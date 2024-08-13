@@ -86,10 +86,11 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 {
-	int	**tile_len;
-	*tile_len = TILE_LEN;
+	int	tile_len;
+	tile_len = TILE_LEN;
 	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
-	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, tile_len, tile_len);
+	printf("file_path : %s\n", file_path);
+	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, &tile_len, &tile_len);
 	free(file_path);
 	return (single_tile);
 }

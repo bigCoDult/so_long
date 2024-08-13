@@ -42,7 +42,7 @@ typedef struct s_tile_data
 	void	*person;
 	void	*chest;
 	void	*door;
-	int		***tile_location;
+	int*	**tile_location;
 }	t_tile_data;
 
 typedef struct s_map_data
@@ -69,19 +69,22 @@ typedef struct s_total_data
 
 
 void	so_long(int fd);
-// void	init_win_data(t_total_data *total_data);
-void	deal_map(t_total_data	*total_data);
-// void	draw_tile_map(t_total_data	*total_data);
-// void	*set_tile_map(t_total_data	*total_data);
-// void	*set_tile_location(t_total_data	*total_data);
-void	*set_char_map(t_map_data *map_data);
+void	init_win_data(t_total_data *total_data);
+
 void	*set_map_str(int fd, t_map_data *map_data);
+void	deal_map(t_total_data	*total_data);
+void	*set_char_map(t_map_data *map_data);
+void	*init_tiles(t_total_data	*total_data);
+void	*set_tile_location(t_total_data	*total_data);
+void	*set_tile_map(t_total_data	*total_data);
+void	*set_tile_location(t_total_data	*total_data);
+void	draw_tile_map(t_total_data	*total_data);
 
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
-// void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
 bool	validate_map(t_map_data *map_data);
 bool	is_square(t_map_data *map_data);

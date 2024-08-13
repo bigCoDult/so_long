@@ -29,7 +29,7 @@ void so_long(int fd)
 	printf("is wall : %d\n", is_wall(total_data->map_data));
 	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
 	
-	// init_win_data(total_data);
+	init_win_data(total_data);
 	deal_map(total_data);
 	
 
@@ -37,21 +37,21 @@ void so_long(int fd)
 
 
 	// key_hook(total_data);
-	// mlx_loop(total_data->win_data->mlx_ptr);
-	// mlx_loop_end(win_data->mlx_ptr);
+	mlx_loop(total_data->win_data->mlx_ptr);
+	mlx_loop_end(total_data->win_data->mlx_ptr);
 }
 
 
-// void	init_win_data(t_total_data *total_data)
-// {
-// 	total_data->win_data = malloc(sizeof(t_win_data));
-// 	if (total_data->win_data == NULL)
-// 		return ;
-// 	total_data->win_data->title = "so_long";
-// 	total_data->win_data->size_x = 500;
-// 	total_data->win_data->size_y = 500;
-// 	total_data->win_data->mlx_ptr = mlx_init();
-// 	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
-// 	return ;
-// }
+void	init_win_data(t_total_data *total_data)
+{
+	total_data->win_data = malloc(sizeof(t_win_data));
+	if (total_data->win_data == NULL)
+		return ;
+	total_data->win_data->title = "so_long";
+	total_data->win_data->size_x = 500;
+	total_data->win_data->size_y = 500;
+	total_data->win_data->mlx_ptr = mlx_init();
+	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
+	return ;
+}
 
