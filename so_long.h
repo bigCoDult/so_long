@@ -54,11 +54,11 @@ typedef struct s_map_data
 	size_t	col_size;
 }	t_map_data;
 
-typedef struct s_cordi
-{
-	int	row;
-	int	col;
-}	t_cordi;
+// typedef struct s_cordi
+// {
+// 	int	row;
+// 	int	col;
+// }	t_cordi;
 
 typedef struct s_total_data
 {
