@@ -42,8 +42,14 @@ typedef struct s_tile_data
 	void	*person;
 	void	*chest;
 	void	*door;
-	int*	**tile_location;
 }	t_tile_data;
+
+
+typedef struct s_cordi
+{
+	int	row;
+	int	col;
+}	t_cordi;
 
 typedef struct s_map_data
 {
@@ -52,13 +58,8 @@ typedef struct s_map_data
 	char		*map_str;
 	size_t	row_size;
 	size_t	col_size;
+	t_cordi	*person;
 }	t_map_data;
-
-// typedef struct s_cordi
-// {
-// 	int	row;
-// 	int	col;
-// }	t_cordi;
 
 typedef struct s_total_data
 {
@@ -87,5 +88,10 @@ bool	validate_map(t_map_data *map_data);
 bool	is_square(t_map_data *map_data);
 bool	is_wall(t_map_data *map_data);
 bool	is_proper_chars(t_map_data *map_data);
+
+bool	backtracking(t_map_data *map_data);
+t_cordi	*get_cordi(t_map_data *map_data, char c);
+bool	is_possible(t_map_data *map_data);
+
 
 #endif /* SO_LONG_H */
