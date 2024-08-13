@@ -25,8 +25,8 @@ void	deal_map(t_total_data	*total_data)
 		return ;
 	set_char_map(total_data->map_data);
 	init_tiles(total_data);
-	// set_tile_map(total_data);
-	// draw_tile_map(total_data);
+	set_tile_map(total_data);
+	draw_tile_map(total_data);
 	return ;
 }
 
@@ -163,15 +163,20 @@ void	*set_tile_map(t_total_data *total_data)
 	col = 0;
 	index = 0;
 	
+	total_data->map_data->tile_map = malloc(sizeof(void **) * total_data->map_data->row_size);
+	if (total_data->map_data->tile_map == NULL)
+		return (NULL);
+	
 	while (row < total_data->map_data->row_size)
 	{
-		total_data->map_data->tile_map[row] = malloc(sizeof(void **) * total_data->map_data->row_size);
+		total_data->map_data->tile_map[row] = malloc(sizeof(void *) * total_data->map_data->col_size);
 		if (total_data->map_data->tile_map[row] == NULL)
 		{
-			while (row-- >= 0)
+			while (row >= 0)
 				free(total_data->map_data->tile_map[row]);
 			free(total_data->map_data->tile_map);
 			return (NULL);
+			row--;
 		}
 		while (col < total_data->map_data->col_size)
 		{
@@ -185,9 +190,9 @@ void	*set_tile_map(t_total_data *total_data)
 				total_data->map_data->tile_map[row][col] = total_data->tile_data->chest;
 			else if (total_data->map_data->char_map[row][col] == EXIT)
 				total_data->map_data->tile_map[row][col] = total_data->tile_data->door;
-			total_data->map_data->col_size++;
+			col++;
 		}
-		total_data->map_data->row_size++;
+		row++;
 	}
 	return (NULL);
 }
