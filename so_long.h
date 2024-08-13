@@ -75,9 +75,7 @@ void	*set_map_str(int fd, t_map_data *map_data);
 void	deal_map(t_total_data	*total_data);
 void	*set_char_map(t_map_data *map_data);
 void	*init_tiles(t_total_data	*total_data);
-void	*set_tile_map(t_total_data	*total_data);
-// void	*set_tile_location(t_total_data	*total_data);
-void	draw_tile_map(t_total_data	*total_data);
+void	draw_map(t_total_data	*total_data);
 
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
