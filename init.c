@@ -68,14 +68,12 @@ void	*set_char_map(t_map_data *map_data)
 	}
 	row = 0;
 	index = 0;
-	// while (map_data->map_str[index] != '\0')
-	while (row < map_data->row_size - 1)
+	while (row < map_data->row_size)
 	{
 		col = 0;
-		while (map_data->map_str[index] != '\n')
+		while (col < map_data->col_size)
 		{
 			map_data->char_map[row][col] = map_data->map_str[index];
-			printf("%c", map_data->char_map[row][col]);
 			index++;
 			col++;
 		}
