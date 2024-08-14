@@ -43,7 +43,6 @@ void	deal_map(t_total_data	*total_data)
 	// printf("is wall : %d\n", is_wall(total_data->map_data));
 	// printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
 	// printf("is possible : %d\n", is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)));
-	draw_map(total_data);
 	return ;
 }
 
