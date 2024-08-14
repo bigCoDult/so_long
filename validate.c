@@ -2,8 +2,8 @@
 
 bool	validate_map(t_map_data *map_data)
 {
-	// if (is_square(map_data) && is_wall(map_data) && is_proper_chars(map_data))
-	if (is_square(map_data) && is_wall(map_data))
+	// if (is_square(map_data) && is_wall(map_data))
+	if (is_square(map_data) && is_wall(map_data) && is_proper_chars(map_data))
 		return (true);
 	return (false);
 
@@ -135,6 +135,7 @@ bool	is_possible(t_map_data *map_data, t_cordi *person)
 	int print;
 	print = 0;
 	printf("\n");
+	printf("count_collect : %d\n", map_data->count_collect);
 	while (print < map_data->row_size)
 		printf("vali_map : %s\n", map_data->vali_map[print++]);
 	
@@ -145,15 +146,23 @@ bool	is_possible(t_map_data *map_data, t_cordi *person)
 	if (person->row < 0 || person->row > map_data->row_size || person->col < 0 || person->col > map_data->col_size)
 		return (false);
 	
-	if (map_data->vali_map[person->row][person->col] == EXIT && map_data->count_collect == 0)
-		return (true);
-	if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '\\')
-		return (false);
-	
-	
-	if (map_data->vali_map[person->row][person->col] == COLLECT)
-		map_data->count_collect--;
-	map_data->vali_map[person->row][person->col] = '\\';
+	if (map_data->count_collect == 0)
+	{
+		if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '/')
+			return (false);
+		if (map_data->vali_map[person->row][person->col] == EXIT)
+			return (true);
+		map_data->vali_map[person->row][person->col] = '/';
+	}
+	else
+	{
+		if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '\\')
+			return (false);
+		if (map_data->vali_map[person->row][person->col] == COLLECT)
+			map_data->count_collect--;
+		if (map_data->vali_map[person->row][person->col] != EXIT)
+			map_data->vali_map[person->row][person->col] = '\\';
+	}
 
 	if (is_possible(map_data, &(t_cordi){person->row + 1, person->col}) \
 		|| is_possible(map_data, &(t_cordi){person->row - 1, person->col}) \
