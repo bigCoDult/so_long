@@ -88,14 +88,14 @@ bool	is_proper_chars(t_map_data *map_data)
 		else if (map_data->map_str[index] == EXIT)
 			count_exit++;
 		else if (map_data->map_str[index] == COLLECT)
-			count_collect++;
+			map_data->count_collect++;
 		else if (map_data->map_str[index] == WALL || map_data->map_str[index] == EMPTY || map_data->map_str[index] == '\n')
 			;
 		else
 			return (false);
 		index++;
 	}
-	if (count_person != 1 || count_exit != 1 || count_collect < 1)
+	if (count_person != 1 || count_exit != 1 || map_data->count_collect < 1)
 		return (false);
 	return (true);
 }
