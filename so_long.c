@@ -25,20 +25,29 @@ void so_long(int fd)
 
 	total_data->map_data->vali_map = set_map_str(fd, total_data->map_data);
 
-	printf("%s\n", total_data->map_data->map_str);
-	printf("row_size : %ld\n", total_data->map_data->row_size);
-	printf("col_size : %ld\n", total_data->map_data->col_size);
-	
-
-	printf("is square : %d\n", is_square(total_data->map_data));
-	printf("is wall : %d\n", is_wall(total_data->map_data));
-	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
-	// printf("is possible : %d\n", is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)));
-	
 	init_win_data(total_data);
 	deal_map(total_data);
 	
 
+	// printf("%s\n", total_data->map_data->map_str);
+	printf("\n");
+	printf("\n");
+	printf("char_map : %s\n", total_data->map_data->char_map[0]);	
+	printf("char_map : %s\n", total_data->map_data->char_map[1]);	
+	printf("char_map : %s\n", total_data->map_data->char_map[2]);	
+	printf("char_map : %s\n", total_data->map_data->char_map[3]);	
+	printf("char_map : %s\n", total_data->map_data->char_map[4]);
+	printf("row_size : %ld\n", total_data->map_data->row_size);
+	printf("col_size : %ld\n", total_data->map_data->col_size);
+	printf("\n");
+	
+
+	// printf("is);
+	// printf("vali_map : %s\n", total_data->map_data->vali_map[0]);	
+	// printf("vali_map : %s\n", total_data->map_data->vali_map[1]);	
+	// printf("vali_map : %s\n", total_data->map_data->vali_map[2]);	
+	// printf("vali_map : %s\n", total_data->map_data->vali_map[3]);	
+	// printf("vali_map : %s\n", total_data->map_data->vali_map[4]);
 
 
 

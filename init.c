@@ -36,11 +36,15 @@ void	deal_map(t_total_data	*total_data)
 {
 	if (!validate_map(total_data->map_data))
 		return ;
+	int veli = 0;
 	init_tiles(total_data);
-	set_char_map(total_data->map_data);
 	set_vali_map(total_data->map_data);
-	// if (!is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)))
-	// 	return ;
+	set_char_map(total_data->map_data);
+	
+	printf("is possible : %d\n", is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)));
+	printf("is square : %d\n", is_square(total_data->map_data));
+	printf("is wall : %d\n", is_wall(total_data->map_data));
+	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
 	draw_map(total_data);
 	return ;
 }
@@ -117,6 +121,7 @@ void	*set_vali_map(t_map_data *map_data)
 		col = 0;
 		while (col < map_data->col_size)
 		{
+			// map_data->vali_map[row][col] = 0;
 			map_data->vali_map[row][col] = map_data->map_str[index];
 			index++;
 			col++;
