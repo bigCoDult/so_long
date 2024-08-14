@@ -16,19 +16,16 @@ int move_person(int key, void *param)
 	t_total_data *total_data;
 	total_data = (t_total_data *)param;
 	t_cordi *person;
-	person = malloc(sizeof(t_cordi));
+	person = get_cordi(total_data->map_data, 'P');
 	if (person == NULL)
 		return (0);
-	person = get_cordi(total_data->map_data, 'P');
 	
 	if (key == KEY_ESC)
 	{
-		// destroy_tiles(total_data);
+		destroy_tiles(total_data);
 		mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
 		mlx_loop_end(total_data->win_data->mlx_ptr);
 		exit(0);
-		// exit이 뭐임
-		// 프로세스 종료하는 거임
 	}
 	else if (key == KEY_W || key == KEY_UP)
 	{
@@ -115,12 +112,12 @@ int move_person(int key, void *param)
 	return (0);
 }
 
-// void	destroy_tiles(t_total_data *total_data)
-// {
-// 	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->rock);
-// 	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->grass);
-// 	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->person);
-// 	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->chest);
-// 	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->door);
-// }
+void	destroy_tiles(t_total_data *total_data)
+{
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->rock);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->grass);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->person);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->chest);
+	mlx_destroy_image (total_data->win_data->mlx_ptr, total_data->tile_data->door);
+}
 // mouse_hook(int button,int x,int y,void *param);

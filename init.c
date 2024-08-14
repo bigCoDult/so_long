@@ -18,6 +18,8 @@ void	*set_map_str(int fd, t_map_data *map_data)
 			break;
 	}
 	index = 0;
+	map_data->row_size = 0;
+	map_data->col_size = 0;
 	while (1)
 	{
 		if (map_data->map_str[index] == '\n' || map_data->map_str[index] == '\0')

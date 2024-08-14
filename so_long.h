@@ -98,6 +98,6 @@ bool	is_possible(t_map_data *map_data, t_cordi *person);
 
 void	key_hook(t_total_data *total_data);
 int move_person(int key, void *param);
-// void	destroy_tiles(t_total_data *total_data)
+void	destroy_tiles(t_total_data *total_data);
 
 #endif /* SO_LONG_H */
