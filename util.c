@@ -13,26 +13,12 @@ char	*template_literal(char *line, char *word, int location)
 	str_i = 0;
 	line_i = 0;
 	word_i = 0;
-	if (ft_strlen(line) < location)
-		return ("wrong location");
 	while (line_i < location)
-	{
-		str[str_i] = line[line_i];
-		str_i++;
-		line_i++;
-	}
+		str[str_i++] = line[line_i++];
 	while (word_i < ft_strlen(word))
-	{
-		str[str_i] = word[word_i];
-		str_i++;
-		word_i++;
-	}
+		str[str_i++] = word[word_i++];
 	while (line[line_i] != '\0')
-	{
-		str[str_i] = line[line_i];
-		str_i++;
-		line_i++;
-	}
+		str[str_i++] = line[line_i++];
 	str[str_i] = '\0';
 	return (str);
 }
@@ -89,7 +75,6 @@ void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name)
 	int	tile_len;
 	tile_len = TILE_LEN;
 	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
-	printf("file_path : %s\n", file_path);
 	single_tile = mlx_xpm_file_to_image(win_data->mlx_ptr, file_path, &tile_len, &tile_len);
 	free(file_path);
 	return (single_tile);

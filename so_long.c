@@ -27,14 +27,7 @@ void so_long(int fd)
 
 	init_win_data(total_data);
 	deal_map(total_data);
-	
-
-	printf("\n");
-	printf("row_size : %ld\n", total_data->map_data->row_size);
-	printf("col_size : %ld\n", total_data->map_data->col_size);
-	printf("\n");
-	
-
+	deal_game(total_data);
 	// key_hook(total_data);
 	mlx_loop(total_data->win_data->mlx_ptr);
 	mlx_loop_end(total_data->win_data->mlx_ptr);

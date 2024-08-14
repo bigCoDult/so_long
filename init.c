@@ -4,6 +4,7 @@ void	*set_map_str(int fd, t_map_data *map_data)
 {
 	int	read_return;
 	char buf[5];
+	int index;
 	map_data->map_str = malloc(sizeof(char) * 1);
 	if (map_data->map_str == NULL)
 		return (NULL);
@@ -16,10 +17,7 @@ void	*set_map_str(int fd, t_map_data *map_data)
 		if (read_return < 5)
 			break;
 	}
-	int index;
 	index = 0;
-	map_data->row_size = 0;
-	map_data->col_size = 0;
 	while (1)
 	{
 		if (map_data->map_str[index] == '\n' || map_data->map_str[index] == '\0')
@@ -36,15 +34,15 @@ void	deal_map(t_total_data	*total_data)
 {
 	if (!validate_map(total_data->map_data))
 		return ;
-	int veli = 0;
 	init_tiles(total_data);
 	set_vali_map(total_data->map_data);
 	set_char_map(total_data->map_data);
-	
-	printf("is square : %d\n", is_square(total_data->map_data));
-	printf("is wall : %d\n", is_wall(total_data->map_data));
-	printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
-	printf("is possible : %d\n", is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)));
+	if (!is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)))
+		return ;
+	// printf("is square : %d\n", is_square(total_data->map_data));
+	// printf("is wall : %d\n", is_wall(total_data->map_data));
+	// printf("is proper chars : %d\n", is_proper_chars(total_data->map_data));	
+	// printf("is possible : %d\n", is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)));
 	draw_map(total_data);
 	return ;
 }
@@ -121,7 +119,6 @@ void	*set_vali_map(t_map_data *map_data)
 		col = 0;
 		while (col < map_data->col_size)
 		{
-			// map_data->vali_map[row][col] = 0;
 			map_data->vali_map[row][col] = map_data->map_str[index];
 			index++;
 			col++;
