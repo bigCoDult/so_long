@@ -60,6 +60,7 @@ typedef struct s_map_data
 	char		*map_str;
 	size_t	row_size;
 	size_t	col_size;
+	int		count_collect;
 }	t_map_data;
 
 typedef struct s_total_data
@@ -92,7 +93,6 @@ bool	is_square(t_map_data *map_data);
 bool	is_wall(t_map_data *map_data);
 bool	is_proper_chars(t_map_data *map_data);
 
-// bool	backtracking(t_map_data *map_data);
 t_cordi	*get_cordi(t_map_data *map_data, char c);
 bool	is_possible(t_map_data *map_data, t_cordi *person);
 

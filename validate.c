@@ -76,12 +76,11 @@ bool	is_proper_chars(t_map_data *map_data)
 	int index;
 	int	count_person;
 	int	count_exit;
-	int	count_collect;
 	
 	index = 0;
 	count_person = 0;
 	count_exit = 0;
-	count_collect = 0;
+	map_data->count_collect = 0;
 	while (map_data->map_str[index] != '\0')
 	{
 		if (map_data->map_str[index] == PERSON)

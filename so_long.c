@@ -29,27 +29,11 @@ void so_long(int fd)
 	deal_map(total_data);
 	
 
-	// printf("%s\n", total_data->map_data->map_str);
 	printf("\n");
-	printf("\n");
-	printf("char_map : %s\n", total_data->map_data->char_map[0]);	
-	printf("char_map : %s\n", total_data->map_data->char_map[1]);	
-	printf("char_map : %s\n", total_data->map_data->char_map[2]);	
-	printf("char_map : %s\n", total_data->map_data->char_map[3]);	
-	printf("char_map : %s\n", total_data->map_data->char_map[4]);
 	printf("row_size : %ld\n", total_data->map_data->row_size);
 	printf("col_size : %ld\n", total_data->map_data->col_size);
 	printf("\n");
 	
-
-	// printf("is);
-	// printf("vali_map : %s\n", total_data->map_data->vali_map[0]);	
-	// printf("vali_map : %s\n", total_data->map_data->vali_map[1]);	
-	// printf("vali_map : %s\n", total_data->map_data->vali_map[2]);	
-	// printf("vali_map : %s\n", total_data->map_data->vali_map[3]);	
-	// printf("vali_map : %s\n", total_data->map_data->vali_map[4]);
-
-
 
 	// key_hook(total_data);
 	mlx_loop(total_data->win_data->mlx_ptr);
