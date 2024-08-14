@@ -16,29 +16,10 @@ void	*set_map_str(int fd, t_map_data *map_data)
 		if (read_return < 5)
 			break;
 	}
-	return (NULL);
-}
-
-void	deal_map(t_total_data	*total_data)
-{
-	if (!validate_map(total_data->map_data))
-		return ;
-	init_tiles(total_data);
-	set_char_map(total_data->map_data);
-	draw_map(total_data);
-	return ;
-}
-
-void	*set_char_map(t_map_data *map_data)
-{
-	int row;
-	int col;
 	int index;
+	index = 0;
 	map_data->row_size = 0;
 	map_data->col_size = 0;
-	row = 0;
-	col = 0;
-	index = 0;
 	while (1)
 	{
 		if (map_data->map_str[index] == '\n' || map_data->map_str[index] == '\0')
@@ -48,8 +29,31 @@ void	*set_char_map(t_map_data *map_data)
 		index++;
 	}
 	map_data->col_size = index / map_data->row_size;
-	printf("row_size : %ld\n", map_data->row_size);
-	printf("col_size : %ld\n", map_data->col_size);
+	return (NULL);
+}
+
+void	deal_map(t_total_data	*total_data)
+{
+	if (!validate_map(total_data->map_data))
+		return ;
+	init_tiles(total_data);
+	set_char_map(total_data->map_data);
+	set_vali_map(total_data->map_data);
+	// if (!is_possible(total_data->map_data, get_cordi(total_data->map_data, PERSON)))
+	// 	return ;
+	draw_map(total_data);
+	return ;
+}
+
+void	*set_char_map(t_map_data *map_data)
+{
+	int row;
+	int col;
+	int index;
+	
+	row = 0;
+	col = 0;
+	index = 0;
 	map_data->char_map = malloc(sizeof(char *) * map_data->row_size);
 	if (map_data->char_map == NULL)
 		return (NULL);
@@ -73,6 +77,47 @@ void	*set_char_map(t_map_data *map_data)
 		while (col < map_data->col_size)
 		{
 			map_data->char_map[row][col] = map_data->map_str[index];
+			index++;
+			col++;
+		}
+		index++;
+		row++;
+	}
+	return (NULL);
+}
+
+void	*set_vali_map(t_map_data *map_data)
+{
+	int row;
+	int col;
+	int index;
+	row = 0;
+	col = 0;
+	index = 0;
+	
+	map_data->vali_map = malloc(sizeof(char *) * map_data->row_size);
+	if (map_data->vali_map == NULL)
+		return (NULL);
+	while (row < map_data->row_size)
+	{
+		map_data->vali_map[row] = malloc(sizeof(char) * map_data->col_size);
+		if (map_data->vali_map[row] == NULL)
+		{
+			while (row-- >= 0)
+				free(map_data->vali_map[row]);
+			free(map_data->vali_map);
+			return (NULL);
+		}
+		row++;
+	}
+	row = 0;
+	index = 0;
+	while (row < map_data->row_size)
+	{
+		col = 0;
+		while (col < map_data->col_size)
+		{
+			map_data->vali_map[row][col] = map_data->map_str[index];
 			index++;
 			col++;
 		}

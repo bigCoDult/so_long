@@ -55,10 +55,11 @@ typedef struct s_map_data
 {
 	void		***tile_map;
 	char		**char_map;
+	char		**game_map;
+	char		**vali_map;
 	char		*map_str;
 	size_t	row_size;
 	size_t	col_size;
-	t_cordi	*person;
 }	t_map_data;
 
 typedef struct s_total_data
@@ -75,6 +76,8 @@ void	init_win_data(t_total_data *total_data);
 void	*set_map_str(int fd, t_map_data *map_data);
 void	deal_map(t_total_data	*total_data);
 void	*set_char_map(t_map_data *map_data);
+void	*set_vali_map(t_map_data *map_data);
+
 void	*init_tiles(t_total_data	*total_data);
 void	draw_map(t_total_data	*total_data);
 
@@ -89,9 +92,9 @@ bool	is_square(t_map_data *map_data);
 bool	is_wall(t_map_data *map_data);
 bool	is_proper_chars(t_map_data *map_data);
 
-bool	backtracking(t_map_data *map_data);
+// bool	backtracking(t_map_data *map_data);
 t_cordi	*get_cordi(t_map_data *map_data, char c);
-bool	is_possible(t_map_data *map_data);
+bool	is_possible(t_map_data *map_data, t_cordi *person);
 
 
 #endif /* SO_LONG_H */
