@@ -122,31 +122,59 @@ t_cordi	*get_cordi(t_map_data *map_data, char c)
 	free(person);
 	return (NULL);
 }
+
+
+
+
+
+
+
+
 bool	is_possible(t_map_data *map_data, t_cordi *person)
 {
 	int print;
-	
 	print = 0;
 	printf("\n");
 	while (print < map_data->row_size)
 		printf("vali_map : %s\n", map_data->vali_map[print++]);
 	
+	
+	
+	
+	
 	if (person->row < 0 || person->row > map_data->row_size || person->col < 0 || person->col > map_data->col_size)
 		return (false);
-	if (map_data->vali_map[person->row][person->col] == EXIT)
+	
+	if (map_data->vali_map[person->row][person->col] == EXIT && map_data->count_collect == 0)
 		return (true);
-	if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '@')
+	if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '\\')
 		return (false);
 	
-	map_data->vali_map[person->row][person->col] = '@';
-	if (is_possible(map_data, &(t_cordi){person->row + 1, person->col}))
-		return (true);
-	if (is_possible(map_data, &(t_cordi){person->row - 1, person->col}))
-		return (true);
-	if (is_possible(map_data, &(t_cordi){person->row, person->col + 1}))
-		return (true);
-	if (is_possible(map_data, &(t_cordi){person->row, person->col - 1}))
+	
+	if (map_data->vali_map[person->row][person->col] == COLLECT)
+		map_data->count_collect--;
+	map_data->vali_map[person->row][person->col] = '\\';
+
+	if (is_possible(map_data, &(t_cordi){person->row + 1, person->col}) \
+		|| is_possible(map_data, &(t_cordi){person->row - 1, person->col}) \
+		|| is_possible(map_data, &(t_cordi){person->row, person->col + 1}) \
+		|| is_possible(map_data, &(t_cordi){person->row, person->col - 1}))
 		return (true);
 	return (false);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
