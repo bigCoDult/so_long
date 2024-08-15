@@ -172,8 +172,10 @@ int end_game(t_total_data *total_data, t_cordi *person)
 	
 	free(total_data->map_data->map_str);
 	free(total_data->map_data);
-	free(total_data->win_data->mlx_ptr);
+	
 	free(total_data->tile_data);
+	
+	free(total_data->win_data->mlx_ptr);
 	free(total_data->win_data);
 	free(total_data);
 	
