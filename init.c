@@ -39,14 +39,10 @@ void	deal_map(t_total_data	*total_data)
 	init_tiles(total_data);
 	set_vali_map(total_data->map_data);
 	set_char_map(total_data->map_data);
-	t_cordi *person;
+	t_cordi person;
 	person = get_cordi(total_data->map_data, PERSON);
 	if (!is_possible(total_data->map_data, person))
-	{
-		free(person);
 		return ;
-	}
-	free(person);
 	return ;
 }
 

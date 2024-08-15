@@ -96,27 +96,24 @@ bool	is_proper_chars(t_map_data *map_data)
 	return (true);
 }
 
-t_cordi	*get_cordi(t_map_data *map_data, char c)
+t_cordi	get_cordi(t_map_data *map_data, char c)
 {
-	t_cordi	*person;
-	person = malloc(sizeof(t_cordi));
-	if (person == NULL)
-		return (NULL);
-	person->row = 0;
-	person->col = 0;
-	while (person->row < map_data->row_size)
+	t_cordi	person;
+	person = (t_cordi){0, 0};
+	person.row = 0;
+	person.col = 0;
+	while (person.row < map_data->row_size)
 	{
-		person->col = 0;
-		while (person->col < map_data->col_size)
+		person.col = 0;
+		while (person.col < map_data->col_size)
 		{
-			if (map_data->char_map[person->row][person->col] == c)
+			if (map_data->char_map[person.row][person.col] == c)
 				return (person);
-			person->col++;
+			person.col++;
 		}
-		person->row++;
+		person.row++;
 	}
-	free(person);
-	return (NULL);
+	return (t_cordi){-1, -1};
 }
 
 	// int print;
@@ -125,32 +122,32 @@ t_cordi	*get_cordi(t_map_data *map_data, char c)
 	// printf("count_collect : %d\n", map_data->count_collect);
 	// while (print < map_data->row_size)
 	// 	printf("vali_map : %s\n", map_data->vali_map[print++]);
-bool	is_possible(t_map_data *map_data, t_cordi *person)
+bool	is_possible(t_map_data *map_data, t_cordi person)
 {
-	if (person->row < 0 || person->row > map_data->row_size || person->col < 0 || person->col > map_data->col_size)
+	if (person.row < 0 || person.row > map_data->row_size || person.col < 0 || person.col > map_data->col_size)
 		return (false);	
 	if (map_data->count_collect == 0)
 	{
-		if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '/')
+		if (map_data->vali_map[person.row][person.col] == WALL || map_data->vali_map[person.row][person.col] == '/')
 			return (false);
-		if (map_data->vali_map[person->row][person->col] == EXIT)
+		if (map_data->vali_map[person.row][person.col] == EXIT)
 			return (true);
-		map_data->vali_map[person->row][person->col] = '/';
+		map_data->vali_map[person.row][person.col] = '/';
 	}
 	else
 	{
-		if (map_data->vali_map[person->row][person->col] == WALL || map_data->vali_map[person->row][person->col] == '\\')
+		if (map_data->vali_map[person.row][person.col] == WALL || map_data->vali_map[person.row][person.col] == '\\')
 			return (false);
-		if (map_data->vali_map[person->row][person->col] == COLLECT)
+		if (map_data->vali_map[person.row][person.col] == COLLECT)
 			map_data->count_collect--;
-		if (map_data->vali_map[person->row][person->col] != EXIT)
-			map_data->vali_map[person->row][person->col] = '\\';
+		if (map_data->vali_map[person.row][person.col] != EXIT)
+			map_data->vali_map[person.row][person.col] = '\\';
 	}
 
-	if (is_possible(map_data, &(t_cordi){person->row + 1, person->col}) \
-		|| is_possible(map_data, &(t_cordi){person->row - 1, person->col}) \
-		|| is_possible(map_data, &(t_cordi){person->row, person->col + 1}) \
-		|| is_possible(map_data, &(t_cordi){person->row, person->col - 1}))
+	if (is_possible(map_data, (t_cordi){person.row + 1, person.col}) \
+		|| is_possible(map_data, (t_cordi){person.row - 1, person.col}) \
+		|| is_possible(map_data, (t_cordi){person.row, person.col + 1}) \
+		|| is_possible(map_data, (t_cordi){person.row, person.col - 1}))
 		return (true);
 	return (false);
 }
