@@ -2,6 +2,7 @@
 
 void	key_hook(t_total_data *total_data)
 {
+	
 	void *param;
 	param = (void *)total_data;
 	draw_map(total_data);
@@ -146,29 +147,36 @@ void	destroy_tiles(t_total_data *total_data)
 
 int end_game(t_total_data *total_data, t_cordi *person)
 {
+	destroy_tiles(total_data);
 	mlx_loop_end(total_data->win_data->mlx_ptr);
 	mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
-	destroy_tiles(total_data);
+	mlx_destroy_display(total_data->win_data->mlx_ptr);
+	
+	
+	free(person);
+	free(total_data->tile_data);
+	free(total_data->win_data->mlx_ptr);
+	free(total_data->win_data);
 	
 	
 	
-	// free(person);
-	// free(total_data->tile_data);
 	// exit(0);
-
 	// int a = total_data->map_data->row_size;
 	// while (--a)
 	// 		free(total_data->map_data->char_map[a]);
 	// 	free(total_data->map_data->char_map);
-		
-	
-	
-	
-	
-	//불필요한 free
-	// mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
-	// free(total_data->win_data->mlx_ptr);
-	// free(total_data->win_data->win_ptr);
-	// free(total_data->win_data->title);
-	// free(total_data->win_data);
+}
+
+// 불필요한 free
+int no_game(t_total_data *total_data)		
+{
+	free(total_data->win_data->win_ptr);
+		// 이거 더블 프리임
+	mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
+		// ERROR SUMMARY: 17 errors from 14 contexts
+		// ERROR SUMMARY: 36 errors from 30 contexts
+		// 에러 늘어남 안써야할거 같음
+	free(total_data->win_data->title);
+		// 에러 한개 늘어남
+		// 왠지는 모르겠음
 }

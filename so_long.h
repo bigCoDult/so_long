@@ -55,7 +55,6 @@ typedef struct s_map_data
 {
 	void		***tile_map;
 	char		**char_map;
-	char		**game_map;
 	char		**vali_map;
 	char		*map_str;
 	size_t	row_size;

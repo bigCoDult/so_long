@@ -29,8 +29,7 @@ void so_long(int fd)
 	init_win_data(total_data);
 	deal_map(total_data);
 	key_hook(total_data);
-	mlx_loop(total_data->win_data->mlx_ptr);
-	mlx_loop_end(total_data->win_data->mlx_ptr);
+	mlx_loop(total_data->win_data->mlx_ptr);	
 }
 
 
