@@ -156,19 +156,23 @@ int end_game(t_total_data *total_data, t_cordi *person)
 {
 	int a = total_data->map_data->row_size;
 	int b = a;
+	// mlx_loop_end(total_data->win_data->mlx_ptr);
+		// 아무 변화 없음
+		// 에러만 늘어남
+	// mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
+		// 아무 변화 없음
 	destroy_tiles(total_data);
-	mlx_loop_end(total_data->win_data->mlx_ptr);
 	mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
 	mlx_destroy_display(total_data->win_data->mlx_ptr);
 	
 	
 	free(person);
 	while (a--)
-			free(total_data->map_data->char_map[a]);
-		free(total_data->map_data->char_map);
+		free(total_data->map_data->char_map[a]);
+	free(total_data->map_data->char_map);
 	while (b--)
-			free(total_data->map_data->vali_map[b]);
-		free(total_data->map_data->vali_map);	
+		free(total_data->map_data->vali_map[b]);
+	free(total_data->map_data->vali_map);	
 	
 	free(total_data->map_data->map_str);
 	free(total_data->map_data);
@@ -176,10 +180,12 @@ int end_game(t_total_data *total_data, t_cordi *person)
 	free(total_data->tile_data);
 	
 	free(total_data->win_data->mlx_ptr);
+		// still reachable이 28로 확 줄어듬
+		// 근데 이걸 쓰면 에러가 8개 늘어남
 	free(total_data->win_data);
 	free(total_data);
 	
-	// exit(0);
+	exit(0);
 }
 
 // 불필요한 free
@@ -187,6 +193,9 @@ int no_game(t_total_data *total_data)
 {
 	free(total_data->win_data->win_ptr);
 		// 이거 더블 프리임
+	free(total_data->win_data->mlx_ptr);
+		// still reachable이 28로 확 줄어듬
+		// 근데 이걸 쓰면 에러가 8개 늘어남
 	mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
 		// ERROR SUMMARY: 17 errors from 14 contexts
 		// ERROR SUMMARY: 36 errors from 30 contexts

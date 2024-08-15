@@ -139,9 +139,9 @@ void	*init_tiles(t_total_data	*total_data)
 		return (NULL);
 	total_data->tile_data->rock = open_xpm(total_data->win_data, NULL, "rock");
 	total_data->tile_data->grass = open_xpm(total_data->win_data, NULL, "grass");
-	total_data->tile_data->door = open_xpm(total_data->win_data, NULL, "door");
-	total_data->tile_data->chest = open_xpm(total_data->win_data, NULL, "chest");
 	total_data->tile_data->person = open_xpm(total_data->win_data, NULL, "person");
+	total_data->tile_data->chest = open_xpm(total_data->win_data, NULL, "chest");
+	total_data->tile_data->door = open_xpm(total_data->win_data, NULL, "door");
 	// return (널말고 뭘 반환?);
 	return (NULL);
 }
