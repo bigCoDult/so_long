@@ -103,7 +103,7 @@ int move_person(int key, void *param)
 		// printf("you step : %d", ++step);
 		draw_map(total_data);
 	}
-	
+	free(person);
 	return (0);
 }
 
@@ -163,6 +163,7 @@ int end_game(t_total_data *total_data, t_cordi *person)
 	free(total_data->win_data->mlx_ptr);
 	free(total_data->tile_data);
 	free(total_data->win_data);
+	free(total_data);
 	
 	// exit(0);
 }
