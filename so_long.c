@@ -24,8 +24,7 @@ void so_long(int fd)
 		return ;
 
 	total_data->map_data->vali_map = set_map_str(fd, total_data->map_data);
-	int a = 1;
-
+	
 	init_win_data(total_data);
 	deal_map(total_data);
 	key_hook(total_data);
@@ -35,9 +34,6 @@ void so_long(int fd)
 
 void	init_win_data(t_total_data *total_data)
 {
-	total_data->win_data = malloc(sizeof(t_win_data));
-	if (total_data->win_data == NULL)
-		return ;
 	total_data->win_data->title = "so_long";
 	total_data->win_data->size_x = total_data->map_data->col_size * 20;
 	total_data->win_data->size_y = total_data->map_data->row_size * 20;

@@ -43,8 +43,9 @@ char	*join_s(char *st_s, char *buf)
 		return (NULL);
 	}
 	free(st_s);
-	st_s = new_line;
-	return (st_s);
+	// st_s = new_line;
+	// return (st_s);
+	return (new_line);
 }
 
 char	*join_s_till_c(char *s1, char *s2, char c)
