@@ -6,13 +6,14 @@ void	key_hook(t_total_data *total_data)
 	param = (void *)total_data;
 	draw_map(total_data);
 	is_proper_chars(total_data->map_data);
-	
 	mlx_key_hook(total_data->win_data->win_ptr, &move_person, param);
 	return ;
 }
 
 int move_person(int key, void *param)
 {
+	int step;
+	step = 0;
 	t_total_data *total_data;
 	total_data = (t_total_data *)param;
 	t_cordi *person;
@@ -41,7 +42,8 @@ int move_person(int key, void *param)
 			}
 			total_data->map_data->char_map[person->row][person->col] = '0';
 			total_data->map_data->char_map[person->row - 1][person->col] = 'P';
-			printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("you step : %d", ++step);
 			draw_map(total_data);
 	}
 	else if (key == KEY_S || key == KEY_DOWN)
@@ -60,7 +62,8 @@ int move_person(int key, void *param)
 			}
 			total_data->map_data->char_map[person->row][person->col] = '0';
 			total_data->map_data->char_map[person->row + 1][person->col] = 'P';
-			printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("you step : %d", ++step);
 			draw_map(total_data);
 	}
 	else if (key == KEY_A || key == KEY_LEFT)
@@ -79,7 +82,8 @@ int move_person(int key, void *param)
 			}
 			total_data->map_data->char_map[person->row][person->col] = '0';
 			total_data->map_data->char_map[person->row][person->col - 1] = 'P';
-			printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("you step : %d", ++step);
 			draw_map(total_data);
 	}
 	else if (key == KEY_D || key == KEY_RIGHT)
@@ -99,7 +103,8 @@ int move_person(int key, void *param)
 
 			total_data->map_data->char_map[person->row][person->col] = '0';
 			total_data->map_data->char_map[person->row][person->col + 1] = 'P';
-			printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("count_collect : %d\n", total_data->map_data->count_collect);
+			// printf("you step : %d", ++step);
 			draw_map(total_data);
 	}
 	
@@ -142,11 +147,15 @@ void	destroy_tiles(t_total_data *total_data)
 int end_game(t_total_data *total_data, t_cordi *person)
 {
 	mlx_loop_end(total_data->win_data->mlx_ptr);
+	mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
 	destroy_tiles(total_data);
-	mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
-
-	// free(total_data->tile_data);
+	
+	
+	
 	// free(person);
+	// free(total_data->tile_data);
+	// exit(0);
+
 	// int a = total_data->map_data->row_size;
 	// while (--a)
 	// 		free(total_data->map_data->char_map[a]);
@@ -156,6 +165,10 @@ int end_game(t_total_data *total_data, t_cordi *person)
 	
 	
 	
-	mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
-	exit(0);
+	//불필요한 free
+	// mlx_clear_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
+	// free(total_data->win_data->mlx_ptr);
+	// free(total_data->win_data->win_ptr);
+	// free(total_data->win_data->title);
+	// free(total_data->win_data);
 }
