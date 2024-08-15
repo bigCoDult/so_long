@@ -24,6 +24,7 @@ void so_long(int fd)
 		return ;
 
 	total_data->map_data->vali_map = set_map_str(fd, total_data->map_data);
+	int a = 1;
 
 	init_win_data(total_data);
 	deal_map(total_data);
