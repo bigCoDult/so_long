@@ -21,7 +21,6 @@ int move_person(int key, void *param)
 	person = get_cordi(total_data->map_data, 'P');
 	if (person == NULL)
 		return (0);
-	
 	if (key == KEY_ESC)
 	{
 		end_game(total_data, person);
