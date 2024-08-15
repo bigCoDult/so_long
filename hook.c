@@ -29,7 +29,10 @@ int move_person(int key, void *param)
 	else if (key == KEY_W || key == KEY_UP)
 	{
 		if (total_data->map_data->char_map[person->row - 1][person->col] == WALL)
+		{
+			free(person);
 			return (0);
+		}
 		if (total_data->map_data->char_map[person->row - 1][person->col] == COLLECT)
 			total_data->map_data->count_collect--;
 		if (total_data->map_data->char_map[person->row - 1][person->col] == EXIT && total_data->map_data->count_collect != 0)
@@ -47,8 +50,11 @@ int move_person(int key, void *param)
 	}
 	else if (key == KEY_S || key == KEY_DOWN)
 	{
-		if (total_data->map_data->char_map[person->row + 1][person->col] == '1')
+		if (total_data->map_data->char_map[person->row + 1][person->col] == WALL)
+		{
+			free(person);
 			return (0);
+		}
 		if (total_data->map_data->char_map[person->row + 1][person->col] == COLLECT)
 			total_data->map_data->count_collect--;
 		if (total_data->map_data->char_map[person->row + 1][person->col] == EXIT && total_data->map_data->count_collect != 0)
@@ -66,8 +72,11 @@ int move_person(int key, void *param)
 	}
 	else if (key == KEY_A || key == KEY_LEFT)
 	{
-		if (total_data->map_data->char_map[person->row][person->col - 1] == '1')
+		if (total_data->map_data->char_map[person->row][person->col - 1] == WALL)
+		{
+			free(person);
 			return (0);
+		}
 		if (total_data->map_data->char_map[person->row][person->col - 1] == COLLECT)
 			total_data->map_data->count_collect--;
 		if (total_data->map_data->char_map[person->row][person->col - 1] == EXIT && total_data->map_data->count_collect != 0)
@@ -85,8 +94,11 @@ int move_person(int key, void *param)
 	}
 	else if (key == KEY_D || key == KEY_RIGHT)
 	{
-		if (total_data->map_data->char_map[person->row][person->col + 1] == '1')
+		if (total_data->map_data->char_map[person->row][person->col + 1] == WALL)
+		{
+			free(person);
 			return (0);
+		}
 		if (total_data->map_data->char_map[person->row][person->col + 1] == COLLECT)
 			total_data->map_data->count_collect--;
 		if (total_data->map_data->char_map[person->row][person->col + 1] == EXIT && total_data->map_data->count_collect != 0)
