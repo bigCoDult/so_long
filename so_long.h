@@ -53,7 +53,6 @@ typedef struct s_cordi
 
 typedef struct s_map_data
 {
-	void		***tile_map;
 	char		**char_map;
 	char		**vali_map;
 	char		*map_str;

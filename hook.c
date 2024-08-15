@@ -147,6 +147,8 @@ void	destroy_tiles(t_total_data *total_data)
 
 int end_game(t_total_data *total_data, t_cordi *person)
 {
+	int a = total_data->map_data->row_size;
+	int b = a;
 	destroy_tiles(total_data);
 	mlx_loop_end(total_data->win_data->mlx_ptr);
 	mlx_destroy_window(total_data->win_data->mlx_ptr, total_data->win_data->win_ptr);
@@ -154,17 +156,20 @@ int end_game(t_total_data *total_data, t_cordi *person)
 	
 	
 	free(person);
-	free(total_data->tile_data);
+	while (a--)
+			free(total_data->map_data->char_map[a]);
+		free(total_data->map_data->char_map);
+	while (b--)
+			free(total_data->map_data->vali_map[b]);
+		free(total_data->map_data->vali_map);	
+	
+	free(total_data->map_data->map_str);
+	free(total_data->map_data);
 	free(total_data->win_data->mlx_ptr);
+	free(total_data->tile_data);
 	free(total_data->win_data);
 	
-	
-	
 	// exit(0);
-	// int a = total_data->map_data->row_size;
-	// while (--a)
-	// 		free(total_data->map_data->char_map[a]);
-	// 	free(total_data->map_data->char_map);
 }
 
 // 불필요한 free
@@ -177,6 +182,11 @@ int no_game(t_total_data *total_data)
 		// ERROR SUMMARY: 36 errors from 30 contexts
 		// 에러 늘어남 안써야할거 같음
 	free(total_data->win_data->title);
-		// 에러 한개 늘어남
-		// 왠지는 모르겠음
+		// 줄어드는건 없고 에러만 늘어남
+	free(total_data->win_data);
+		// 줄어드는건 없고 에러만 늘어남
+	free(total_data->tile_data);
+		// 줄어드는건 없고 에러만 한개 늘어남
+	free(total_data->tile_data->rock);
+		// 이거 더블 프리임
 }
