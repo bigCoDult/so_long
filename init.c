@@ -54,18 +54,16 @@ int	deal_map(t_tot	*tot)
 		mlx_loop_end(tot->w_d->m_p);
 		return (0);
 	}
-	init_tiles(tot);
-	set_vali_map(tot->m_d);
 	set_c_map(tot->m_d);
+	set_vali_map(tot->m_d);
 	person = get_cor(tot->m_d, P);
 	tot->m_d->possible = is_possible(tot->m_d, person);
 	if (!tot->m_d->possible)
 	{
-			while (tot->m_d->row_size--)
-		free(tot->m_d->vali_map[tot->m_d->row_size]);
-	free(tot->m_d->vali_map);
+		mlx_loop_end(tot->w_d->m_p);
 		return (0);
 	}
+	init_tiles(tot);
 	return (1);
 }
 
