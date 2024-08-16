@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 23:36:18 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 23:41:25 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	end_game(t_tot *tot)
 	}
 	free(tot->m_d->str);
 	free(tot->m_d);
-	free(tot->t_d);
+	if (a && b && c && d)
+		free(tot->t_d);
 	free(tot->w_d->m_p);
 	free(tot->w_d);
 	free(tot);
