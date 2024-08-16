@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 23:41:25 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:04:58 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,12 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		return (0);
 	if (tot->m_d->c_map[person.r][person.c] == C)
 		tot->m_d->c_c--;
-	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c != 0)
-		return (0);
 	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c == 0)
 		mlx_loop_end(tot->w_d->m_p);
-	tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
+	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c != 0)
+		tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
+	else
+		tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
 	tot->m_d->c_map[person.r][person.c] = P;
 	draw_map(tot);
 }
