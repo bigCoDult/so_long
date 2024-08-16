@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 00:53:56 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:56:05 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,22 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		way.c = -1;
 	else if (key == KEY_D || key == KEY_RIGHT)
 		way.c = 1;
-	person.r += way.r;
-	person.c += way.c;
-	if (tot->m_d->c_map[person.r][person.c] == W)
+	way.r += person.r;
+	way.c += person.c;
+	if (tot->m_d->c_map[way.r][way.c] == W)
 		return (0);
-	if (tot->m_d->c_map[person.r][person.c] == C)
+	if (tot->m_d->c_map[way.r][way.c] == C)
 		tot->m_d->c_c--;
-	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c == 0)
+	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
 		mlx_loop_end(tot->w_d->m_p);
-	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c != 0)
+	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c != 0)
 	{
 		return (0);
 		// tot->m_d->c_map[person.r][person.c] = P;
 		// tot->m_d->c_map[exit.r][exit.c] = E;
 		// tot->m_d->c_map[person.r - way.r][person.c - way.c] = E;
 	}
-	tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
-	tot->m_d->c_map[person.r][person.c] = P;
+	tot->m_d->c_map[person.r][person.c] = Z;
+	tot->m_d->c_map[way.r][way.c] = P;
 	draw_map(tot);
 }
