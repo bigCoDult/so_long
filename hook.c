@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 21:54:12 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 23:22:44 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	key_hook(t_tot *tot)
 {
 	void	*param;
+	int		step;
 
 	param = (void *)tot;
 	draw_map(tot);
 	is_proper_chars(tot->m_d);
+	step = 0;
 	mlx_key_hook(tot->w_d->w_p, &move_person, param);
 	return ;
 }
@@ -26,10 +28,8 @@ void	key_hook(t_tot *tot)
 int	move_person(int key, void *param)
 {
 	t_tot	*tot;
-	int		step;
 	t_cor	person;
 
-	step = 0;
 	tot = (t_tot *)param;
 	person = get_cor(tot->m_d, 'P');
 	if (key == KEY_ESC)
@@ -57,12 +57,12 @@ int	end_game(t_tot *tot)
 	int b = is_w(tot->m_d);
 	int c = is_proper_chars(tot->m_d);
 	int d = tot->m_d->possible;
-	// if (a && b && c && d)
+	if (a && b && c && d)
 		destroy_tiles(tot);
 	mlx_destroy_window(tot->w_d->m_p, tot->w_d->w_p);
 	mlx_destroy_display(tot->w_d->m_p);
-	// if (d)
-	if (1)
+	// if (1)
+	if (d)
 	{
 		while (rs--)
 			free(tot->m_d->c_map[rs]);
@@ -105,7 +105,7 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		return (0);
 	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c == 0)
 		mlx_loop_end(tot->w_d->m_p);
-	tot->m_d->c_map[person.r - way.r][person.c - way.c] = '0';
-	tot->m_d->c_map[person.r][person.c] = 'P';
+	tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
+	tot->m_d->c_map[person.r][person.c] = P;
 	draw_map(tot);
 }

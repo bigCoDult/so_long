@@ -35,8 +35,7 @@ void	so_long(int fd)
 	tot->m_d = malloc(sizeof(t_m_d));
 	if (tot->m_d == NULL)
 		return ;
-	tot->m_d->vali_map = set_str(fd, tot->m_d);
-	//이거 뭐냐
+	set_str(fd, tot->m_d);
 	init_w_d(tot);
 	
 	
@@ -45,7 +44,7 @@ void	so_long(int fd)
 	else
 	{
 		printf("map is invalid\n");
-		return ;
+		// return ;
 	}
 	
 	
