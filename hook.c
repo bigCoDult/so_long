@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 08:34:57 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 08:53:18 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
 	{
 		mlx_loop_end(tot->w_d->m_p);
-		printf("!!!!!game clear!!!!!]\n");
+		printf("!!!!!!!!!!!!!!!game clear!!!!!!!!!!!!!!!\n");
 	}
 	tot->m_d->c_map[person.r][person.c] = Z;
 	if (get_cor(tot->m_d, E).r == -1)
