@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 00:04:58 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:53:56 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	end_game(t_tot *tot)
 int	move_way(int key, t_cor person, t_tot *tot)
 {
 	t_cor	way;
+	t_cor	exit;
 
+	exit = get_cor(tot->m_d, E);
 	way = (t_cor){0, 0};
 	if (key == KEY_W || key == KEY_UP)
 		way.r = -1;
@@ -103,9 +105,13 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c == 0)
 		mlx_loop_end(tot->w_d->m_p);
 	if (tot->m_d->c_map[person.r][person.c] == E && tot->m_d->c_c != 0)
-		tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
-	else
-		tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
+	{
+		return (0);
+		// tot->m_d->c_map[person.r][person.c] = P;
+		// tot->m_d->c_map[exit.r][exit.c] = E;
+		// tot->m_d->c_map[person.r - way.r][person.c - way.c] = E;
+	}
+	tot->m_d->c_map[person.r - way.r][person.c - way.c] = Z;
 	tot->m_d->c_map[person.r][person.c] = P;
 	draw_map(tot);
 }
