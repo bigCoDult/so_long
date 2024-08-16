@@ -40,7 +40,7 @@ void	so_long(int fd)
 	deal_map(tot);
 	key_hook(tot);
 	mlx_loop(tot->w_d->mlx_ptr);
-	// mlx_hook(tot->w_d->win_ptr, 17, 0, end_game, tot); 
+	// mlx_hook(tot->w_d->w_p, 17, 0, end_game, tot); 
 		// 게임 종료
 		// 안되는디?
 	end_game(tot);
@@ -52,7 +52,7 @@ void	init_w_d(t_tot *tot)
 	tot->w_d->size_x = tot->map_d->col_size * 20;
 	tot->w_d->size_y = tot->map_d->row_size * 20;
 	tot->w_d->mlx_ptr = mlx_init();
-	tot->w_d->win_ptr = mlx_new_window(\
+	tot->w_d->w_p = mlx_new_window(\
 	tot->w_d->mlx_ptr, tot->w_d->size_x, tot->w_d->size_y, tot->w_d->title);
 	return ;
 }

@@ -5,7 +5,7 @@
 # define PERSON 'P'
 # define COLLECT 'C'
 # define EXIT 'E'
-# define TILE_LEN 20
+# define T_L 20
 #	define KEY_W     119
 #	define KEY_S     115
 #	define KEY_A     97
@@ -29,20 +29,20 @@
 typedef struct s_w_d
 {
 	void		*mlx_ptr;
-	void		*win_ptr;
+	void		*w_p;
 	char		*title;
 	size_t	size_y;
 	size_t	size_x;
 }	t_w_d;
 
-typedef struct s_tile_data
+typedef struct s_t_d
 {
 	void	*rock;
 	void	*grass;
 	void	*person;
 	void	*chest;
 	void	*door;
-}	t_tile_data;
+}	t_t_d;
 
 
 typedef struct s_cor
@@ -64,7 +64,7 @@ typedef struct s_map_d
 typedef struct s_tot
 {
 	t_w_d	*w_d;
-	t_tile_data	*tile_data;
+	t_t_d	*t_d;
 	t_map_d	*map_d;
 	}	t_tot;
 

@@ -130,41 +130,41 @@ void	*set_vali_map(t_map_d *map_d)
 
 void	*init_tiles(t_tot	*tot)
 {
-	tot->tile_data = malloc(sizeof(t_tile_data));
-	if (tot->tile_data == NULL)
+	tot->t_d = malloc(sizeof(t_t_d));
+	if (tot->t_d == NULL)
 		return (NULL);
-	tot->tile_data->rock = open_xpm(tot->w_d, NULL, "rock");
-	tot->tile_data->grass = open_xpm(tot->w_d, NULL, "grass");
-	tot->tile_data->person = open_xpm(tot->w_d, NULL, "person");
-	tot->tile_data->chest = open_xpm(tot->w_d, NULL, "chest");
-	tot->tile_data->door = open_xpm(tot->w_d, NULL, "door");
+	tot->t_d->rock = open_xpm(tot->w_d, NULL, "rock");
+	tot->t_d->grass = open_xpm(tot->w_d, NULL, "grass");
+	tot->t_d->person = open_xpm(tot->w_d, NULL, "person");
+	tot->t_d->chest = open_xpm(tot->w_d, NULL, "chest");
+	tot->t_d->door = open_xpm(tot->w_d, NULL, "door");
 	// return (널말고 뭘 반환?);
 	return (NULL);
 }
 
 void draw_map(t_tot	*tot)
 {
-	int r;
-	int c;
 	int index;
-	
-	r = 0;
-	c = 0;
+	t_cor cor;
+
 	index = 0;
-	while (r < tot->map_d->row_size)
+	cor = (t_cor){0, 0};
+	while (cor.r < tot->map_d->row_size)
 	{
-		c = 0;
-		while (c < tot->map_d->col_size)
-			if (tot->map_d->c_map[r][c] == WALL)
-				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->rock, TILE_LEN * c++, TILE_LEN * r);		
-			else if (tot->map_d->c_map[r][c] == EMPTY)
-				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->grass, TILE_LEN * c++, TILE_LEN * r);		
-			else if (tot->map_d->c_map[r][c] == PERSON)			
-				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->person, TILE_LEN * c++, TILE_LEN * r);		
-			else if (tot->map_d->c_map[r][c] == COLLECT)
-				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->chest, TILE_LEN * c++, TILE_LEN * r);		
-			else if (tot->map_d->c_map[r][c] == EXIT)
-				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->door, TILE_LEN * c++, TILE_LEN * r);		
-		r++;
+		cor.c = 0;
+		while (cor.c < tot->map_d->col_size)
+		{
+			if (tot->map_d->c_map[cor.r][cor.c] == WALL)
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->w_p, tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
+			else if (tot->map_d->c_map[cor.r][cor.c] == EMPTY)
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->w_p, tot->t_d->grass, T_L * cor.c++, T_L * cor.r);
+			else if (tot->map_d->c_map[cor.r][cor.c] == PERSON)
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->w_p, tot->t_d->person, T_L * cor.c++, T_L * cor.r);
+			else if (tot->map_d->c_map[cor.r][cor.c] == COLLECT)
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->w_p, tot->t_d->chest, T_L * cor.c++, T_L * cor.r);
+			else if (tot->map_d->c_map[cor.r][cor.c] == EXIT)
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->w_p, tot->t_d->door, T_L * cor.c++, T_L * cor.r);
+		}
+	cor.r++;
 	}
 }

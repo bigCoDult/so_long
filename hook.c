@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 13:52:14 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 13:56:59 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	key_hook(t_tot *tot)
 	param = (void *)tot;
 	draw_map(tot);
 	is_proper_chars(tot->map_d);
-	mlx_key_hook(tot->w_d->win_ptr, &move_person, param);
+	mlx_key_hook(tot->w_d->w_p, &move_person, param);
 	return ;
 }
 
@@ -41,11 +41,11 @@ int	move_person(int key, void *param)
 
 void	destroy_tiles(t_tot *tot)
 {
-	mlx_destroy_image (tot->w_d->mlx_ptr, tot->tile_data->rock);
-	mlx_destroy_image (tot->w_d->mlx_ptr, tot->tile_data->grass);
-	mlx_destroy_image (tot->w_d->mlx_ptr, tot->tile_data->person);
-	mlx_destroy_image (tot->w_d->mlx_ptr, tot->tile_data->chest);
-	mlx_destroy_image (tot->w_d->mlx_ptr, tot->tile_data->door);
+	mlx_destroy_image (tot->w_d->mlx_ptr, tot->t_d->rock);
+	mlx_destroy_image (tot->w_d->mlx_ptr, tot->t_d->grass);
+	mlx_destroy_image (tot->w_d->mlx_ptr, tot->t_d->person);
+	mlx_destroy_image (tot->w_d->mlx_ptr, tot->t_d->chest);
+	mlx_destroy_image (tot->w_d->mlx_ptr, tot->t_d->door);
 }
 
 int	end_game(t_tot *tot)
@@ -56,7 +56,7 @@ int	end_game(t_tot *tot)
 	a = tot->map_d->row_size;
 	b = a;
 	destroy_tiles(tot);
-	mlx_destroy_window(tot->w_d->mlx_ptr, tot->w_d->win_ptr);
+	mlx_destroy_window(tot->w_d->mlx_ptr, tot->w_d->w_p);
 	mlx_destroy_display(tot->w_d->mlx_ptr);
 	while (a--)
 		free(tot->map_d->c_map[a]);
@@ -66,7 +66,7 @@ int	end_game(t_tot *tot)
 	free(tot->map_d->vali_map);
 	free(tot->map_d->map_str);
 	free(tot->map_d);
-	free(tot->tile_data);
+	free(tot->t_d);
 	free(tot->w_d->mlx_ptr);
 	free(tot->w_d);
 	free(tot);
