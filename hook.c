@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 12:52:30 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 12:54:14 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,19 @@ int	end_game(t_tot *tot)
 
 int	move_way(int key, t_cor person, t_tot *tot)
 {
-	int	r;
-	int	c;
+	t_cor	way;
 
-	r = 0;
-	c = 0;
+	way = (t_cor){0, 0};
 	if (key == KEY_W || key == KEY_UP)
-		r = -1;
+		way.r = -1;
 	else if (key == KEY_S || key == KEY_DOWN)
-		r = 1;
+		way.r = 1;
 	else if (key == KEY_A || key == KEY_LEFT)
-		c = -1;
+		way.c = -1;
 	else if (key == KEY_D || key == KEY_RIGHT)
-		c = 1;
-	person.r += r;
-	person.c += c;
+		way.c = 1;
+	person.r += way.r;
+	person.c += way.c;
 	if (tot->map_d->c_map[person.r][person.c] == WALL)
 		return (0);
 	if (tot->map_d->c_map[person.r][person.c] == COLLECT)
@@ -98,7 +96,7 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		return (0);
 	if (tot->map_d->c_map[person.r][person.c] == EXIT && tot->map_d->c_c == 0)
 		mlx_loop_end(tot->win_data->mlx_ptr);
-	tot->map_d->c_map[person.r - r][person.c - c] = '0';
+	tot->map_d->c_map[person.r - way.r][person.c - way.c] = '0';
 	tot->map_d->c_map[person.r][person.c] = 'P';
 	draw_map(tot);
 }
