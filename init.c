@@ -45,22 +45,22 @@ void	*set_str(int fd, t_m_d *map_d)
 	return (NULL);
 }
 
-void	deal_map(t_tot	*tot)
+int	deal_map(t_tot	*tot)
 {
 	t_cor	person;
 
 	if (!validate_map(tot->map_d))
 	{
 		mlx_loop_end(tot->w_d->m_p);
-		return ;
+		return (0);
 	}
 	init_tiles(tot);
 	set_vali_map(tot->map_d);
 	set_c_map(tot->map_d);
 	person = get_cor(tot->map_d, P);
 	if (!is_possible(tot->map_d, person))
-		return ;
-	return ;
+		return (0);
+	return (1);
 }
 
 void	*set_c_map(t_m_d *map_d)

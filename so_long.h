@@ -73,7 +73,7 @@ void	so_long(int fd);
 void	init_w_d(t_tot *tot);
 
 void	*set_str(int fd, t_m_d *map_d);
-void	deal_map(t_tot	*tot);
+int	deal_map(t_tot	*tot);
 void	*set_c_map(t_m_d *map_d);
 void	*set_vali_map(t_m_d *map_d);
 

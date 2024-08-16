@@ -37,8 +37,8 @@ void	so_long(int fd)
 		return ;
 	tot->map_d->vali_map = set_str(fd, tot->map_d);
 	init_w_d(tot);
-	deal_map(tot);
-	key_hook(tot);
+	if (deal_map(tot))
+		key_hook(tot);
 	mlx_loop(tot->w_d->m_p);
 	// mlx_hook(tot->w_d->w_p, 17, 0, end_game, tot);
 		// 게임 종료
