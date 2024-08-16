@@ -76,7 +76,7 @@ void	*open_xpm(t_w_d *w_d, void *single_tile, char *tile_name)
 	int	tile_len;
 	tile_len = T_L;
 	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
-	single_tile = mlx_xpm_file_to_image(w_d->mlx_ptr, file_path, &tile_len, &tile_len);
+	single_tile = mlx_xpm_file_to_image(w_d->m_p, file_path, &tile_len, &tile_len);
 	free(file_path);
 	return (single_tile);
 }

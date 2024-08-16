@@ -6,134 +6,133 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 13:38:10 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 14:30:05 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	validate_map(t_map_d *map_d)
+bool	validate_map(t_m_d *m_d)
 {
-	if (is_square(map_d) && is_wall(map_d) && is_proper_chars(map_d))
+	if (is_square(m_d) && is_w(m_d) && is_proper_chars(m_d))
 		return (true);
 	return (false);
 }
 
-bool	is_square(t_map_d *map_d)
+bool	is_square(t_m_d *m_d)
 {
-	int	in;
-	int	f_l;
+	int	i;
+	int	f_line;
 	int	now;
 
-	in = 0;
-	f_l = 0;
+	i = 0;
+	f_line = 0;
 	now = 0;
-	while (map_d->map_str[f_l] != '\n' && map_d->map_str[f_l] != '\0')
-		f_l++;
-	in = f_l + 1;
-	while (map_d->map_str[in] != '\0')
+	while (m_d->str[f_line] != '\n' && m_d->str[f_line] != '\0')
+		f_line++;
+	i = f_line + 1;
+	while (m_d->str[i] != '\0')
 	{
-		now = in;
-		while (map_d->map_str[now] != '\n' && map_d->map_str[now] != '\0')
+		now = i;
+		while (m_d->str[now] != '\n' && m_d->str[now] != '\0')
 			now++;
-		if (now - in != f_l)
+		if (now - i != f_line)
 			return (false);
-		in += f_l;
-		if (map_d->map_str[in] == '\n')
-			in++;
+		i += f_line;
+		if (m_d->str[i] == '\n')
+			i++;
 	}
 	return (true);
 }
 
-bool	is_wall(t_map_d *map_d)
+bool	is_w(t_m_d *m_d)
 {
-	int	in;
-	int	f_l;
+	int	i;
+	int	f_line;
 	int	now;
 
-	in = 0;
-	f_l = 0;
+	i = 0;
+	f_line = 0;
 	now = 0;
-	while (map_d->map_str[f_l] != '\n' && map_d->map_str[f_l] != '\0')
-		f_l++;
-	while (in < f_l)
+	while (m_d->str[f_line] != '\n' && m_d->str[f_line] != '\0')
+		f_line++;
+	while (i < f_line)
 	{
-		if (map_d->map_str[in] != WALL)
+		if (m_d->str[i] != W)
 			return (false);
-		in++;
+		i++;
 	}
-	while (map_d->map_str[in] != '\0')
+	while (m_d->str[i] != '\0')
 	{
-		in++;
-		if (map_d->map_str[in] != WALL || map_d->map_str[in + f_l - 1] != WALL)
+		i++;
+		if (m_d->str[i] != W || m_d->str[i + f_line - 1] != W)
 			return (false);
-		in += f_l;
+		i += f_line;
 	}
-	in -= f_l;
-	while (map_d->map_str[in] != '\0')
+	i -= f_line;
+	while (m_d->str[i] != '\0')
 	{
-		if (map_d->map_str[in] != WALL)
+		if (m_d->str[i] != W)
 			return (false);
-		in++;
+		i++;
 	}
 	return (true);
 }
 
-bool	is_proper_chars(t_map_d *map_d)
+bool	is_proper_chars(t_m_d *m_d)
 {
-	int in;
-	int	count_person;
+	int	i;
+	int	count_he;
 	int	count_exit;
 
-	in = 0;
-	count_person = 0;
+	i = 0;
+	count_he = 0;
 	count_exit = 0;
-	map_d->c_c = 0;
-	while (map_d->map_str[in] != '\0')
+	m_d->c_c = 0;
+	while (m_d->str[i] != '\0')
 	{
-		if (map_d->map_str[in] == PERSON)
-			count_person++;
-		else if (map_d->map_str[in] == EXIT)
+		if (m_d->str[i] == P)
+			count_he++;
+		else if (m_d->str[i] == E)
 			count_exit++;
-		else if (map_d->map_str[in] == COLLECT)
-			map_d->c_c++;
-		else if (map_d->map_str[in] == WALL || map_d->map_str[in] == EMPTY || map_d->map_str[in] == '\n')
+		else if (m_d->str[i] == C)
+			m_d->c_c++;
+		else if (m_d->str[i] == W || m_d->str[i] == Z || m_d->str[i] == '\n')
 			;
 		else
 			return (false);
-		in++;
+		i++;
 	}
-	if (count_person != 1 || count_exit != 1 || map_d->c_c < 1)
+	if (count_he != 1 || count_exit != 1 || m_d->c_c < 1)
 		return (false);
 	return (true);
 }
 
-bool	is_possible(t_map_d *map_d, t_cor person)
+bool	is_possible(t_m_d *m_d, t_cor he)
 {
-	if (person.r < 0 || person.r > map_d->row_size || person.c < 0 || person.c > map_d->col_size)
+	if (he.r < 0 || he.r > m_d->row_size || he.c < 0 || he.c > m_d->col_size)
 		return (false);
-	if (map_d->c_c == 0)
+	if (m_d->c_c == 0)
 	{
-		if (map_d->vali_map[person.r][person.c] == WALL || map_d->vali_map[person.r][person.c] == '/')
+		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '/')
 			return (false);
-		if (map_d->vali_map[person.r][person.c] == EXIT)
+		if (m_d->vali_map[he.r][he.c] == E)
 			return (true);
-		map_d->vali_map[person.r][person.c] = '/';
+		m_d->vali_map[he.r][he.c] = '/';
 	}
 	else
 	{
-		if (map_d->vali_map[person.r][person.c] == WALL || map_d->vali_map[person.r][person.c] == '\\')
+		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\')
 			return (false);
-		if (map_d->vali_map[person.r][person.c] == COLLECT)
-			map_d->c_c--;
-		if (map_d->vali_map[person.r][person.c] != EXIT)
-			map_d->vali_map[person.r][person.c] = '\\';
+		if (m_d->vali_map[he.r][he.c] == C)
+			m_d->c_c--;
+		if (m_d->vali_map[he.r][he.c] != E)
+			m_d->vali_map[he.r][he.c] = '\\';
 	}
-
-	if (is_possible(map_d, (t_cor){person.r + 1, person.c}) \
-		|| is_possible(map_d, (t_cor){person.r - 1, person.c}) \
-		|| is_possible(map_d, (t_cor){person.r, person.c + 1}) \
-		|| is_possible(map_d, (t_cor){person.r, person.c - 1}))
+	if (is_possible(m_d, (t_cor){he.r + 1, he.c}) \
+		|| is_possible(m_d, (t_cor){he.r - 1, he.c}) \
+		|| is_possible(m_d, (t_cor){he.r, he.c + 1}) \
+		|| is_possible(m_d, (t_cor){he.r, he.c - 1}))
 		return (true);
 	return (false);
 }

@@ -1,10 +1,10 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define WALL '1'
-# define EMPTY '0'
-# define PERSON 'P'
-# define COLLECT 'C'
-# define EXIT 'E'
+# define W '1'
+# define Z '0'
+# define P 'P'
+# define C 'C'
+# define E 'E'
 # define T_L 20
 #	define KEY_W     119
 #	define KEY_S     115
@@ -28,7 +28,7 @@
 
 typedef struct s_w_d
 {
-	void		*mlx_ptr;
+	void		*m_p;
 	void		*w_p;
 	char		*title;
 	size_t	size_y;
@@ -51,31 +51,31 @@ typedef struct s_cor
 	int	c;
 }	t_cor;
 
-typedef struct s_map_d
+typedef struct s_m_d
 {
 	char		**c_map;
 	char		**vali_map;
-	char		*map_str;
+	char		*str;
 	size_t	row_size;
 	size_t	col_size;
 	int		c_c;
-}	t_map_d;
+}	t_m_d;
 
 typedef struct s_tot
 {
 	t_w_d	*w_d;
 	t_t_d	*t_d;
-	t_map_d	*map_d;
+	t_m_d	*map_d;
 	}	t_tot;
 
 
 void	so_long(int fd);
 void	init_w_d(t_tot *tot);
 
-void	*set_map_str(int fd, t_map_d *map_d);
+void	*set_str(int fd, t_m_d *map_d);
 void	deal_map(t_tot	*tot);
-void	*set_c_map(t_map_d *map_d);
-void	*set_vali_map(t_map_d *map_d);
+void	*set_c_map(t_m_d *map_d);
+void	*set_vali_map(t_m_d *map_d);
 
 void	*init_tiles(t_tot	*tot);
 void	draw_map(t_tot	*tot);
@@ -86,13 +86,13 @@ char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 void	*open_xpm(t_w_d *w_d, void *single_tile, char *tile_name);
 
-bool	validate_map(t_map_d *map_d);
-bool	is_square(t_map_d *map_d);
-bool	is_wall(t_map_d *map_d);
-bool	is_proper_chars(t_map_d *map_d);
+bool	validate_map(t_m_d *map_d);
+bool	is_square(t_m_d *map_d);
+bool	is_w(t_m_d *map_d);
+bool	is_proper_chars(t_m_d *map_d);
 
-t_cor	get_cor(t_map_d *map_d, char c);
-bool	is_possible(t_map_d *map_d, t_cor person);
+t_cor	get_cor(t_m_d *map_d, char c);
+bool	is_possible(t_m_d *map_d, t_cor person);
 
 void	key_hook(t_tot *tot);
 int move_person(int key, void *param);
