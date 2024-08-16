@@ -61,6 +61,7 @@ typedef struct s_m_d
 	int		c_c;
 	int		possible;
 	t_cor	exit;
+	int step;
 }	t_m_d;
 
 typedef struct s_tot

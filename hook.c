@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 07:47:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 07:53:41 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	key_hook(t_tot *tot)
 	void	*param;
 	int		step;
 
-	draw_map(tot);
 	step = 0;
-	printf("step : %d\n", step);
+	tot->m_d->step = 0;
+	printf("step : %d\n", tot->m_d->step++);
+	draw_map(tot);
 	tot->m_d->exit = get_cor(tot->m_d, E);
 	param = (void *)tot;
 	is_proper_chars(tot->m_d);
@@ -32,9 +33,6 @@ int	move_person(int key, void *param)
 	t_tot	*tot;
 	t_cor	person;
 	t_cor	exit;
-	int step;
-	step = 0;
-	// printf("step : %d\n", ++step);
 
 	tot = (t_tot *)param;
 	person = get_cor(tot->m_d, P);
@@ -49,6 +47,7 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	t_cor	way;
 
 	way = (t_cor){0, 0};
+	printf("step : %d\n", tot->m_d->step++);
 	if (key == KEY_W || key == KEY_UP)
 		way.r = -1;
 	else if (key == KEY_S || key == KEY_DOWN)
@@ -59,8 +58,6 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		way.c = 1;
 	way.r += person.r;
 	way.c += person.c;
-	//여기서부터 수정
-	//여기서부터 수정
 	if (tot->m_d->c_map[way.r][way.c] == W)
 		return (0);
 	if (tot->m_d->c_map[way.r][way.c] == C)
