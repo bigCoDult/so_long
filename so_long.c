@@ -36,17 +36,22 @@ void	so_long(int fd)
 	if (tot->m_d == NULL)
 		return ;
 	tot->m_d->vali_map = set_str(fd, tot->m_d);
+	//이거 뭐냐
 	init_w_d(tot);
+	
+	
 	if (deal_map(tot))
 		key_hook(tot);
 	else
 	{
-		printf("map is not valid\n");
+		printf("map is invalid\n");
 		return ;
 	}
+	
+	
 	mlx_loop(tot->w_d->m_p);
 	// mlx_hook(tot->w_d->w_p, 17, 0, end_game, tot);
-		// 게임 종료
+		// 마우스로 종료
 		// 안되는디?
 	end_game(tot);
 }

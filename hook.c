@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 17:42:45 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 21:54:12 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ int	end_game(t_tot *tot)
 	int b = is_w(tot->m_d);
 	int c = is_proper_chars(tot->m_d);
 	int d = tot->m_d->possible;
-	if (1)
-	if (a && b && c && d)
+	// if (a && b && c && d)
 		destroy_tiles(tot);
 	mlx_destroy_window(tot->w_d->m_p, tot->w_d->w_p);
 	mlx_destroy_display(tot->w_d->m_p);
-	// if (1)
-	if (a && b && c)
+	// if (d)
+	if (1)
 	{
 		while (rs--)
 			free(tot->m_d->c_map[rs]);
@@ -73,8 +72,8 @@ int	end_game(t_tot *tot)
 			free(tot->m_d->vali_map[rs]);
 		free(tot->m_d->vali_map);
 	}
-	if (a || b)
-		free(tot->m_d->str);
+	// if (a && b && c)
+	free(tot->m_d->str);
 	free(tot->m_d);
 	free(tot->t_d);
 	free(tot->w_d->m_p);
