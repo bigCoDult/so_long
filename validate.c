@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 23:23:40 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 08:38:33 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 bool	validate_map(t_m_d *m_d)
 {
 	if (!is_square(m_d))
-		return (false);
+		printf("[not square]\n");
 	if (!is_w(m_d))
-		return (false);
+		printf("[not enclosed by wall]\n");
 	if (!is_proper_chars(m_d))
-		return (false);
-	return (true);
+		printf("[not proper char]\n");
+	if (is_square(m_d) && is_w(m_d) && is_proper_chars(m_d))
+		return (true);
+	return (false);
 }
 
 bool	is_square(t_m_d *m_d)

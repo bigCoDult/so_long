@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 07:53:41 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 08:34:57 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	t_cor	way;
 
 	way = (t_cor){0, 0};
-	printf("step : %d\n", tot->m_d->step++);
 	if (key == KEY_W || key == KEY_UP)
 		way.r = -1;
 	else if (key == KEY_S || key == KEY_DOWN)
@@ -60,10 +59,15 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	way.c += person.c;
 	if (tot->m_d->c_map[way.r][way.c] == W)
 		return (0);
+	else
+		printf("step : %d\n", tot->m_d->step++);
 	if (tot->m_d->c_map[way.r][way.c] == C)
 		tot->m_d->c_c--;
 	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
+	{
 		mlx_loop_end(tot->w_d->m_p);
+		printf("!!!!!game clear!!!!!]\n");
+	}
 	tot->m_d->c_map[person.r][person.c] = Z;
 	if (get_cor(tot->m_d, E).r == -1)
 		tot->m_d->c_map[tot->m_d->exit.r][tot->m_d->exit.c] = E;
