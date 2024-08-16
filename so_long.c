@@ -55,3 +55,23 @@ void	init_win_data(t_tot *tot)
 	return ;
 }
 
+t_cor	get_cor(t_map_d *map_d, char c)
+{
+	t_cor	person;
+	person = (t_cor){0, 0};
+	person.r = 0;
+	person.c = 0;
+	while (person.r < map_d->row_size)
+	{
+		person.c = 0;
+		while (person.c < map_d->col_size)
+		{
+			if (map_d->c_map[person.r][person.c] == c)
+				return (person);
+			person.c++;
+		}
+		person.r++;
+	}
+	return (t_cor){-1, -1};
+}
+
