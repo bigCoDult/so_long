@@ -32,13 +32,18 @@ void	so_long(int fd)
 	tot->w_d = malloc(sizeof(t_w_d));
 	if (tot->w_d == NULL)
 		return ;
-	tot->map_d = malloc(sizeof(t_m_d));
-	if (tot->map_d == NULL)
+	tot->m_d = malloc(sizeof(t_m_d));
+	if (tot->m_d == NULL)
 		return ;
-	tot->map_d->vali_map = set_str(fd, tot->map_d);
+	tot->m_d->vali_map = set_str(fd, tot->m_d);
 	init_w_d(tot);
 	if (deal_map(tot))
 		key_hook(tot);
+	else
+	{
+		printf("map is not valid\n");
+		return ;
+	}
 	mlx_loop(tot->w_d->m_p);
 	// mlx_hook(tot->w_d->w_p, 17, 0, end_game, tot);
 		// 게임 종료
@@ -49,27 +54,27 @@ void	so_long(int fd)
 void	init_w_d(t_tot *tot)
 {
 	tot->w_d->title = "so_long";
-	tot->w_d->size_x = tot->map_d->col_size * 20;
-	tot->w_d->size_y = tot->map_d->row_size * 20;
+	tot->w_d->size_x = tot->m_d->col_size * 20;
+	tot->w_d->size_y = tot->m_d->row_size * 20;
 	tot->w_d->m_p = mlx_init();
 	tot->w_d->w_p = mlx_new_window(\
 	tot->w_d->m_p, tot->w_d->size_x, tot->w_d->size_y, tot->w_d->title);
 	return ;
 }
 
-t_cor	get_cor(t_m_d *map_d, char c)
+t_cor	get_cor(t_m_d *m_d, char c)
 {
 	t_cor	person;
 
 	person = (t_cor){0, 0};
 	person.r = 0;
 	person.c = 0;
-	while (person.r < map_d->row_size)
+	while (person.r < m_d->row_size)
 	{
 		person.c = 0;
-		while (person.c < map_d->col_size)
+		while (person.c < m_d->col_size)
 		{
-			if (map_d->c_map[person.r][person.c] == c)
+			if (m_d->c_map[person.r][person.c] == c)
 				return (person);
 			person.c++;
 		}
@@ -85,24 +90,24 @@ void	draw_map(t_tot	*tot)
 
 	index = 0;
 	cor = (t_cor){0, 0};
-	while (cor.r < tot->map_d->row_size)
+	while (cor.r < tot->m_d->row_size)
 	{
 		cor.c = 0;
-		while (cor.c < tot->map_d->col_size)
+		while (cor.c < tot->m_d->col_size)
 		{
-			if (tot->map_d->c_map[cor.r][cor.c] == W)
+			if (tot->m_d->c_map[cor.r][cor.c] == W)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
-			else if (tot->map_d->c_map[cor.r][cor.c] == Z)
+			else if (tot->m_d->c_map[cor.r][cor.c] == Z)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->grass, T_L * cor.c++, T_L * cor.r);
-			else if (tot->map_d->c_map[cor.r][cor.c] == P)
+			else if (tot->m_d->c_map[cor.r][cor.c] == P)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->person, T_L * cor.c++, T_L * cor.r);
-			else if (tot->map_d->c_map[cor.r][cor.c] == C)
+			else if (tot->m_d->c_map[cor.r][cor.c] == C)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->chest, T_L * cor.c++, T_L * cor.r);
-			else if (tot->map_d->c_map[cor.r][cor.c] == E)
+			else if (tot->m_d->c_map[cor.r][cor.c] == E)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->door, T_L * cor.c++, T_L * cor.r);
 		}

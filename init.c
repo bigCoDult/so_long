@@ -12,36 +12,36 @@
 
 #include "so_long.h"
 
-void	*set_str(int fd, t_m_d *map_d)
+void	*set_str(int fd, t_m_d *m_d)
 {
 	int		read_return;
 	char	buf[5];
 	int		index;
 
-	map_d->str = malloc(sizeof(char) * 1);
-	if (map_d->str == NULL)
+	m_d->str = malloc(sizeof(char) * 1);
+	if (m_d->str == NULL)
 		return (NULL);
-	map_d->str[0] = '\0';
+	m_d->str[0] = '\0';
 	while (1)
 	{
 		read_return = read(fd, buf, 5);
 		buf[read_return] = '\0';
-		map_d->str = join_s(map_d->str, buf);
+		m_d->str = join_s(m_d->str, buf);
 		if (read_return < 5)
 			break ;
 	}
 	index = 0;
-	map_d->row_size = 0;
-	map_d->col_size = 0;
+	m_d->row_size = 0;
+	m_d->col_size = 0;
 	while (1)
 	{
-		if (map_d->str[index] == '\n' || map_d->str[index] == '\0')
-			map_d->row_size++;
-		if (map_d->str[index] == '\0')
+		if (m_d->str[index] == '\n' || m_d->str[index] == '\0')
+			m_d->row_size++;
+		if (m_d->str[index] == '\0')
 			break ;
 		index++;
 	}
-	map_d->col_size = index / map_d->row_size;
+	m_d->col_size = index / m_d->row_size;
 	return (NULL);
 }
 
@@ -49,21 +49,27 @@ int	deal_map(t_tot	*tot)
 {
 	t_cor	person;
 
-	if (!validate_map(tot->map_d))
+	if (!validate_map(tot->m_d))
 	{
 		mlx_loop_end(tot->w_d->m_p);
 		return (0);
 	}
 	init_tiles(tot);
-	set_vali_map(tot->map_d);
-	set_c_map(tot->map_d);
-	person = get_cor(tot->map_d, P);
-	if (!is_possible(tot->map_d, person))
+	set_vali_map(tot->m_d);
+	set_c_map(tot->m_d);
+	person = get_cor(tot->m_d, P);
+	tot->m_d->possible = is_possible(tot->m_d, person);
+	if (!tot->m_d->possible)
+	{
+			while (tot->m_d->row_size--)
+		free(tot->m_d->vali_map[tot->m_d->row_size]);
+	free(tot->m_d->vali_map);
 		return (0);
+	}
 	return (1);
 }
 
-void	*set_c_map(t_m_d *map_d)
+void	*set_c_map(t_m_d *m_d)
 {
 	int	r;
 	int	c;
@@ -72,29 +78,29 @@ void	*set_c_map(t_m_d *map_d)
 	r = 0;
 	c = 0;
 	index = 0;
-	map_d->c_map = malloc(sizeof(char *) * map_d->row_size);
-	if (map_d->c_map == NULL)
+	m_d->c_map = malloc(sizeof(char *) * m_d->row_size);
+	if (m_d->c_map == NULL)
 		return (NULL);
-	while (r < map_d->row_size)
+	while (r < m_d->row_size)
 	{
-		map_d->c_map[r] = malloc(sizeof(char) * map_d->col_size);
-		if (map_d->c_map[r] == NULL)
+		m_d->c_map[r] = malloc(sizeof(char) * m_d->col_size);
+		if (m_d->c_map[r] == NULL)
 		{
 			while (r-- >= 0)
-				free(map_d->c_map[r]);
-			free(map_d->c_map);
+				free(m_d->c_map[r]);
+			free(m_d->c_map);
 			return (NULL);
 		}
 		r++;
 	}
 	r = 0;
 	index = 0;
-	while (r < map_d->row_size)
+	while (r < m_d->row_size)
 	{
 		c = 0;
-		while (c < map_d->col_size)
+		while (c < m_d->col_size)
 		{
-			map_d->c_map[r][c] = map_d->str[index];
+			m_d->c_map[r][c] = m_d->str[index];
 			index++;
 			c++;
 		}
@@ -104,7 +110,7 @@ void	*set_c_map(t_m_d *map_d)
 	return (NULL);
 }
 
-void	*set_vali_map(t_m_d *map_d)
+void	*set_vali_map(t_m_d *m_d)
 {
 	int	r;
 	int	c;
@@ -113,29 +119,29 @@ void	*set_vali_map(t_m_d *map_d)
 	r = 0;
 	c = 0;
 	index = 0;
-	map_d->vali_map = malloc(sizeof(char *) * map_d->row_size);
-	if (map_d->vali_map == NULL)
+	m_d->vali_map = malloc(sizeof(char *) * m_d->row_size);
+	if (m_d->vali_map == NULL)
 		return (NULL);
-	while (r < map_d->row_size)
+	while (r < m_d->row_size)
 	{
-		map_d->vali_map[r] = malloc(sizeof(char) * map_d->col_size);
-		if (map_d->vali_map[r] == NULL)
+		m_d->vali_map[r] = malloc(sizeof(char) * m_d->col_size);
+		if (m_d->vali_map[r] == NULL)
 		{
 			while (r-- >= 0)
-				free(map_d->vali_map[r]);
-			free(map_d->vali_map);
+				free(m_d->vali_map[r]);
+			free(m_d->vali_map);
 			return (NULL);
 		}
 		r++;
 	}
 	r = 0;
 	index = 0;
-	while (r < map_d->row_size)
+	while (r < m_d->row_size)
 	{
 		c = 0;
-		while (c < map_d->col_size)
+		while (c < m_d->col_size)
 		{
-			map_d->vali_map[r][c] = map_d->str[index];
+			m_d->vali_map[r][c] = m_d->str[index];
 			index++;
 			c++;
 		}
