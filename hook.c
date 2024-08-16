@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 00:56:05 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 07:35:32 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,45 @@ int	move_person(int key, void *param)
 {
 	t_tot	*tot;
 	t_cor	person;
+	t_cor	exit;
 
 	tot = (t_tot *)param;
-	person = get_cor(tot->m_d, 'P');
+	person = get_cor(tot->m_d, P);
+	exit = get_cor(tot->m_d, E);
 	if (key == KEY_ESC)
 		mlx_loop_end(tot->w_d->m_p);
 	else
-		move_way(key, person, tot);
+		move_way(key, person, exit, tot);
 	return (0);
+}
+int	move_way(int key, t_cor person, t_cor exit, t_tot *tot)
+{
+	t_cor	way;
+
+	way = (t_cor){0, 0};
+	if (key == KEY_W || key == KEY_UP)
+		way.r = -1;
+	else if (key == KEY_S || key == KEY_DOWN)
+		way.r = 1;
+	else if (key == KEY_A || key == KEY_LEFT)
+		way.c = -1;
+	else if (key == KEY_D || key == KEY_RIGHT)
+		way.c = 1;
+	way.r += person.r;
+	way.c += person.c;
+	//여기서부터 수정
+	if (get_cor(tot->m_d, E).r == -1)
+		tot->m_d->c_map[exit.r][exit.c] = E;
+	//여기서부터 수정
+	if (tot->m_d->c_map[way.r][way.c] == W)
+		return (0);
+	if (tot->m_d->c_map[way.r][way.c] == C)
+		tot->m_d->c_c--;
+	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
+		mlx_loop_end(tot->w_d->m_p);
+	tot->m_d->c_map[person.r][person.c] = Z;
+	tot->m_d->c_map[way.r][way.c] = P;
+	draw_map(tot);
 }
 
 void	destroy_tiles(t_tot *tot)
@@ -81,37 +112,3 @@ int	end_game(t_tot *tot)
 	return (0);
 }
 
-int	move_way(int key, t_cor person, t_tot *tot)
-{
-	t_cor	way;
-	t_cor	exit;
-
-	exit = get_cor(tot->m_d, E);
-	way = (t_cor){0, 0};
-	if (key == KEY_W || key == KEY_UP)
-		way.r = -1;
-	else if (key == KEY_S || key == KEY_DOWN)
-		way.r = 1;
-	else if (key == KEY_A || key == KEY_LEFT)
-		way.c = -1;
-	else if (key == KEY_D || key == KEY_RIGHT)
-		way.c = 1;
-	way.r += person.r;
-	way.c += person.c;
-	if (tot->m_d->c_map[way.r][way.c] == W)
-		return (0);
-	if (tot->m_d->c_map[way.r][way.c] == C)
-		tot->m_d->c_c--;
-	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
-		mlx_loop_end(tot->w_d->m_p);
-	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c != 0)
-	{
-		return (0);
-		// tot->m_d->c_map[person.r][person.c] = P;
-		// tot->m_d->c_map[exit.r][exit.c] = E;
-		// tot->m_d->c_map[person.r - way.r][person.c - way.c] = E;
-	}
-	tot->m_d->c_map[person.r][person.c] = Z;
-	tot->m_d->c_map[way.r][way.c] = P;
-	draw_map(tot);
-}
