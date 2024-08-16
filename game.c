@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int	deal_game(t_total_data *tot)
+int	deal_game(t_tot *tot)
 {
 	
 	

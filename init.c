@@ -1,134 +1,134 @@
 #include "so_long.h"
 
-void	*set_map_str(int fd, t_map_data *map_data)
+void	*set_map_str(int fd, t_map_d *map_d)
 {
 	int	read_return;
 	char buf[5];
 	int index;
-	map_data->map_str = malloc(sizeof(char) * 1);
-	if (map_data->map_str == NULL)
+	map_d->map_str = malloc(sizeof(char) * 1);
+	if (map_d->map_str == NULL)
 		return (NULL);
-	map_data->map_str[0] = '\0';
+	map_d->map_str[0] = '\0';
 	while (1)
 	{
 		read_return = read(fd, buf, 5);
 		buf[read_return] = '\0';
-		map_data->map_str = join_s(map_data->map_str, buf);
+		map_d->map_str = join_s(map_d->map_str, buf);
 		if (read_return < 5)
 			break;
 	}
 	index = 0;
-	map_data->row_size = 0;
-	map_data->col_size = 0;
+	map_d->row_size = 0;
+	map_d->col_size = 0;
 	while (1)
 	{
-		if (map_data->map_str[index] == '\n' || map_data->map_str[index] == '\0')
-			map_data->row_size++;
-		if (map_data->map_str[index] == '\0')
+		if (map_d->map_str[index] == '\n' || map_d->map_str[index] == '\0')
+			map_d->row_size++;
+		if (map_d->map_str[index] == '\0')
 			break;
 		index++;
 	}
-	map_data->col_size = index / map_data->row_size;
+	map_d->col_size = index / map_d->row_size;
 	return (NULL);
 }
 
-void	deal_map(t_total_data	*tot)
+void	deal_map(t_tot	*tot)
 {
-	if (!validate_map(tot->map_data))
+	if (!validate_map(tot->map_d))
 		return ;
 	init_tiles(tot);
-	set_vali_map(tot->map_data);
-	set_char_map(tot->map_data);
-	t_cordi person;
-	person = get_cordi(tot->map_data, PERSON);
-	if (!is_possible(tot->map_data, person))
+	set_vali_map(tot->map_d);
+	set_c_map(tot->map_d);
+	t_cor person;
+	person = get_cor(tot->map_d, PERSON);
+	if (!is_possible(tot->map_d, person))
 		return ;
 	return ;
 }
 
-void	*set_char_map(t_map_data *map_data)
+void	*set_c_map(t_map_d *map_d)
 {
-	int row;
-	int col;
+	int r;
+	int c;
 	int index;
 	
-	row = 0;
-	col = 0;
+	r = 0;
+	c = 0;
 	index = 0;
-	map_data->char_map = malloc(sizeof(char *) * map_data->row_size);
-	if (map_data->char_map == NULL)
+	map_d->c_map = malloc(sizeof(char *) * map_d->row_size);
+	if (map_d->c_map == NULL)
 		return (NULL);
-	while (row < map_data->row_size)
+	while (r < map_d->row_size)
 	{
-		map_data->char_map[row] = malloc(sizeof(char) * map_data->col_size);
-		if (map_data->char_map[row] == NULL)
+		map_d->c_map[r] = malloc(sizeof(char) * map_d->col_size);
+		if (map_d->c_map[r] == NULL)
 		{
-			while (row-- >= 0)
-				free(map_data->char_map[row]);
-			free(map_data->char_map);
+			while (r-- >= 0)
+				free(map_d->c_map[r]);
+			free(map_d->c_map);
 			return (NULL);
 		}
-		row++;
+		r++;
 	}
-	row = 0;
+	r = 0;
 	index = 0;
-	while (row < map_data->row_size)
+	while (r < map_d->row_size)
 	{
-		col = 0;
-		while (col < map_data->col_size)
+		c = 0;
+		while (c < map_d->col_size)
 		{
-			map_data->char_map[row][col] = map_data->map_str[index];
+			map_d->c_map[r][c] = map_d->map_str[index];
 			index++;
-			col++;
+			c++;
 		}
 		index++;
-		row++;
+		r++;
 	}
 	return (NULL);
 }
 
-void	*set_vali_map(t_map_data *map_data)
+void	*set_vali_map(t_map_d *map_d)
 {
-	int row;
-	int col;
+	int r;
+	int c;
 	int index;
-	row = 0;
-	col = 0;
+	r = 0;
+	c = 0;
 	index = 0;
 	
-	map_data->vali_map = malloc(sizeof(char *) * map_data->row_size);
-	if (map_data->vali_map == NULL)
+	map_d->vali_map = malloc(sizeof(char *) * map_d->row_size);
+	if (map_d->vali_map == NULL)
 		return (NULL);
-	while (row < map_data->row_size)
+	while (r < map_d->row_size)
 	{
-		map_data->vali_map[row] = malloc(sizeof(char) * map_data->col_size);
-		if (map_data->vali_map[row] == NULL)
+		map_d->vali_map[r] = malloc(sizeof(char) * map_d->col_size);
+		if (map_d->vali_map[r] == NULL)
 		{
-			while (row-- >= 0)
-				free(map_data->vali_map[row]);
-			free(map_data->vali_map);
+			while (r-- >= 0)
+				free(map_d->vali_map[r]);
+			free(map_d->vali_map);
 			return (NULL);
 		}
-		row++;
+		r++;
 	}
-	row = 0;
+	r = 0;
 	index = 0;
-	while (row < map_data->row_size)
+	while (r < map_d->row_size)
 	{
-		col = 0;
-		while (col < map_data->col_size)
+		c = 0;
+		while (c < map_d->col_size)
 		{
-			map_data->vali_map[row][col] = map_data->map_str[index];
+			map_d->vali_map[r][c] = map_d->map_str[index];
 			index++;
-			col++;
+			c++;
 		}
 		index++;
-		row++;
+		r++;
 	}
 	return (NULL);
 }
 
-void	*init_tiles(t_total_data	*tot)
+void	*init_tiles(t_tot	*tot)
 {
 	tot->tile_data = malloc(sizeof(t_tile_data));
 	if (tot->tile_data == NULL)
@@ -142,29 +142,29 @@ void	*init_tiles(t_total_data	*tot)
 	return (NULL);
 }
 
-void draw_map(t_total_data	*tot)
+void draw_map(t_tot	*tot)
 {
-	int row;
-	int col;
+	int r;
+	int c;
 	int index;
 	
-	row = 0;
-	col = 0;
+	r = 0;
+	c = 0;
 	index = 0;
-	while (row < tot->map_data->row_size)
+	while (r < tot->map_d->row_size)
 	{
-		col = 0;
-		while (col < tot->map_data->col_size)
-			if (tot->map_data->char_map[row][col] == WALL)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->rock, TILE_LEN * col++, TILE_LEN * row);		
-			else if (tot->map_data->char_map[row][col] == EMPTY)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->grass, TILE_LEN * col++, TILE_LEN * row);		
-			else if (tot->map_data->char_map[row][col] == PERSON)			
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->person, TILE_LEN * col++, TILE_LEN * row);		
-			else if (tot->map_data->char_map[row][col] == COLLECT)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->chest, TILE_LEN * col++, TILE_LEN * row);		
-			else if (tot->map_data->char_map[row][col] == EXIT)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->door, TILE_LEN * col++, TILE_LEN * row);		
-		row++;
+		c = 0;
+		while (c < tot->map_d->col_size)
+			if (tot->map_d->c_map[r][c] == WALL)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->rock, TILE_LEN * c++, TILE_LEN * r);		
+			else if (tot->map_d->c_map[r][c] == EMPTY)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->grass, TILE_LEN * c++, TILE_LEN * r);		
+			else if (tot->map_d->c_map[r][c] == PERSON)			
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->person, TILE_LEN * c++, TILE_LEN * r);		
+			else if (tot->map_d->c_map[r][c] == COLLECT)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->chest, TILE_LEN * c++, TILE_LEN * r);		
+			else if (tot->map_d->c_map[r][c] == EXIT)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->door, TILE_LEN * c++, TILE_LEN * r);		
+		r++;
 	}
 }

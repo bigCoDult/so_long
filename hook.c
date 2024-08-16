@@ -6,44 +6,40 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 12:41:17 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 12:52:30 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	key_hook(t_total_data *tot)
+void	key_hook(t_tot *tot)
 {
 	void	*param;
 
 	param = (void *)tot;
 	draw_map(tot);
-	is_proper_chars(tot->map_data);
+	is_proper_chars(tot->map_d);
 	mlx_key_hook(tot->win_data->win_ptr, &move_person, param);
 	return ;
 }
 
 int	move_person(int key, void *param)
 {
-	t_total_data	*tot;
-	int						step;
+	t_tot	*tot;
+	int		step;
+	t_cor	person;
 
 	step = 0;
-	tot = (t_total_data *)param;
-	t_cordi person;
-	person = get_cordi(tot->map_data, 'P');
+	tot = (t_tot *)param;
+	person = get_cor(tot->map_d, 'P');
 	if (key == KEY_ESC)
-	{
-		// end_game(tot);
 		mlx_loop_end(tot->win_data->mlx_ptr);
-		return (0);
-	}
 	else
 		move_way(key, person, tot);
 	return (0);
 }
 
-void	destroy_tiles(t_total_data *tot)
+void	destroy_tiles(t_tot *tot)
 {
 	mlx_destroy_image (tot->win_data->mlx_ptr, tot->tile_data->rock);
 	mlx_destroy_image (tot->win_data->mlx_ptr, tot->tile_data->grass);
@@ -52,54 +48,57 @@ void	destroy_tiles(t_total_data *tot)
 	mlx_destroy_image (tot->win_data->mlx_ptr, tot->tile_data->door);
 }
 
-int end_game(t_total_data *tot)
+int	end_game(t_tot *tot)
 {
-	int a = tot->map_data->row_size;
-	int b = a;
-	
+	int	a;
+	int	b;
+
+	a = tot->map_d->row_size;
+	b = a;
 	destroy_tiles(tot);
 	mlx_destroy_window(tot->win_data->mlx_ptr, tot->win_data->win_ptr);
 	mlx_destroy_display(tot->win_data->mlx_ptr);
 	while (a--)
-		free(tot->map_data->char_map[a]);
-	free(tot->map_data->char_map);
+		free(tot->map_d->c_map[a]);
+	free(tot->map_d->c_map);
 	while (b--)
-		free(tot->map_data->vali_map[b]);
-	free(tot->map_data->vali_map);	
-	free(tot->map_data->map_str);
-	free(tot->map_data);
-	free(tot->tile_data);	
+		free(tot->map_d->vali_map[b]);
+	free(tot->map_d->vali_map);
+	free(tot->map_d->map_str);
+	free(tot->map_d);
+	free(tot->tile_data);
 	free(tot->win_data->mlx_ptr);
 	free(tot->win_data);
 	free(tot);
-	return (0);	
+	return (0);
 }
 
-int move_way(int key, t_cordi person, t_total_data *tot)
+int	move_way(int key, t_cor person, t_tot *tot)
 {
-	int row;
-	int col;
-	row = 0;	
-	col = 0;
+	int	r;
+	int	c;
+
+	r = 0;
+	c = 0;
 	if (key == KEY_W || key == KEY_UP)
-		row = -1;
+		r = -1;
 	else if (key == KEY_S || key == KEY_DOWN)
-		row = 1;
+		r = 1;
 	else if (key == KEY_A || key == KEY_LEFT)
-		col = -1;
+		c = -1;
 	else if (key == KEY_D || key == KEY_RIGHT)
-		col = 1;
-	person.row += row;
-	person.col += col;		
-	if (tot->map_data->char_map[person.row][person.col] == WALL)
+		c = 1;
+	person.r += r;
+	person.c += c;
+	if (tot->map_d->c_map[person.r][person.c] == WALL)
 		return (0);
-	if (tot->map_data->char_map[person.row][person.col] == COLLECT)
-		tot->map_data->count_collect--;
-	if (tot->map_data->char_map[person.row][person.col] == EXIT && tot->map_data->count_collect != 0)
+	if (tot->map_d->c_map[person.r][person.c] == COLLECT)
+		tot->map_d->c_c--;
+	if (tot->map_d->c_map[person.r][person.c] == EXIT && tot->map_d->c_c != 0)
 		return (0);
-	if (tot->map_data->char_map[person.row][person.col] == EXIT && tot->map_data->count_collect == 0)
+	if (tot->map_d->c_map[person.r][person.c] == EXIT && tot->map_d->c_c == 0)
 		mlx_loop_end(tot->win_data->mlx_ptr);
-	tot->map_data->char_map[person.row - row][person.col - col] = '0';
-	tot->map_data->char_map[person.row][person.col] = 'P';
+	tot->map_d->c_map[person.r - r][person.c - c] = '0';
+	tot->map_d->c_map[person.r][person.c] = 'P';
 	draw_map(tot);
 }

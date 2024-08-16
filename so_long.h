@@ -45,40 +45,40 @@ typedef struct s_tile_data
 }	t_tile_data;
 
 
-typedef struct s_cordi
+typedef struct s_cor
 {
-	int	row;
-	int	col;
-}	t_cordi;
+	int	r;
+	int	c;
+}	t_cor;
 
-typedef struct s_map_data
+typedef struct s_map_d
 {
-	char		**char_map;
+	char		**c_map;
 	char		**vali_map;
 	char		*map_str;
 	size_t	row_size;
 	size_t	col_size;
-	int		count_collect;
-}	t_map_data;
+	int		c_c;
+}	t_map_d;
 
-typedef struct s_total_data
+typedef struct s_tot
 {
 	t_win_data	*win_data;
 	t_tile_data	*tile_data;
-	t_map_data	*map_data;
-	}	t_total_data;
+	t_map_d	*map_d;
+	}	t_tot;
 
 
 void	so_long(int fd);
-void	init_win_data(t_total_data *tot);
+void	init_win_data(t_tot *tot);
 
-void	*set_map_str(int fd, t_map_data *map_data);
-void	deal_map(t_total_data	*tot);
-void	*set_char_map(t_map_data *map_data);
-void	*set_vali_map(t_map_data *map_data);
+void	*set_map_str(int fd, t_map_d *map_d);
+void	deal_map(t_tot	*tot);
+void	*set_c_map(t_map_d *map_d);
+void	*set_vali_map(t_map_d *map_d);
 
-void	*init_tiles(t_total_data	*tot);
-void	draw_map(t_total_data	*tot);
+void	*init_tiles(t_tot	*tot);
+void	draw_map(t_tot	*tot);
 
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
@@ -86,19 +86,19 @@ char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
 
-bool	validate_map(t_map_data *map_data);
-bool	is_square(t_map_data *map_data);
-bool	is_wall(t_map_data *map_data);
-bool	is_proper_chars(t_map_data *map_data);
+bool	validate_map(t_map_d *map_d);
+bool	is_square(t_map_d *map_d);
+bool	is_wall(t_map_d *map_d);
+bool	is_proper_chars(t_map_d *map_d);
 
-t_cordi	get_cordi(t_map_data *map_data, char c);
-bool	is_possible(t_map_data *map_data, t_cordi person);
+t_cor	get_cor(t_map_d *map_d, char c);
+bool	is_possible(t_map_d *map_d, t_cor person);
 
-void	key_hook(t_total_data *tot);
+void	key_hook(t_tot *tot);
 int move_person(int key, void *param);
-int move_way(int key, t_cordi person, t_total_data *tot);
-void	destroy_tiles(t_total_data *tot);
-int end_game(t_total_data *tot);
+int move_way(int key, t_cor person, t_tot *tot);
+void	destroy_tiles(t_tot *tot);
+int end_game(t_tot *tot);
 
 
 #endif /* SO_LONG_H */

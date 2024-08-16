@@ -19,18 +19,18 @@ int	main(int argc, char **argv)
 
 void so_long(int fd)
 {
-	t_total_data	*tot;
-	tot = malloc(sizeof(t_total_data));
+	t_tot	*tot;
+	tot = malloc(sizeof(t_tot));
 	if (tot == NULL)
 		return ;
 	tot->win_data = malloc(sizeof(t_win_data));
 	if (tot->win_data == NULL)
 		return ;
-	tot->map_data = malloc(sizeof(t_map_data));
-	if (tot->map_data == NULL)
+	tot->map_d = malloc(sizeof(t_map_d));
+	if (tot->map_d == NULL)
 		return ;
 
-	tot->map_data->vali_map = set_map_str(fd, tot->map_data);
+	tot->map_d->vali_map = set_map_str(fd, tot->map_d);
 	
 	init_win_data(tot);
 	deal_map(tot);
@@ -45,11 +45,11 @@ void so_long(int fd)
 }
 
 
-void	init_win_data(t_total_data *tot)
+void	init_win_data(t_tot *tot)
 {
 	tot->win_data->title = "so_long";
-	tot->win_data->size_x = tot->map_data->col_size * 20;
-	tot->win_data->size_y = tot->map_data->row_size * 20;
+	tot->win_data->size_x = tot->map_d->col_size * 20;
+	tot->win_data->size_y = tot->map_d->row_size * 20;
 	tot->win_data->mlx_ptr = mlx_init();
 	tot->win_data->win_ptr = mlx_new_window(tot->win_data->mlx_ptr, tot->win_data->size_x, tot->win_data->size_y, tot->win_data->title);
 	return ;
