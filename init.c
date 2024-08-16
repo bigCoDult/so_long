@@ -133,11 +133,11 @@ void	*init_tiles(t_tot	*tot)
 	tot->tile_data = malloc(sizeof(t_tile_data));
 	if (tot->tile_data == NULL)
 		return (NULL);
-	tot->tile_data->rock = open_xpm(tot->win_data, NULL, "rock");
-	tot->tile_data->grass = open_xpm(tot->win_data, NULL, "grass");
-	tot->tile_data->person = open_xpm(tot->win_data, NULL, "person");
-	tot->tile_data->chest = open_xpm(tot->win_data, NULL, "chest");
-	tot->tile_data->door = open_xpm(tot->win_data, NULL, "door");
+	tot->tile_data->rock = open_xpm(tot->w_d, NULL, "rock");
+	tot->tile_data->grass = open_xpm(tot->w_d, NULL, "grass");
+	tot->tile_data->person = open_xpm(tot->w_d, NULL, "person");
+	tot->tile_data->chest = open_xpm(tot->w_d, NULL, "chest");
+	tot->tile_data->door = open_xpm(tot->w_d, NULL, "door");
 	// return (널말고 뭘 반환?);
 	return (NULL);
 }
@@ -156,15 +156,15 @@ void draw_map(t_tot	*tot)
 		c = 0;
 		while (c < tot->map_d->col_size)
 			if (tot->map_d->c_map[r][c] == WALL)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->rock, TILE_LEN * c++, TILE_LEN * r);		
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->rock, TILE_LEN * c++, TILE_LEN * r);		
 			else if (tot->map_d->c_map[r][c] == EMPTY)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->grass, TILE_LEN * c++, TILE_LEN * r);		
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->grass, TILE_LEN * c++, TILE_LEN * r);		
 			else if (tot->map_d->c_map[r][c] == PERSON)			
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->person, TILE_LEN * c++, TILE_LEN * r);		
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->person, TILE_LEN * c++, TILE_LEN * r);		
 			else if (tot->map_d->c_map[r][c] == COLLECT)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->chest, TILE_LEN * c++, TILE_LEN * r);		
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->chest, TILE_LEN * c++, TILE_LEN * r);		
 			else if (tot->map_d->c_map[r][c] == EXIT)
-				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->door, TILE_LEN * c++, TILE_LEN * r);		
+				mlx_put_image_to_window (tot->w_d->mlx_ptr, tot->w_d->win_ptr, tot->tile_data->door, TILE_LEN * c++, TILE_LEN * r);		
 		r++;
 	}
 }

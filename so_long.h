@@ -26,14 +26,14 @@
 # include <stdbool.h>
 #	include "./minilibx-linux/mlx.h"
 
-typedef struct s_win_data
+typedef struct s_w_d
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	char		*title;
 	size_t	size_y;
 	size_t	size_x;
-}	t_win_data;
+}	t_w_d;
 
 typedef struct s_tile_data
 {
@@ -63,14 +63,14 @@ typedef struct s_map_d
 
 typedef struct s_tot
 {
-	t_win_data	*win_data;
+	t_w_d	*w_d;
 	t_tile_data	*tile_data;
 	t_map_d	*map_d;
 	}	t_tot;
 
 
 void	so_long(int fd);
-void	init_win_data(t_tot *tot);
+void	init_w_d(t_tot *tot);
 
 void	*set_map_str(int fd, t_map_d *map_d);
 void	deal_map(t_tot	*tot);
@@ -84,7 +84,7 @@ size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
-void	*open_xpm(t_win_data *win_data, void *single_tile, char *tile_name);
+void	*open_xpm(t_w_d *w_d, void *single_tile, char *tile_name);
 
 bool	validate_map(t_map_d *map_d);
 bool	is_square(t_map_d *map_d);
