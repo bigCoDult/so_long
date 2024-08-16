@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 07:35:32 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 07:47:44 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	key_hook(t_tot *tot)
 	void	*param;
 	int		step;
 
-	param = (void *)tot;
 	draw_map(tot);
-	is_proper_chars(tot->m_d);
 	step = 0;
+	printf("step : %d\n", step);
+	tot->m_d->exit = get_cor(tot->m_d, E);
+	param = (void *)tot;
+	is_proper_chars(tot->m_d);
 	mlx_key_hook(tot->w_d->w_p, &move_person, param);
 	return ;
 }
@@ -30,17 +32,19 @@ int	move_person(int key, void *param)
 	t_tot	*tot;
 	t_cor	person;
 	t_cor	exit;
+	int step;
+	step = 0;
+	// printf("step : %d\n", ++step);
 
 	tot = (t_tot *)param;
 	person = get_cor(tot->m_d, P);
-	exit = get_cor(tot->m_d, E);
 	if (key == KEY_ESC)
 		mlx_loop_end(tot->w_d->m_p);
 	else
-		move_way(key, person, exit, tot);
+		move_way(key, person, tot);
 	return (0);
 }
-int	move_way(int key, t_cor person, t_cor exit, t_tot *tot)
+int	move_way(int key, t_cor person, t_tot *tot)
 {
 	t_cor	way;
 
@@ -56,8 +60,6 @@ int	move_way(int key, t_cor person, t_cor exit, t_tot *tot)
 	way.r += person.r;
 	way.c += person.c;
 	//여기서부터 수정
-	if (get_cor(tot->m_d, E).r == -1)
-		tot->m_d->c_map[exit.r][exit.c] = E;
 	//여기서부터 수정
 	if (tot->m_d->c_map[way.r][way.c] == W)
 		return (0);
@@ -66,6 +68,8 @@ int	move_way(int key, t_cor person, t_cor exit, t_tot *tot)
 	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
 		mlx_loop_end(tot->w_d->m_p);
 	tot->m_d->c_map[person.r][person.c] = Z;
+	if (get_cor(tot->m_d, E).r == -1)
+		tot->m_d->c_map[tot->m_d->exit.r][tot->m_d->exit.c] = E;
 	tot->m_d->c_map[way.r][way.c] = P;
 	draw_map(tot);
 }

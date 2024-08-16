@@ -60,6 +60,7 @@ typedef struct s_m_d
 	size_t	col_size;
 	int		c_c;
 	int		possible;
+	t_cor	exit;
 }	t_m_d;
 
 typedef struct s_tot
@@ -97,7 +98,7 @@ bool	is_possible(t_m_d *m_d, t_cor person);
 
 void	key_hook(t_tot *tot);
 int move_person(int key, void *param);
-int move_way(int key, t_cor person, t_cor exit, t_tot *tot);
+int move_way(int key, t_cor person, t_tot *tot);
 void	destroy_tiles(t_tot *tot);
 int end_game(t_tot *tot);
 
