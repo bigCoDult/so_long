@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 14:30:05 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 14:42:11 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 bool	validate_map(t_m_d *m_d)
 {
-	if (is_square(m_d) && is_w(m_d) && is_proper_chars(m_d))
-		return (true);
-	return (false);
+	if (!is_square(m_d))
+		return (false);
+	if (!is_w(m_d))
+		return (false);
+	if (!is_proper_chars(m_d))
+		return (false);
+	return (true);
 }
 
 bool	is_square(t_m_d *m_d)

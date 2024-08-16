@@ -50,7 +50,10 @@ void	deal_map(t_tot	*tot)
 	t_cor	person;
 
 	if (!validate_map(tot->map_d))
+	{
+		mlx_loop_end(tot->w_d->m_p);
 		return ;
+	}
 	init_tiles(tot);
 	set_vali_map(tot->map_d);
 	set_c_map(tot->map_d);
