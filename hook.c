@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 23:22:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/16 23:36:18 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	end_game(t_tot *tot)
 		destroy_tiles(tot);
 	mlx_destroy_window(tot->w_d->m_p, tot->w_d->w_p);
 	mlx_destroy_display(tot->w_d->m_p);
-	// if (1)
-	if (d)
+	if (a && b && c)
 	{
 		while (rs--)
 			free(tot->m_d->c_map[rs]);
@@ -72,7 +71,6 @@ int	end_game(t_tot *tot)
 			free(tot->m_d->vali_map[rs]);
 		free(tot->m_d->vali_map);
 	}
-	// if (a && b && c)
 	free(tot->m_d->str);
 	free(tot->m_d);
 	free(tot->t_d);
