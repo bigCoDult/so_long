@@ -70,15 +70,15 @@ typedef struct s_total_data
 
 
 void	so_long(int fd);
-void	init_win_data(t_total_data *total_data);
+void	init_win_data(t_total_data *tot);
 
 void	*set_map_str(int fd, t_map_data *map_data);
-void	deal_map(t_total_data	*total_data);
+void	deal_map(t_total_data	*tot);
 void	*set_char_map(t_map_data *map_data);
 void	*set_vali_map(t_map_data *map_data);
 
-void	*init_tiles(t_total_data	*total_data);
-void	draw_map(t_total_data	*total_data);
+void	*init_tiles(t_total_data	*tot);
+void	draw_map(t_total_data	*tot);
 
 size_t	ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
@@ -94,10 +94,11 @@ bool	is_proper_chars(t_map_data *map_data);
 t_cordi	get_cordi(t_map_data *map_data, char c);
 bool	is_possible(t_map_data *map_data, t_cordi person);
 
-void	key_hook(t_total_data *total_data);
+void	key_hook(t_total_data *tot);
 int move_person(int key, void *param);
-void	destroy_tiles(t_total_data *total_data);
-int end_game(t_total_data *total_data);
+int move_way(int key, t_cordi person, t_total_data *tot);
+void	destroy_tiles(t_total_data *tot);
+int end_game(t_total_data *tot);
 
 
 #endif /* SO_LONG_H */

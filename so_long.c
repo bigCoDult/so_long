@@ -19,36 +19,39 @@ int	main(int argc, char **argv)
 
 void so_long(int fd)
 {
-	t_total_data	*total_data;
-	total_data = malloc(sizeof(t_total_data));
-	if (total_data == NULL)
+	t_total_data	*tot;
+	tot = malloc(sizeof(t_total_data));
+	if (tot == NULL)
 		return ;
-	total_data->win_data = malloc(sizeof(t_win_data));
-	if (total_data->win_data == NULL)
+	tot->win_data = malloc(sizeof(t_win_data));
+	if (tot->win_data == NULL)
 		return ;
-	total_data->map_data = malloc(sizeof(t_map_data));
-	if (total_data->map_data == NULL)
+	tot->map_data = malloc(sizeof(t_map_data));
+	if (tot->map_data == NULL)
 		return ;
 
-	total_data->map_data->vali_map = set_map_str(fd, total_data->map_data);
+	tot->map_data->vali_map = set_map_str(fd, tot->map_data);
 	
-	init_win_data(total_data);
-	deal_map(total_data);
-	key_hook(total_data);
+	init_win_data(tot);
+	deal_map(tot);
+	key_hook(tot);
 	//key hook 안에 mlx_loop_end가 있어야 함
-	mlx_loop(total_data->win_data->mlx_ptr);
-	//이부분에 end game 하면 exit 필요 없음
-	end_game(total_data);
+	mlx_loop(tot->win_data->mlx_ptr);
+	// mlx_hook(tot->win_data->win_ptr, 17, 0, end_game, tot); 
+		// 게임 종료
+		// 안되는디?
+	end_game(tot);
+		//이부분에 end game 하면 exit(0) 필요 없음
 }
 
 
-void	init_win_data(t_total_data *total_data)
+void	init_win_data(t_total_data *tot)
 {
-	total_data->win_data->title = "so_long";
-	total_data->win_data->size_x = total_data->map_data->col_size * 20;
-	total_data->win_data->size_y = total_data->map_data->row_size * 20;
-	total_data->win_data->mlx_ptr = mlx_init();
-	total_data->win_data->win_ptr = mlx_new_window(total_data->win_data->mlx_ptr, total_data->win_data->size_x, total_data->win_data->size_y, total_data->win_data->title);
+	tot->win_data->title = "so_long";
+	tot->win_data->size_x = tot->map_data->col_size * 20;
+	tot->win_data->size_y = tot->map_data->row_size * 20;
+	tot->win_data->mlx_ptr = mlx_init();
+	tot->win_data->win_ptr = mlx_new_window(tot->win_data->mlx_ptr, tot->win_data->size_x, tot->win_data->size_y, tot->win_data->title);
 	return ;
 }
 

@@ -32,16 +32,16 @@ void	*set_map_str(int fd, t_map_data *map_data)
 	return (NULL);
 }
 
-void	deal_map(t_total_data	*total_data)
+void	deal_map(t_total_data	*tot)
 {
-	if (!validate_map(total_data->map_data))
+	if (!validate_map(tot->map_data))
 		return ;
-	init_tiles(total_data);
-	set_vali_map(total_data->map_data);
-	set_char_map(total_data->map_data);
+	init_tiles(tot);
+	set_vali_map(tot->map_data);
+	set_char_map(tot->map_data);
 	t_cordi person;
-	person = get_cordi(total_data->map_data, PERSON);
-	if (!is_possible(total_data->map_data, person))
+	person = get_cordi(tot->map_data, PERSON);
+	if (!is_possible(tot->map_data, person))
 		return ;
 	return ;
 }
@@ -128,21 +128,21 @@ void	*set_vali_map(t_map_data *map_data)
 	return (NULL);
 }
 
-void	*init_tiles(t_total_data	*total_data)
+void	*init_tiles(t_total_data	*tot)
 {
-	total_data->tile_data = malloc(sizeof(t_tile_data));
-	if (total_data->tile_data == NULL)
+	tot->tile_data = malloc(sizeof(t_tile_data));
+	if (tot->tile_data == NULL)
 		return (NULL);
-	total_data->tile_data->rock = open_xpm(total_data->win_data, NULL, "rock");
-	total_data->tile_data->grass = open_xpm(total_data->win_data, NULL, "grass");
-	total_data->tile_data->person = open_xpm(total_data->win_data, NULL, "person");
-	total_data->tile_data->chest = open_xpm(total_data->win_data, NULL, "chest");
-	total_data->tile_data->door = open_xpm(total_data->win_data, NULL, "door");
+	tot->tile_data->rock = open_xpm(tot->win_data, NULL, "rock");
+	tot->tile_data->grass = open_xpm(tot->win_data, NULL, "grass");
+	tot->tile_data->person = open_xpm(tot->win_data, NULL, "person");
+	tot->tile_data->chest = open_xpm(tot->win_data, NULL, "chest");
+	tot->tile_data->door = open_xpm(tot->win_data, NULL, "door");
 	// return (널말고 뭘 반환?);
 	return (NULL);
 }
 
-void draw_map(t_total_data	*total_data)
+void draw_map(t_total_data	*tot)
 {
 	int row;
 	int col;
@@ -151,20 +151,20 @@ void draw_map(t_total_data	*total_data)
 	row = 0;
 	col = 0;
 	index = 0;
-	while (row < total_data->map_data->row_size)
+	while (row < tot->map_data->row_size)
 	{
 		col = 0;
-		while (col < total_data->map_data->col_size)
-			if (total_data->map_data->char_map[row][col] == WALL)
-				mlx_put_image_to_window (total_data->win_data->mlx_ptr, total_data->win_data->win_ptr, total_data->tile_data->rock, TILE_LEN * col++, TILE_LEN * row);		
-			else if (total_data->map_data->char_map[row][col] == EMPTY)
-				mlx_put_image_to_window (total_data->win_data->mlx_ptr, total_data->win_data->win_ptr, total_data->tile_data->grass, TILE_LEN * col++, TILE_LEN * row);		
-			else if (total_data->map_data->char_map[row][col] == PERSON)			
-				mlx_put_image_to_window (total_data->win_data->mlx_ptr, total_data->win_data->win_ptr, total_data->tile_data->person, TILE_LEN * col++, TILE_LEN * row);		
-			else if (total_data->map_data->char_map[row][col] == COLLECT)
-				mlx_put_image_to_window (total_data->win_data->mlx_ptr, total_data->win_data->win_ptr, total_data->tile_data->chest, TILE_LEN * col++, TILE_LEN * row);		
-			else if (total_data->map_data->char_map[row][col] == EXIT)
-				mlx_put_image_to_window (total_data->win_data->mlx_ptr, total_data->win_data->win_ptr, total_data->tile_data->door, TILE_LEN * col++, TILE_LEN * row);		
+		while (col < tot->map_data->col_size)
+			if (tot->map_data->char_map[row][col] == WALL)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->rock, TILE_LEN * col++, TILE_LEN * row);		
+			else if (tot->map_data->char_map[row][col] == EMPTY)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->grass, TILE_LEN * col++, TILE_LEN * row);		
+			else if (tot->map_data->char_map[row][col] == PERSON)			
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->person, TILE_LEN * col++, TILE_LEN * row);		
+			else if (tot->map_data->char_map[row][col] == COLLECT)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->chest, TILE_LEN * col++, TILE_LEN * row);		
+			else if (tot->map_data->char_map[row][col] == EXIT)
+				mlx_put_image_to_window (tot->win_data->mlx_ptr, tot->win_data->win_ptr, tot->tile_data->door, TILE_LEN * col++, TILE_LEN * row);		
 		row++;
 	}
 }
