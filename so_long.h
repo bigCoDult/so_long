@@ -85,8 +85,7 @@ typedef struct s_tt
 
 void	so_long(int fd);
 void	init_wd(t_tt *tt);
-void	pi(void *mlx, void *win, void *img, int x, int y);
-// void	pi(void *mlx, void *win, void *img, t_cor c);
+void	pi(void *mlx, void *win, void *img, t_cor c);
 void	set_str(int fd, t_m_d *m_d);
 int		deal_map(t_tt	*tt);
 void	set_c_map(t_m_d *m_d);

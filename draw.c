@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:36:53 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 08:52:54 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 08:57:24 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,24 @@ void	draw_map(t_tt	*tt)
 		while (c.c < tt->m_d->col_size)
 		{
 			if (tt->m_d->c_map[c.r][c.c] == W)
-				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ro, TL * c.c++, TL * c.r);
-				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->ro, (t_cor){TL * c.c++, TL * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ro, (t_cor){TL * c.c++, TL * c.r});
 			else if (tt->m_d->c_map[c.r][c.c] == Z)
-				pi(tt->wd->mp, tt->wd->wp, tt->t_d->gr, TL * c.c++, TL * c.r);
-				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->gr, (t_cor){TL * c.c++, TL * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->gr, (t_cor){TL * c.c++, TL * c.r});
 			else if (tt->m_d->c_map[c.r][c.c] == P)
-				pi(tt->wd->mp, tt->wd->wp, tt->t_d->pe, TL * c.c++, TL * c.r);
-				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->pe, (t_cor){TL * c.c++, TL * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->pe, (t_cor){TL * c.c++, TL * c.r});
 			else if (tt->m_d->c_map[c.r][c.c] == C)
-				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ch, TL * c.c++, TL * c.r);
-				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->ch, (t_cor){TL * c.c++, TL * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ch, (t_cor){TL * c.c++, TL * c.r});
 			else if (tt->m_d->c_map[c.r][c.c] == E)
-				pi(tt->wd->mp, tt->wd->wp, tt->t_d->dr, TL * c.c++, TL * c.r);
-				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->dr, (t_cor){TL * c.c++, TL * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->dr, (t_cor){TL * c.c++, TL * c.r});
 		}
 		c.r++;
 	}
 }
 
-void	pi(void *mlx, void *win, void *img, int x, int y)
+void	pi(void *mlx, void *win, void *img, t_cor c)
 {
-	mlx_put_image_to_window(mlx, win, img, x, y);
+	mlx_put_image_to_window(mlx, win, img, c.r, c.c);
 }
-// void	pi(void *mlx, void *win, void *img, t_cor c)
-// {
-// 	mlx_put_image_to_window(mlx, win, img, c.c, c.r);
-// }
 
 void	*init_tiles(t_tt	*tt)
 {
