@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 09:39:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 11:20:59 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ bool	is_w(t_m_d *m_d)
 		i += fst_l;
 	}
 	i -= fst_l;
-	while (fst_l--)
 	// while (m_d->str[i] != '\0')
+	while (fst_l--)
 	{
 		if (m_d->str[i] != W)
 			return (false);
