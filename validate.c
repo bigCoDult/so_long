@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 15:05:33 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 16:11:44 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ bool	is_square(t_m_d *m_d)
 
 bool	is_w(t_m_d *m_d)
 {
+	int	col_size;
 	int	i;
 	int	fst_l;
 	int	now;
@@ -68,13 +69,10 @@ bool	is_w(t_m_d *m_d)
 	while (i < fst_l)
 	{
 		if (m_d->str[i] != W)
-		{
-			printf("not horizental WALL\n");
 			return (false);
-		}
 		i++;
 	}
-	int col_size = i / fst_l;
+	col_size = i / fst_l;
 	while (m_d->str[i] != '\0')
 	{
 		i++;
@@ -82,23 +80,17 @@ bool	is_w(t_m_d *m_d)
 			return (false);
 		i += fst_l;
 	}
-	while(m_d->str[i] != '\0')
+	while (m_d->str[i] != '\0')
 		i++;
 	i -= fst_l;
 	while (fst_l--)
 	{
 		if (m_d->str[i] != W)
-		{
-			printf("not horizental WALL\n");
 			return (false);
-		}
 		i++;
 	}
 	if (m_d->str[i] != '\0')
-	{
-		printf("not \\0\n");
 		return (false);
-	}
 	return (true);
 }
 
@@ -145,7 +137,6 @@ bool	is_possible(t_m_d *m_d, t_cor he)
 	}
 	else
 	{
-		// if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\' || m_d->vali_map[he.r][he.c] == E)
 		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\')
 			return (false);
 		if (m_d->vali_map[he.r][he.c] == C)
