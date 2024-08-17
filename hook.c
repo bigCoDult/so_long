@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 08:53:18 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:06:42 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,13 @@ int	end_game(t_tot *tot)
 	int	rs;
 
 	rs = tot->m_d->row_size;
-	int a = is_square(tot->m_d);
-	int b = is_w(tot->m_d);
-	int c = is_proper_chars(tot->m_d);
+	int c;
+	c = is_proper_chars(tot->m_d);
+	int a;
+	a = is_square(tot->m_d);
+	int b;
+	if (a)
+		b = is_w(tot->m_d);
 	int d = tot->m_d->possible;
 	if (a && b && c && d)
 		destroy_tiles(tot);

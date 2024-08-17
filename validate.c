@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 11:20:59 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:11:16 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 bool	validate_map(t_m_d *m_d)
 {
-	if (!is_square(m_d))
-		printf("[not box]\n");
-	if (!is_w(m_d))
-		printf("[not wall box]\n");
 	if (!is_proper_chars(m_d))
 		printf("[not proper char]\n");
+	if (!is_square(m_d))
+	{
+		printf("[not box]\n");
+		return (false);
+	}
+	if (!is_w(m_d))
+		printf("[not wall box]\n");
 	if (is_square(m_d) && is_w(m_d) && is_proper_chars(m_d))
 		return (true);
 	return (false);
@@ -65,9 +68,13 @@ bool	is_w(t_m_d *m_d)
 	while (i < fst_l)
 	{
 		if (m_d->str[i] != W)
+		{
+			printf("not horizental WALL\n");
 			return (false);
+		}
 		i++;
 	}
+	int col_size = i / fst_l;
 	while (m_d->str[i] != '\0')
 	{
 		i++;
@@ -77,16 +84,27 @@ bool	is_w(t_m_d *m_d)
 		//문제라인
 		i += fst_l;
 	}
+	while(m_d->str[i] != '\0')
+		i++;
+	printf("i: %d\n", i);
 	i -= fst_l;
+	printf("i: %d\n", i);
 	// while (m_d->str[i] != '\0')
 	while (fst_l--)
 	{
 		if (m_d->str[i] != W)
+		{
+			printf("not horizental WALL\n");
 			return (false);
+		}
 		i++;
 	}
+	printf("i: %d\n", i);
 	if (m_d->str[i] != '\0')
+	{
+		printf("not null\n");
 		return (false);
+	}
 	return (true);
 }
 
