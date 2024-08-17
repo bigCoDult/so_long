@@ -30,8 +30,6 @@ void	set_str(int fd, t_m_d *m_d)
 		m_d->str = join_s(m_d->str, buf);
 	}
 	index = 0;
-	m_d->row_size = 0;
-	m_d->col_size = 0;
 	while (1)
 	{
 		if (m_d->str[index] == '\n' || m_d->str[index] == '\0')
