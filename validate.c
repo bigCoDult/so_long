@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 08:52:23 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 09:14:07 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ bool	validate_map(t_m_d *m_d)
 bool	is_square(t_m_d *m_d)
 {
 	int	i;
-	int	f_line;
+	int	fst_l;
 	int	now;
 
 	i = 0;
-	f_line = 0;
+	fst_l = 0;
 	now = 0;
-	while (m_d->str[f_line] != '\n' && m_d->str[f_line] != '\0')
-		f_line++;
-	i = f_line + 1;
+	while (m_d->str[fst_l] != '\n' && m_d->str[fst_l] != '\0')
+		fst_l++;
+	i = fst_l + 1;
 	while (m_d->str[i] != '\0')
 	{
 		now = i;
 		while (m_d->str[now] != '\n' && m_d->str[now] != '\0')
 			now++;
-		if (now - i != f_line)
+		if (now - i != fst_l)
 			return (false);
-		i += f_line;
+		i += fst_l;
 		if (m_d->str[i] == '\n')
 			i++;
 	}
@@ -54,15 +54,15 @@ bool	is_square(t_m_d *m_d)
 bool	is_w(t_m_d *m_d)
 {
 	int	i;
-	int	f_line;
+	int	fst_l;
 	int	now;
 
 	i = 0;
-	f_line = 0;
+	fst_l = 0;
 	now = 0;
-	while (m_d->str[f_line] != '\n' && m_d->str[f_line] != '\0')
-		f_line++;
-	while (i < f_line)
+	while (m_d->str[fst_l] != '\n' && m_d->str[fst_l] != '\0')
+		fst_l++;
+	while (i < fst_l)
 	{
 		if (m_d->str[i] != W)
 			return (false);
@@ -71,17 +71,22 @@ bool	is_w(t_m_d *m_d)
 	while (m_d->str[i] != '\0')
 	{
 		i++;
-		if (m_d->str[i] != W || m_d->str[i + f_line - 1] != W)
+		//문제라인
+		if (m_d->str[i] != W || m_d->str[i + fst_l - 1] != W)
 			return (false);
-		i += f_line;
+		//문제라인
+		i += fst_l;
 	}
-	i -= f_line;
-	while (m_d->str[i] != '\0')
+	i -= fst_l;
+	// while (m_d->str[i] != '\0')
+	while (fst_l--)
 	{
 		if (m_d->str[i] != W)
 			return (false);
 		i++;
 	}
+	if (m_d->str[i] != '\0')
+		return (false);
 	return (true);
 }
 
