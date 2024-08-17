@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 12:06:42 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:14:52 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	move_way(int key, t_cor person, t_tot *tot)
 	way.c += person.c;
 	if (tot->m_d->c_map[way.r][way.c] == W)
 		return (0);
-	else
+	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN || key == KEY_A || key == KEY_LEFT || key == KEY_D || key == KEY_RIGHT)
 		printf("step : %d\n", tot->m_d->step++);
 	if (tot->m_d->c_map[way.r][way.c] == C)
 		tot->m_d->c_c--;

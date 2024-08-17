@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 12:11:16 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:12:41 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,9 @@ bool	is_w(t_m_d *m_d)
 	}
 	while(m_d->str[i] != '\0')
 		i++;
-	printf("i: %d\n", i);
 	i -= fst_l;
-	printf("i: %d\n", i);
-	// while (m_d->str[i] != '\0')
-	while (fst_l--)
+	// while (fst_l--)
+	while (m_d->str[i] != '\0')
 	{
 		if (m_d->str[i] != W)
 		{
@@ -99,10 +97,9 @@ bool	is_w(t_m_d *m_d)
 		}
 		i++;
 	}
-	printf("i: %d\n", i);
 	if (m_d->str[i] != '\0')
 	{
-		printf("not null\n");
+		printf("not \\0\n");
 		return (false);
 	}
 	return (true);
