@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 12:14:52 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 15:08:29 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,17 @@ void	key_hook(t_tot *tot)
 	tot->m_d->exit = get_cor(tot->m_d, E);
 	param = (void *)tot;
 	is_proper_chars(tot->m_d);
-	mlx_key_hook(tot->w_d->w_p, &move_person, param);
+	mlx_hook(tot->w_d->w_p, KeyPress, KeyPressMask, &move_person, param);
+	mlx_hook(tot->w_d->w_p, 17, NoEventMask, &close_window, param);
 	return ;
+}
+int close_window(void *param)
+{
+	t_tot	*tot;
+
+	tot = (t_tot *)param;
+	mlx_loop_end(tot->w_d->m_p);
+	return (0);
 }
 
 int	move_person(int key, void *param)

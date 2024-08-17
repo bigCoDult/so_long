@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 12:16:23 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 15:05:33 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ bool	is_possible(t_m_d *m_d, t_cor he)
 	}
 	else
 	{
+		// if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\' || m_d->vali_map[he.r][he.c] == E)
 		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\')
 			return (false);
 		if (m_d->vali_map[he.r][he.c] == C)
