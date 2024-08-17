@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
+/*   Updated: 2024/08/17 15:16:18 by sanbaek          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	*template_literal(char *line, char *word, int location)
 {
-	char		*str;
+	char	*str;
 	size_t	str_i;
 	size_t	line_i;
 	size_t	word_i;
@@ -39,12 +51,8 @@ char	*join_s(char *st_s, char *buf)
 
 	new_line = join_s_till_c(st_s, buf, '\0');
 	if (new_line == NULL)
-	{
 		return (NULL);
-	}
 	free(st_s);
-	// st_s = new_line;
-	// return (st_s);
 	return (new_line);
 }
 
@@ -73,11 +81,12 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 
 void	*open_xpm(t_w_d *w_d, void *single_tile, char *tile_name)
 {
-	int	tile_len;
+	int		tile_len;
+	char	*path;
+
 	tile_len = T_L;
-	char *file_path = template_literal("./tile/.xpm", tile_name, 7);
-	single_tile = mlx_xpm_file_to_image(w_d->m_p, file_path, &tile_len, &tile_len);
-	free(file_path);
+	path = template_literal("./tile/.xpm", tile_name, 7);
+	single_tile = mlx_xpm_file_to_image(w_d->m_p, path, &tile_len, &tile_len);
+	free(path);
 	return (single_tile);
 }
-
