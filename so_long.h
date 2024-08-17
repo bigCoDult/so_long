@@ -77,10 +77,12 @@ typedef struct s_tot
 void	so_long(int fd);
 void	init_w_d(t_tot *tot);
 
-void	*set_str(int fd, t_m_d *m_d);
+void	set_str(int fd, t_m_d *m_d);
 int	deal_map(t_tot	*tot);
-void	*set_c_map(t_m_d *m_d);
-void	*set_vali_map(t_m_d *m_d);
+void	set_c_map(t_m_d *m_d);
+void fill_c_map(int	r, int	index, t_m_d *m_d);
+void	set_v_map(t_m_d *m_d);
+void fill_v_map(int	r, int	index, t_m_d *m_d);
 
 void	*init_tiles(t_tot	*tot);
 void	draw_map(t_tot	*tot);

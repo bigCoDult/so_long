@@ -110,3 +110,39 @@ void	draw_map(t_tot	*tot)
 		cor.r++;
 	}
 }
+
+void	*init_tiles(t_tot	*tot)
+{
+	tot->t_d = malloc(sizeof(t_t_d));
+	if (tot->t_d == NULL)
+		return (NULL);
+	tot->t_d->rock = open_xpm(tot->w_d, NULL, "rock");
+	tot->t_d->grass = open_xpm(tot->w_d, NULL, "grass");
+	tot->t_d->person = open_xpm(tot->w_d, NULL, "person");
+	tot->t_d->chest = open_xpm(tot->w_d, NULL, "chest");
+	tot->t_d->door = open_xpm(tot->w_d, NULL, "door");
+	return (NULL);
+}
+
+int	deal_map(t_tot	*tot)
+{
+	t_cor	person;
+
+	if (!validate_map(tot->m_d))
+	{
+		mlx_loop_end(tot->w_d->m_p);
+		return (0);
+	}
+	set_c_map(tot->m_d);
+	set_v_map(tot->m_d);
+	person = get_cor(tot->m_d, P);
+	tot->m_d->possible = is_possible(tot->m_d, person);
+	if (!tot->m_d->possible)
+	{
+		printf("[impossible map]\n");
+		mlx_loop_end(tot->w_d->m_p);
+		return (0);
+	}
+	init_tiles(tot);
+	return (1);
+}
