@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 16:11:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 22:09:15 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ bool	is_w(t_m_d *m_d)
 	int	col_size;
 	int	i;
 	int	fst_l;
-	int	now;
 
 	i = 0;
 	fst_l = 0;
-	now = 0;
 	while (m_d->str[fst_l] != '\n' && m_d->str[fst_l] != '\0')
 		fst_l++;
 	while (i < fst_l)

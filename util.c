@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 15:16:18 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 22:25:55 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 char	*template_literal(char *line, char *word, int location)
 {
 	char	*str;
-	size_t	str_i;
-	size_t	line_i;
-	size_t	word_i;
+	int	str_i;
+	int	line_i;
+	int	word_i;
 
 	str = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(word) + 1));
 	if (str == NULL)
@@ -35,9 +35,9 @@ char	*template_literal(char *line, char *word, int location)
 	return (str);
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
-	size_t	length;
+	int	length;
 
 	length = 0;
 	while (s && s[length] != '\0')
@@ -59,9 +59,9 @@ char	*join_s(char *st_s, char *buf)
 char	*join_s_till_c(char *s1, char *s2, char c)
 {
 	char	*out_s;
-	size_t	i_in_s1;
-	size_t	i_in_s2;
-	size_t	i_out;
+	int	i_in_s1;
+	int	i_in_s2;
+	int	i_out;
 
 	i_in_s1 = 0;
 	i_in_s2 = 0;
