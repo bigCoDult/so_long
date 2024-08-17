@@ -35,15 +35,10 @@ void	so_long(int fd)
 	tot->m_d = malloc(sizeof(t_m_d));
 	if (tot->m_d == NULL)
 		return ;
-		
 	tot->m_d->row_size = 0;
 	tot->m_d->col_size = 0;
 	set_str(fd, tot->m_d);
 	init_w_d(tot);
-
-	// mlx_hook(tot->w_d->w_p, 17, 0, end_game, tot);
-		// 마우스로 종료
-		// 안되는디?
 	if (deal_map(tot))
 		key_hook(tot);
 	mlx_loop(tot->w_d->m_p);
@@ -95,8 +90,8 @@ void	draw_map(t_tot	*tot)
 		while (cor.c < tot->m_d->col_size)
 		{
 			if (tot->m_d->c_map[cor.r][cor.c] == W)
-				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
-				tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
+				// mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
+				p_im(tot->w_d->m_p, tot->w_d->w_p, tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
 			else if (tot->m_d->c_map[cor.r][cor.c] == Z)
 				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
 				tot->t_d->grass, T_L * cor.c++, T_L * cor.r);
@@ -112,6 +107,10 @@ void	draw_map(t_tot	*tot)
 		}
 		cor.r++;
 	}
+}
+void p_im(void *mlx, void *win, void *img, int x, int y)
+{
+	mlx_put_image_to_window(mlx, win, img, x, y);
 }
 
 void	*init_tiles(t_tot	*tot)

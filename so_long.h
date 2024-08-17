@@ -85,6 +85,7 @@ typedef struct s_tot
 
 void	so_long(int fd);
 void	init_w_d(t_tot *tot);
+void	p_im(void *mlx, void *win, void *img, int x, int y);
 void	set_str(int fd, t_m_d *m_d);
 int		deal_map(t_tot	*tot);
 void	set_c_map(t_m_d *m_d);
