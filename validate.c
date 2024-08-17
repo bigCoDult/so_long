@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 12:12:41 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:16:23 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,14 @@ bool	is_w(t_m_d *m_d)
 	while (m_d->str[i] != '\0')
 	{
 		i++;
-		//문제라인
 		if (m_d->str[i] != W || m_d->str[i + fst_l - 1] != W)
 			return (false);
-		//문제라인
 		i += fst_l;
 	}
 	while(m_d->str[i] != '\0')
 		i++;
 	i -= fst_l;
-	// while (fst_l--)
-	while (m_d->str[i] != '\0')
+	while (fst_l--)
 	{
 		if (m_d->str[i] != W)
 		{
