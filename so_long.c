@@ -24,35 +24,35 @@ int	main(int argc, char **argv)
 
 void	so_long(int fd)
 {
-	t_tot	*tot;
+	t_tt	*tt;
 
-	tot = malloc(sizeof(t_tot));
-	if (tot == NULL)
+	tt = malloc(sizeof(t_tt));
+	if (tt == NULL)
 		return ;
-	tot->w_d = malloc(sizeof(t_w_d));
-	if (tot->w_d == NULL)
+	tt->wd = malloc(sizeof(t_wd));
+	if (tt->wd == NULL)
 		return ;
-	tot->m_d = malloc(sizeof(t_m_d));
-	if (tot->m_d == NULL)
+	tt->m_d = malloc(sizeof(t_m_d));
+	if (tt->m_d == NULL)
 		return ;
-	tot->m_d->row_size = 0;
-	tot->m_d->col_size = 0;
-	set_str(fd, tot->m_d);
-	init_w_d(tot);
-	if (deal_map(tot))
-		key_hook(tot);
-	mlx_loop(tot->w_d->m_p);
-	end_game(tot);
+	tt->m_d->row_size = 0;
+	tt->m_d->col_size = 0;
+	set_str(fd, tt->m_d);
+	init_wd(tt);
+	if (deal_map(tt))
+		key_hook(tt);
+	mlx_loop(tt->wd->mp);
+	end_game(tt);
 }
 
-void	init_w_d(t_tot *tot)
+void	init_wd(t_tt *tt)
 {
-	tot->w_d->title = "so_long";
-	tot->w_d->size_x = tot->m_d->col_size * 20;
-	tot->w_d->size_y = tot->m_d->row_size * 20;
-	tot->w_d->m_p = mlx_init();
-	tot->w_d->w_p = mlx_new_window(\
-	tot->w_d->m_p, tot->w_d->size_x, tot->w_d->size_y, tot->w_d->title);
+	tt->wd->title = "so_long";
+	tt->wd->size_x = tt->m_d->col_size * 20;
+	tt->wd->size_y = tt->m_d->row_size * 20;
+	tt->wd->mp = mlx_init();
+	tt->wd->wp = mlx_new_window(\
+	tt->wd->mp, tt->wd->size_x, tt->wd->size_y, tt->wd->title);
 	return ;
 }
 
@@ -77,74 +77,71 @@ t_cor	get_cor(t_m_d *m_d, char c)
 	return ((t_cor){-1, -1});
 }
 
-void	draw_map(t_tot	*tot)
+void	draw_map(t_tt	*tt)
 {
 	int		index;
-	t_cor	cor;
+	t_cor	c;
 
 	index = 0;
-	cor = (t_cor){0, 0};
-	while (cor.r < tot->m_d->row_size)
+	c = (t_cor){0, 0};
+	while (c.r < tt->m_d->row_size)
 	{
-		cor.c = 0;
-		while (cor.c < tot->m_d->col_size)
+		c.c = 0;
+		while (c.c < tt->m_d->col_size)
 		{
-			if (tot->m_d->c_map[cor.r][cor.c] == W)
-				// mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
-				p_im(tot->w_d->m_p, tot->w_d->w_p, tot->t_d->rock, T_L * cor.c++, T_L * cor.r);
-			else if (tot->m_d->c_map[cor.r][cor.c] == Z)
-				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
-				tot->t_d->grass, T_L * cor.c++, T_L * cor.r);
-			else if (tot->m_d->c_map[cor.r][cor.c] == P)
-				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
-				tot->t_d->person, T_L * cor.c++, T_L * cor.r);
-			else if (tot->m_d->c_map[cor.r][cor.c] == C)
-				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
-				tot->t_d->chest, T_L * cor.c++, T_L * cor.r);
-			else if (tot->m_d->c_map[cor.r][cor.c] == E)
-				mlx_put_image_to_window (tot->w_d->m_p, tot->w_d->w_p, \
-				tot->t_d->door, T_L * cor.c++, T_L * cor.r);
+			if (tt->m_d->c_map[c.r][c.c] == W)
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ro, TL * c.c++, TL * c.r);
+				// pi(tt->wd->mp, tt->wd->wp, tt->t_d->ro, &(t_cor){TL * c.c++, TL * c.r});
+			else if (tt->m_d->c_map[c.r][c.c] == Z)
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->gr, TL * c.c++, TL * c.r);
+			else if (tt->m_d->c_map[c.r][c.c] == P)
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->pe, TL * c.c++, TL * c.r);
+			else if (tt->m_d->c_map[c.r][c.c] == C)
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->ch, TL * c.c++, TL * c.r);
+			else if (tt->m_d->c_map[c.r][c.c] == E)
+				pi(tt->wd->mp, tt->wd->wp, tt->t_d->dr, TL * c.c++, TL * c.r);
 		}
-		cor.r++;
+		c.r++;
 	}
 }
-void p_im(void *mlx, void *win, void *img, int x, int y)
+
+void	pi(void *mlx, void *win, void *img, int x, int y)
 {
 	mlx_put_image_to_window(mlx, win, img, x, y);
 }
 
-void	*init_tiles(t_tot	*tot)
+void	*init_tiles(t_tt	*tt)
 {
-	tot->t_d = malloc(sizeof(t_t_d));
-	if (tot->t_d == NULL)
+	tt->t_d = malloc(sizeof(t_t_d));
+	if (tt->t_d == NULL)
 		return (NULL);
-	tot->t_d->rock = open_xpm(tot->w_d, NULL, "rock");
-	tot->t_d->grass = open_xpm(tot->w_d, NULL, "grass");
-	tot->t_d->person = open_xpm(tot->w_d, NULL, "person");
-	tot->t_d->chest = open_xpm(tot->w_d, NULL, "chest");
-	tot->t_d->door = open_xpm(tot->w_d, NULL, "door");
+	tt->t_d->ro = open_xpm(tt->wd, NULL, "rock");
+	tt->t_d->gr = open_xpm(tt->wd, NULL, "grass");
+	tt->t_d->pe = open_xpm(tt->wd, NULL, "person");
+	tt->t_d->ch = open_xpm(tt->wd, NULL, "chest");
+	tt->t_d->dr = open_xpm(tt->wd, NULL, "door");
 	return (NULL);
 }
 
-int	deal_map(t_tot	*tot)
+int	deal_map(t_tt	*tt)
 {
 	t_cor	person;
 
-	if (!validate_map(tot->m_d))
+	if (!validate_map(tt->m_d))
 	{
-		mlx_loop_end(tot->w_d->m_p);
+		mlx_loop_end(tt->wd->mp);
 		return (0);
 	}
-	set_c_map(tot->m_d);
-	set_v_map(tot->m_d);
-	person = get_cor(tot->m_d, P);
-	tot->m_d->possible = is_possible(tot->m_d, person);
-	if (!tot->m_d->possible)
+	set_c_map(tt->m_d);
+	set_v_map(tt->m_d);
+	person = get_cor(tt->m_d, P);
+	tt->m_d->possible = is_possible(tt->m_d, person);
+	if (!tt->m_d->possible)
 	{
 		printf("[impossible map]\n");
-		mlx_loop_end(tot->w_d->m_p);
+		mlx_loop_end(tt->wd->mp);
 		return (0);
 	}
-	init_tiles(tot);
+	init_tiles(tt);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 22:25:55 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 00:25:52 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ char	*join_s_till_c(char *s1, char *s2, char c)
 	return (out_s);
 }
 
-void	*open_xpm(t_w_d *w_d, void *single_tile, char *tile_name)
+void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name)
 {
 	int		tile_len;
 	char	*path;
 
-	tile_len = T_L;
+	tile_len = TL;
 	path = template_literal("./tile/.xpm", tile_name, 7);
-	single_tile = mlx_xpm_file_to_image(w_d->m_p, path, &tile_len, &tile_len);
+	single_tile = mlx_xpm_file_to_image(wd->mp, path, &tile_len, &tile_len);
 	free(path);
 	return (single_tile);
 }

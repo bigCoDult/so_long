@@ -6,52 +6,52 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 15:08:29 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 00:25:52 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	key_hook(t_tot *tot)
+void	key_hook(t_tt *tt)
 {
 	void	*param;
 	int		step;
 
 	step = 0;
-	tot->m_d->step = 0;
-	printf("step : %d\n", tot->m_d->step++);
-	draw_map(tot);
-	tot->m_d->exit = get_cor(tot->m_d, E);
-	param = (void *)tot;
-	is_proper_chars(tot->m_d);
-	mlx_hook(tot->w_d->w_p, KeyPress, KeyPressMask, &move_person, param);
-	mlx_hook(tot->w_d->w_p, 17, NoEventMask, &close_window, param);
+	tt->m_d->step = 0;
+	printf("step : %d\n", tt->m_d->step++);
+	draw_map(tt);
+	tt->m_d->exit = get_cor(tt->m_d, E);
+	param = (void *)tt;
+	is_proper_chars(tt->m_d);
+	mlx_hook(tt->wd->wp, KeyPress, KeyPressMask, &move_person, param);
+	mlx_hook(tt->wd->wp, 17, NoEventMask, &close_window, param);
 	return ;
 }
 int close_window(void *param)
 {
-	t_tot	*tot;
+	t_tt	*tt;
 
-	tot = (t_tot *)param;
-	mlx_loop_end(tot->w_d->m_p);
+	tt = (t_tt *)param;
+	mlx_loop_end(tt->wd->mp);
 	return (0);
 }
 
 int	move_person(int key, void *param)
 {
-	t_tot	*tot;
+	t_tt	*tt;
 	t_cor	person;
 	t_cor	exit;
 
-	tot = (t_tot *)param;
-	person = get_cor(tot->m_d, P);
+	tt = (t_tt *)param;
+	person = get_cor(tt->m_d, P);
 	if (key == KEY_ESC)
-		mlx_loop_end(tot->w_d->m_p);
+		mlx_loop_end(tt->wd->mp);
 	else
-		move_way(key, person, tot);
+		move_way(key, person, tt);
 	return (0);
 }
-int	move_way(int key, t_cor person, t_tot *tot)
+int	move_way(int key, t_cor person, t_tt *tt)
 {
 	t_cor	way;
 
@@ -66,67 +66,67 @@ int	move_way(int key, t_cor person, t_tot *tot)
 		way.c = 1;
 	way.r += person.r;
 	way.c += person.c;
-	if (tot->m_d->c_map[way.r][way.c] == W)
+	if (tt->m_d->c_map[way.r][way.c] == W)
 		return (0);
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN || key == KEY_A || key == KEY_LEFT || key == KEY_D || key == KEY_RIGHT)
-		printf("step : %d\n", tot->m_d->step++);
-	if (tot->m_d->c_map[way.r][way.c] == C)
-		tot->m_d->c_c--;
-	if (tot->m_d->c_map[way.r][way.c] == E && tot->m_d->c_c == 0)
+		printf("step : %d\n", tt->m_d->step++);
+	if (tt->m_d->c_map[way.r][way.c] == C)
+		tt->m_d->c_c--;
+	if (tt->m_d->c_map[way.r][way.c] == E && tt->m_d->c_c == 0)
 	{
-		mlx_loop_end(tot->w_d->m_p);
+		mlx_loop_end(tt->wd->mp);
 		printf("!!!!!!!!!!!!!!!game clear!!!!!!!!!!!!!!!\n");
 	}
-	tot->m_d->c_map[person.r][person.c] = Z;
-	if (get_cor(tot->m_d, E).r == -1)
-		tot->m_d->c_map[tot->m_d->exit.r][tot->m_d->exit.c] = E;
-	tot->m_d->c_map[way.r][way.c] = P;
-	draw_map(tot);
+	tt->m_d->c_map[person.r][person.c] = Z;
+	if (get_cor(tt->m_d, E).r == -1)
+		tt->m_d->c_map[tt->m_d->exit.r][tt->m_d->exit.c] = E;
+	tt->m_d->c_map[way.r][way.c] = P;
+	draw_map(tt);
 }
 
-void	destroy_tiles(t_tot *tot)
+void	destroy_tiles(t_tt *tt)
 {
-	mlx_destroy_image (tot->w_d->m_p, tot->t_d->rock);
-	mlx_destroy_image (tot->w_d->m_p, tot->t_d->grass);
-	mlx_destroy_image (tot->w_d->m_p, tot->t_d->person);
-	mlx_destroy_image (tot->w_d->m_p, tot->t_d->chest);
-	mlx_destroy_image (tot->w_d->m_p, tot->t_d->door);
+	mlx_destroy_image (tt->wd->mp, tt->t_d->ro);
+	mlx_destroy_image (tt->wd->mp, tt->t_d->gr);
+	mlx_destroy_image (tt->wd->mp, tt->t_d->pe);
+	mlx_destroy_image (tt->wd->mp, tt->t_d->ch);
+	mlx_destroy_image (tt->wd->mp, tt->t_d->dr);
 }
 
-int	end_game(t_tot *tot)
+int	end_game(t_tt *tt)
 {
 	int	rs;
 
-	rs = tot->m_d->row_size;
+	rs = tt->m_d->row_size;
 	int c;
-	c = is_proper_chars(tot->m_d);
+	c = is_proper_chars(tt->m_d);
 	int a;
-	a = is_square(tot->m_d);
+	a = is_square(tt->m_d);
 	int b;
 	if (a)
-		b = is_w(tot->m_d);
-	int d = tot->m_d->possible;
+		b = is_w(tt->m_d);
+	int d = tt->m_d->possible;
 	if (a && b && c && d)
-		destroy_tiles(tot);
-	mlx_destroy_window(tot->w_d->m_p, tot->w_d->w_p);
-	mlx_destroy_display(tot->w_d->m_p);
+		destroy_tiles(tt);
+	mlx_destroy_window(tt->wd->mp, tt->wd->wp);
+	mlx_destroy_display(tt->wd->mp);
 	if (a && b && c)
 	{
 		while (rs--)
-			free(tot->m_d->c_map[rs]);
-		free(tot->m_d->c_map);
-		rs = tot->m_d->row_size;
+			free(tt->m_d->c_map[rs]);
+		free(tt->m_d->c_map);
+		rs = tt->m_d->row_size;
 		while (rs--)
-			free(tot->m_d->vali_map[rs]);
-		free(tot->m_d->vali_map);
+			free(tt->m_d->vali_map[rs]);
+		free(tt->m_d->vali_map);
 	}
-	free(tot->m_d->str);
-	free(tot->m_d);
+	free(tt->m_d->str);
+	free(tt->m_d);
 	if (a && b && c && d)
-		free(tot->t_d);
-	free(tot->w_d->m_p);
-	free(tot->w_d);
-	free(tot);
+		free(tt->t_d);
+	free(tt->wd->mp);
+	free(tt->wd);
+	free(tt);
 	return (0);
 }
 
