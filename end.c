@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 08:38:26 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 08:45:13 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 int	end_game(t_tt *tt)
 {
 	int	rs;
+	int	a;
+	int	b;
+	int	c;
+	int	d;
 
 	rs = tt->m_d->row_size;
-	int c;
-	c = is_proper_chars(tt->m_d);
-	int a;
 	a = is_square(tt->m_d);
-	int b;
 	if (a)
 		b = is_w(tt->m_d);
-	int d = tt->m_d->possible;
+	c = is_proper_chars(tt->m_d);
+	d = tt->m_d->possible;
 	if (a && b && c && d)
 		destroy_tiles(tt);
 	mlx_destroy_window(tt->wd->mp, tt->wd->wp);
