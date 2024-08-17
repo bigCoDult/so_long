@@ -111,5 +111,7 @@ int		close_window(void *param);
 int		move_way(int key, t_cor person, t_tt *tt);
 void	destroy_tiles(t_tt *tt);
 int		end_game(t_tt *tt);
+t_cor get_way(int key, t_cor person, t_cor way, t_tt *tt);
+
 
 #endif /* SO_LONG_H */
