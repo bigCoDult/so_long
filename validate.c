@@ -6,29 +6,29 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:00:14 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:15:38 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	validate_map(t_m_d *m_d)
+bool	validate_map(t_md *md)
 {
-	if (!is_proper_chars(m_d))
+	if (!is_proper_chars(md))
 		printf("[not proper char]\n");
-	if (!is_square(m_d))
+	if (!is_square(md))
 	{
 		printf("[not box]\n");
 		return (false);
 	}
-	if (!is_w(m_d))
+	if (!is_w(md))
 		printf("[not wall box]\n");
-	if (is_square(m_d) && is_w(m_d) && is_proper_chars(m_d))
+	if (is_square(md) && is_w(md) && is_proper_chars(md))
 		return (true);
 	return (false);
 }
 
-bool	is_square(t_m_d *m_d)
+bool	is_square(t_md *md)
 {
 	int	i;
 	int	fst_l;
@@ -37,24 +37,24 @@ bool	is_square(t_m_d *m_d)
 	i = 0;
 	fst_l = 0;
 	now = 0;
-	while (m_d->str[fst_l] != '\n' && m_d->str[fst_l] != '\0')
+	while (md->str[fst_l] != '\n' && md->str[fst_l] != '\0')
 		fst_l++;
 	i = fst_l + 1;
-	while (m_d->str[i] != '\0')
+	while (md->str[i] != '\0')
 	{
 		now = i;
-		while (m_d->str[now] != '\n' && m_d->str[now] != '\0')
+		while (md->str[now] != '\n' && md->str[now] != '\0')
 			now++;
 		if (now - i != fst_l)
 			return (false);
 		i += fst_l;
-		if (m_d->str[i] == '\n')
+		if (md->str[i] == '\n')
 			i++;
 	}
 	return (true);
 }
 
-bool	is_w(t_m_d *m_d)
+bool	is_w(t_md *md)
 {
 	int	col_size;
 	int	i;
@@ -62,37 +62,37 @@ bool	is_w(t_m_d *m_d)
 
 	i = 0;
 	fst_l = 0;
-	while (m_d->str[fst_l] != '\n' && m_d->str[fst_l] != '\0')
+	while (md->str[fst_l] != '\n' && md->str[fst_l] != '\0')
 		fst_l++;
 	while (i < fst_l)
 	{
-		if (m_d->str[i] != W)
+		if (md->str[i] != W)
 			return (false);
 		i++;
 	}
 	col_size = i / fst_l;
-	while (m_d->str[i] != '\0')
+	while (md->str[i] != '\0')
 	{
 		i++;
-		if (m_d->str[i] != W || m_d->str[i + fst_l - 1] != W)
+		if (md->str[i] != W || md->str[i + fst_l - 1] != W)
 			return (false);
 		i += fst_l;
 	}
-	while (m_d->str[i] != '\0')
+	while (md->str[i] != '\0')
 		i++;
 	i -= fst_l;
 	while (fst_l--)
 	{
-		if (m_d->str[i] != W)
+		if (md->str[i] != W)
 			return (false);
 		i++;
 	}
-	if (m_d->str[i] != '\0')
+	if (md->str[i] != '\0')
 		return (false);
 	return (true);
 }
 
-bool	is_proper_chars(t_m_d *m_d)
+bool	is_proper_chars(t_md *md)
 {
 	int	i;
 	int	count_he;
@@ -101,51 +101,51 @@ bool	is_proper_chars(t_m_d *m_d)
 	i = 0;
 	count_he = 0;
 	count_exit = 0;
-	m_d->c_c = 0;
-	while (m_d->str[i] != '\0')
+	md->c_c = 0;
+	while (md->str[i] != '\0')
 	{
-		if (m_d->str[i] == P)
+		if (md->str[i] == P)
 			count_he++;
-		else if (m_d->str[i] == E)
+		else if (md->str[i] == E)
 			count_exit++;
-		else if (m_d->str[i] == C)
-			m_d->c_c++;
-		else if (m_d->str[i] == W || m_d->str[i] == Z || m_d->str[i] == '\n')
+		else if (md->str[i] == C)
+			md->c_c++;
+		else if (md->str[i] == W || md->str[i] == Z || md->str[i] == '\n')
 			;
 		else
 			return (false);
 		i++;
 	}
-	if (count_he != 1 || count_exit != 1 || m_d->c_c < 1)
+	if (count_he != 1 || count_exit != 1 || md->c_c < 1)
 		return (false);
 	return (true);
 }
 
-bool	is_possible(t_m_d *m_d, t_c he)
+bool	is_possible(t_md *md, t_c he)
 {
-	if (he.r < 0 || he.r > m_d->row_size || he.c < 0 || he.c > m_d->col_size)
+	if (he.r < 0 || he.r > md->row_size || he.c < 0 || he.c > md->col_size)
 		return (false);
-	if (m_d->c_c == 0)
+	if (md->c_c == 0)
 	{
-		if (m_d->vm[he.r][he.c] == W || m_d->vm[he.r][he.c] == '/')
+		if (md->vm[he.r][he.c] == W || md->vm[he.r][he.c] == '/')
 			return (false);
-		if (m_d->vm[he.r][he.c] == E)
+		if (md->vm[he.r][he.c] == E)
 			return (true);
-		m_d->vm[he.r][he.c] = '/';
+		md->vm[he.r][he.c] = '/';
 	}
 	else
 	{
-		if (m_d->vm[he.r][he.c] == W || m_d->vm[he.r][he.c] == '\\')
+		if (md->vm[he.r][he.c] == W || md->vm[he.r][he.c] == '\\')
 			return (false);
-		if (m_d->vm[he.r][he.c] == C)
-			m_d->c_c--;
-		if (m_d->vm[he.r][he.c] != E)
-			m_d->vm[he.r][he.c] = '\\';
+		if (md->vm[he.r][he.c] == C)
+			md->c_c--;
+		if (md->vm[he.r][he.c] != E)
+			md->vm[he.r][he.c] = '\\';
 	}
-	if (is_possible(m_d, (t_c){he.r + 1, he.c}) \
-		|| is_possible(m_d, (t_c){he.r - 1, he.c}) \
-		|| is_possible(m_d, (t_c){he.r, he.c + 1}) \
-		|| is_possible(m_d, (t_c){he.r, he.c - 1}))
+	if (is_possible(md, (t_c){he.r + 1, he.c}) \
+		|| is_possible(md, (t_c){he.r - 1, he.c}) \
+		|| is_possible(md, (t_c){he.r, he.c + 1}) \
+		|| is_possible(md, (t_c){he.r, he.c - 1}))
 		return (true);
 	return (false);
 }

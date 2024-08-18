@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:14:04 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:15:38 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int	end_game(t_t *t)
 	int	c;
 	int	d;
 
-	rs = t->m_d->row_size;
-	a = is_square(t->m_d);
+	rs = t->md->row_size;
+	a = is_square(t->md);
 	if (a)
-		b = is_w(t->m_d);
-	c = is_proper_chars(t->m_d);
-	d = t->m_d->possible;
+		b = is_w(t->md);
+	c = is_proper_chars(t->md);
+	d = t->md->possible;
 	if (a && b && c && d)
 		destroy_tiles(t);
 	mlx_destroy_window(t->wd->mp, t->wd->wp);
 	mlx_destroy_display(t->wd->mp);
 	if (a && b && c)
-		free_maps(t->m_d, rs);
-	free(t->m_d->str);
-	free(t->m_d);
+		free_maps(t->md, rs);
+	free(t->md->str);
+	free(t->md);
 	if (a && b && c && d)
 		free(t->td);
 	free(t->wd->mp);
@@ -41,15 +41,15 @@ int	end_game(t_t *t)
 	free(t);
 	return (0);
 }
-int free_maps(t_m_d *m_d, int rs)
+int free_maps(t_md *md, int rs)
 	{
 		while (rs--)
-			free(m_d->cm[rs]);
-		free(m_d->cm);
-		rs = m_d->row_size;
+			free(md->cm[rs]);
+		free(md->cm);
+		rs = md->row_size;
 		while (rs--)
-			free(m_d->vm[rs]);
-		free(m_d->vm);
+			free(md->vm[rs]);
+		free(md->vm);
 }
 
 int	close_window(void *param)

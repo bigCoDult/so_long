@@ -74,24 +74,24 @@ typedef struct s_m_d
 	int		possible;
 	t_c	exit;
 	int		step;
-}	t_m_d;
+}	t_md;
 
 typedef struct s_tt
 {
 	t_wd	*wd;
 	t_t_d	*td;
-	t_m_d	*m_d;
+	t_md	*md;
 }	t_t;
 
 void	so_long(int fd);
 void	init_wd(t_t *t);
 void	pi(void *mlx, void *win, void *img, t_c c);
-void	set_str(int fd, t_m_d *m_d);
+void	set_str(int fd, t_md *md);
 int		deal_map(t_t	*t);
-void	set_c_map(t_m_d *m_d);
-void	fill_c_map(int r, int index, t_m_d *m_d);
-void	set_v_map(t_m_d *m_d);
-void	fill_v_map(int r, int index, t_m_d *m_d);
+void	set_c_map(t_md *md);
+void	fill_c_map(int r, int index, t_md *md);
+void	set_v_map(t_md *md);
+void	fill_v_map(int r, int index, t_md *md);
 void	*init_tiles(t_t	*t);
 void	draw_map(t_t	*t);
 int		ft_strlen(char *s);
@@ -99,12 +99,12 @@ char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name);
-bool	validate_map(t_m_d *m_d);
-bool	is_square(t_m_d *m_d);
-bool	is_w(t_m_d *m_d);
-bool	is_proper_chars(t_m_d *m_d);
-t_c		get_cor(t_m_d *m_d, char c);
-bool	is_possible(t_m_d *m_d, t_c person);
+bool	validate_map(t_md *md);
+bool	is_square(t_md *md);
+bool	is_w(t_md *md);
+bool	is_proper_chars(t_md *md);
+t_c		get_cor(t_md *md, char c);
+bool	is_possible(t_md *md, t_c person);
 void	key_hook(t_t *t);
 int		move_person(int key, void *param);
 int		close_window(void *param);
@@ -112,7 +112,7 @@ int		move_way(int key, t_c person, t_t *t);
 void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
 t_c		get_way(int key, t_c person, t_c way, t_t *t);
-int		free_maps(t_m_d *m_d, int rs);
+int		free_maps(t_md *md, int rs);
 
 
 #endif /* SO_LONG_H */

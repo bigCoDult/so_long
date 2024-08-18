@@ -32,12 +32,12 @@ void	so_long(int fd)
 	t->wd = malloc(sizeof(t_wd));
 	if (t->wd == NULL)
 		return ;
-	t->m_d = malloc(sizeof(t_m_d));
-	if (t->m_d == NULL)
+	t->md = malloc(sizeof(t_md));
+	if (t->md == NULL)
 		return ;
-	t->m_d->row_size = 0;
-	t->m_d->col_size = 0;
-	set_str(fd, t->m_d);
+	t->md->row_size = 0;
+	t->md->col_size = 0;
+	set_str(fd, t->md);
 	init_wd(t);
 	if (deal_map(t))
 		key_hook(t);
@@ -49,16 +49,16 @@ int	deal_map(t_t	*t)
 {
 	t_c	person;
 
-	if (!validate_map(t->m_d))
+	if (!validate_map(t->md))
 	{
 		mlx_loop_end(t->wd->mp);
 		return (0);
 	}
-	set_c_map(t->m_d);
-	set_v_map(t->m_d);
-	person = get_cor(t->m_d, P);
-	t->m_d->possible = is_possible(t->m_d, person);
-	if (!t->m_d->possible)
+	set_c_map(t->md);
+	set_v_map(t->md);
+	person = get_cor(t->md, P);
+	t->md->possible = is_possible(t->md, person);
+	if (!t->md->possible)
 	{
 		printf("[impossible map]\n");
 		mlx_loop_end(t->wd->mp);
@@ -71,8 +71,8 @@ int	deal_map(t_t	*t)
 void	init_wd(t_t *t)
 {
 	t->wd->title = "so_long";
-	t->wd->size_x = t->m_d->col_size * 20;
-	t->wd->size_y = t->m_d->row_size * 20;
+	t->wd->size_x = t->md->col_size * 20;
+	t->wd->size_y = t->md->row_size * 20;
 	t->wd->mp = mlx_init();
 	t->wd->wp = mlx_new_window(\
 	t->wd->mp, t->wd->size_x, t->wd->size_y, t->wd->title);

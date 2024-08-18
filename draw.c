@@ -6,25 +6,25 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:36:53 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:06:07 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:15:38 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_c	get_cor(t_m_d *m_d, char c)
+t_c	get_cor(t_md *md, char c)
 {
 	t_c	person;
 
 	person = (t_c){0, 0};
 	person.r = 0;
 	person.c = 0;
-	while (person.r < m_d->row_size)
+	while (person.r < md->row_size)
 	{
 		person.c = 0;
-		while (person.c < m_d->col_size)
+		while (person.c < md->col_size)
 		{
-			if (m_d->cm[person.r][person.c] == c)
+			if (md->cm[person.r][person.c] == c)
 				return (person);
 			person.c++;
 		}
@@ -40,20 +40,20 @@ void	draw_map(t_t	*t)
 
 	index = 0;
 	c = (t_c){0, 0};
-	while (c.r < t->m_d->row_size)
+	while (c.r < t->md->row_size)
 	{
 		c.c = 0;
-		while (c.c < t->m_d->col_size)
+		while (c.c < t->md->col_size)
 		{
-			if (t->m_d->cm[c.r][c.c] == W)
+			if (t->md->cm[c.r][c.c] == W)
 				pi(t->wd->mp, t->wd->wp, t->td->r, (t_c){T * c.c++, T * c.r});
-			else if (t->m_d->cm[c.r][c.c] == Z)
+			else if (t->md->cm[c.r][c.c] == Z)
 				pi(t->wd->mp, t->wd->wp, t->td->g, (t_c){T * c.c++, T * c.r});
-			else if (t->m_d->cm[c.r][c.c] == P)
+			else if (t->md->cm[c.r][c.c] == P)
 				pi(t->wd->mp, t->wd->wp, t->td->p, (t_c){T * c.c++, T * c.r});
-			else if (t->m_d->cm[c.r][c.c] == C)
+			else if (t->md->cm[c.r][c.c] == C)
 				pi(t->wd->mp, t->wd->wp, t->td->h, (t_c){T * c.c++, T * c.r});
-			else if (t->m_d->cm[c.r][c.c] == E)
+			else if (t->md->cm[c.r][c.c] == E)
 				pi(t->wd->mp, t->wd->wp, t->td->d, (t_c){T * c.c++, T * c.r});
 		}
 		c.r++;
