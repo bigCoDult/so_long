@@ -14,11 +14,12 @@
 
 void	set_str(int fd, t_md *md)
 {
-	char	buf[5];
+	char	buf[6];
 	int		read_return;
 	int		index;
 
 	read_return = 5;
+	index = 0;
 	md->str = malloc(sizeof(char) * 1);
 	if (md->str == NULL)
 		return ;
@@ -29,7 +30,6 @@ void	set_str(int fd, t_md *md)
 		buf[read_return] = '\0';
 		md->str = join_s(md->str, buf);
 	}
-	index = 0;
 	while (1)
 	{
 		if (md->str[index] == '\n' || md->str[index] == '\0')
