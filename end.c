@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:19:50 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:25:05 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	is_llaw(t_md *md, int col_size, int i, int fst_l)
 	{
 		i++;
 		if (md->str[i] != W || md->str[i + fst_l - 1] != W)
-			return (false);
+			return (0);
 		i += fst_l;
 	}
 	while (md->str[i] != '\0')
@@ -87,10 +87,10 @@ int	is_llaw(t_md *md, int col_size, int i, int fst_l)
 	while (fst_l--)
 	{
 		if (md->str[i] != W)
-			return (false);
+			return (0);
 		i++;
 	}
 	if (md->str[i] != '\0')
-		return (false);
-	return (true);
+		return (0);
+	return (1);
 }

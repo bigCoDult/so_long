@@ -6,29 +6,29 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:19:36 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:25:05 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	validate_map(t_md *md)
+int	validate_map(t_md *md)
 {
 	if (!is_proper_chars(md))
 		printf("[not proper char]\n");
 	if (!is_square(md))
 	{
 		printf("[not box]\n");
-		return (false);
+		return (0);
 	}
 	if (!is_wall(md))
 		printf("[not wall box]\n");
 	if (is_square(md) && is_wall(md) && is_proper_chars(md))
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
 
-bool	is_square(t_md *md)
+int	is_square(t_md *md)
 {
 	int	i;
 	int	fst_l;
@@ -46,15 +46,15 @@ bool	is_square(t_md *md)
 		while (md->str[now] != '\n' && md->str[now] != '\0')
 			now++;
 		if (now - i != fst_l)
-			return (false);
+			return (0);
 		i += fst_l;
 		if (md->str[i] == '\n')
 			i++;
 	}
-	return (true);
+	return (1);
 }
 
-bool	is_wall(t_md *md)
+int	is_wall(t_md *md)
 {
 	int	col_size;
 	int	i;
@@ -67,14 +67,14 @@ bool	is_wall(t_md *md)
 	while (i < fst_l)
 	{
 		if (md->str[i] != W)
-			return (false);
+			return (0);
 		i++;
 	}
 	col_size = i / fst_l;
 	return (is_llaw(md, col_size, i, fst_l));
 }
 
-bool	is_proper_chars(t_md *md)
+int	is_proper_chars(t_md *md)
 {
 	int	i;
 	int	count_he;
@@ -95,30 +95,30 @@ bool	is_proper_chars(t_md *md)
 		else if (md->str[i] == W || md->str[i] == Z || md->str[i] == '\n')
 			;
 		else
-			return (false);
+			return (0);
 		i++;
 	}
 	if (count_he != 1 || count_exit != 1 || md->c_c < 1)
-		return (false);
-	return (true);
+		return (0);
+	return (1);
 }
 
-bool	is_possible(t_md *md, t_c he)
+int	is_possible(t_md *md, t_c he)
 {
 	if (he.r < 0 || he.r > md->row_size || he.c < 0 || he.c > md->col_size)
-		return (false);
+		return (0);
 	if (md->c_c == 0)
 	{
 		if (md->vm[he.r][he.c] == W || md->vm[he.r][he.c] == '/')
-			return (false);
+			return (0);
 		if (md->vm[he.r][he.c] == E)
-			return (true);
+			return (1);
 		md->vm[he.r][he.c] = '/';
 	}
 	else
 	{
 		if (md->vm[he.r][he.c] == W || md->vm[he.r][he.c] == '\\')
-			return (false);
+			return (0);
 		if (md->vm[he.r][he.c] == C)
 			md->c_c--;
 		if (md->vm[he.r][he.c] != E)
@@ -128,6 +128,6 @@ bool	is_possible(t_md *md, t_c he)
 		|| is_possible(md, (t_c){he.r - 1, he.c}) \
 		|| is_possible(md, (t_c){he.r, he.c + 1}) \
 		|| is_possible(md, (t_c){he.r, he.c - 1}))
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }

@@ -36,8 +36,16 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "./minilibx-linux/mlx.h"
-# include <stdbool.h>
+# include <stdarg.h>
+# include <stdlib.h>
 
+typedef struct s_etc
+{
+	int						n;
+	unsigned int			u;
+	char					*string;
+	long long unsigned int	*ads;
+}	t_etc;
 typedef struct s_wd
 {
 	void	*mp;
@@ -98,13 +106,13 @@ char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
 void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name);
-bool	validate_map(t_md *md);
-bool	is_square(t_md *md);
-bool	is_wall(t_md *md);
+int	validate_map(t_md *md);
+int	is_square(t_md *md);
+int	is_wall(t_md *md);
 int		is_llaw(t_md *md, int col_size, int i, int fst_l);
-bool	is_proper_chars(t_md *md);
+int	is_proper_chars(t_md *md);
 t_c		get_cor(t_md *md, char c);
-bool	is_possible(t_md *md, t_c person);
+int	is_possible(t_md *md, t_c person);
 void	key_hook(t_t *t);
 int		move_person(int key, void *param);
 int		close_window(void *param);
@@ -113,5 +121,12 @@ void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
 t_c		get_way(int key, t_c person, t_c way, t_t *t);
 int		free_maps(t_md *md);
+int	ft_printf(const char *str, ...);
+int	ft_putfmt_cdux(t_etc *etc, va_list ap, char c);
+int	ft_putfmt_sp(t_etc *etc, va_list ap, char c);
+int	ft_putchar_fd(char c, int fd);
+int	ft_putstr_fd(char *s, int fd);
+int	ft_putll_fd(long long int n, int fd);
+int	ft_puthex_fd(int islower, long long unsigned int n, int fd);
 
 #endif /* SO_LONG_H */
