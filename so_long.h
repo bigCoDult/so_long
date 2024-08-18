@@ -31,11 +31,11 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+# include "./minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "./minilibx-linux/mlx.h"
 # include <stdarg.h>
 # include <stdlib.h>
 
@@ -109,7 +109,7 @@ void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name);
 int	validate_map(t_md *md);
 int	is_square(t_md *md);
 int	is_wall(t_md *md);
-int		is_llaw(t_md *md, int col_size, int i, int fst_l);
+int		is_llaw(t_md *md, int i, int fst_l);
 int	is_proper_chars(t_md *md);
 t_c		get_cor(t_md *md, char c);
 int	is_possible(t_md *md, t_c person);
@@ -119,7 +119,7 @@ int		close_window(void *param);
 int		move_way(int key, t_c person, t_t *t);
 void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
-t_c		get_way(int key, t_c person, t_c way, t_t *t);
+t_c		get_way(int key, t_c person, t_c way);
 int		free_maps(t_md *md);
 int	ft_printf(const char *str, ...);
 int	ft_putfmt_cdux(t_etc *etc, va_list ap, char c);

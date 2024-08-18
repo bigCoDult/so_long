@@ -44,7 +44,6 @@ void	set_str(int fd, t_md *md)
 void	set_c_map(t_md *md)
 {
 	int	r;
-	int	c;
 	int	index;
 
 	r = 0;
@@ -86,7 +85,6 @@ void	fill_c_map(int r, int index, t_md *md)
 void	set_v_map(t_md *md)
 {
 	int	r;
-	int	c;
 	int	index;
 
 	r = 0;

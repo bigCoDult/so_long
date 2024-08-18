@@ -1,15 +1,19 @@
-NAME = libftprintf.a
+NAME = so_long.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs
 RM = rm -f
 INC = -I.
-SRC = \
-      ./ft_printf.c \
-      ./ft_pututils.c \
-
-
+SRC = draw.c \
+			end.c \
+			ft_printf.c \
+			ft_pututils.c \
+			hook.c \
+			init.c \
+			so_long.c \
+			util.c \
+			validate.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:36:53 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:15:38 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:34:14 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ t_c	get_cor(t_md *md, char c)
 
 void	draw_map(t_t	*t)
 {
-	int	index;
 	t_c	c;
 
-	index = 0;
 	c = (t_c){0, 0};
 	while (c.r < t->md->row_size)
 	{

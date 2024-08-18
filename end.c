@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:25:05 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:35:34 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	free_maps(t_md *md)
 	while (rs--)
 		free(md->vm[rs]);
 	free(md->vm);
+	return (0);
 }
 
 int	close_window(void *param)
@@ -72,7 +73,7 @@ void	destroy_tiles(t_t *t)
 	mlx_destroy_image (t->wd->mp, t->td->d);
 }
 
-int	is_llaw(t_md *md, int col_size, int i, int fst_l)
+int	is_llaw(t_md *md, int i, int fst_l)
 {
 	while (md->str[i] != '\0')
 	{

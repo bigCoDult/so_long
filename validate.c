@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:25:50 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:40:32 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	is_square(t_md *md)
 
 int	is_wall(t_md *md)
 {
-	int	col_size;
+	// int	col_size;
 	int	i;
 	int	fst_l;
 
@@ -70,8 +70,8 @@ int	is_wall(t_md *md)
 			return (0);
 		i++;
 	}
-	col_size = i / fst_l;
-	return (is_llaw(md, col_size, i, fst_l));
+	// col_size = i / fst_l;
+	return (is_llaw(md, i, fst_l));
 }
 
 int	is_proper_chars(t_md *md)

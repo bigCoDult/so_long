@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:25:50 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:38:17 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	key_hook(t_t *t)
 {
 	void	*param;
-	int		step;
 
-	step = 0;
 	t->md->step = 0;
 	ft_printf("step : %d\n", t->md->step++);
 	draw_map(t);
@@ -33,7 +31,6 @@ int	move_person(int key, void *param)
 {
 	t_t	*t;
 	t_c	person;
-	t_c	exit;
 
 	t = (t_t *)param;
 	person = get_cor(t->md, P);
@@ -48,7 +45,7 @@ int	move_way(int key, t_c person, t_t *t)
 {
 	t_c	way;
 
-	way = get_way(key, person, way, t);
+	way = get_way(key, person, way);
 	if (t->md->cm[way.r][way.c] == W)
 		return (0);
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN \
@@ -66,9 +63,10 @@ int	move_way(int key, t_c person, t_t *t)
 		t->md->cm[t->md->exit.r][t->md->exit.c] = E;
 	t->md->cm[way.r][way.c] = P;
 	draw_map(t);
+	return (0);
 }
 
-t_c	get_way(int key, t_c person, t_c way, t_t *t)
+t_c	get_way(int key, t_c person, t_c way)
 {
 	way = (t_c){0, 0};
 	if (key == KEY_W || key == KEY_UP)
