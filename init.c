@@ -49,17 +49,17 @@ void	set_c_map(t_m_d *m_d)
 
 	r = 0;
 	index = 0;
-	m_d->c_map = malloc(sizeof(char *) * m_d->row_size);
-	if (m_d->c_map == NULL)
+	m_d->cm = malloc(sizeof(char *) * m_d->row_size);
+	if (m_d->cm == NULL)
 		return ;
 	while (r < m_d->row_size)
 	{
-		m_d->c_map[r] = malloc(sizeof(char) * m_d->col_size);
-		if (m_d->c_map[r] == NULL)
+		m_d->cm[r] = malloc(sizeof(char) * m_d->col_size);
+		if (m_d->cm[r] == NULL)
 		{
 			while (r-- >= 0)
-				free(m_d->c_map[r]);
-			free(m_d->c_map);
+				free(m_d->cm[r]);
+			free(m_d->cm);
 			return ;
 		}
 		r++;
@@ -77,7 +77,7 @@ void	fill_c_map(int r, int index, t_m_d *m_d)
 	{
 		c = 0;
 		while (c < m_d->col_size)
-			m_d->c_map[r][c++] = m_d->str[index++];
+			m_d->cm[r][c++] = m_d->str[index++];
 		index++;
 		r++;
 	}
@@ -91,17 +91,17 @@ void	set_v_map(t_m_d *m_d)
 
 	r = 0;
 	index = 0;
-	m_d->vali_map = malloc(sizeof(char *) * m_d->row_size);
-	if (m_d->vali_map == NULL)
+	m_d->vm = malloc(sizeof(char *) * m_d->row_size);
+	if (m_d->vm == NULL)
 		return ;
 	while (r < m_d->row_size)
 	{
-		m_d->vali_map[r] = malloc(sizeof(char) * m_d->col_size);
-		if (m_d->vali_map[r] == NULL)
+		m_d->vm[r] = malloc(sizeof(char) * m_d->col_size);
+		if (m_d->vm[r] == NULL)
 		{
 			while (r-- >= 0)
-				free(m_d->vali_map[r]);
-			free(m_d->vali_map);
+				free(m_d->vm[r]);
+			free(m_d->vm);
 			return ;
 		}
 		r++;
@@ -119,7 +119,7 @@ void	fill_v_map(int r, int index, t_m_d *m_d)
 	{
 		c = 0;
 		while (c < m_d->col_size)
-			m_d->vali_map[r][c++] = m_d->str[index++];
+			m_d->vm[r][c++] = m_d->str[index++];
 		index++;
 		r++;
 	}

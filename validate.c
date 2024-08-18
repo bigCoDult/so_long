@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/17 22:09:15 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:00:14 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,31 +121,31 @@ bool	is_proper_chars(t_m_d *m_d)
 	return (true);
 }
 
-bool	is_possible(t_m_d *m_d, t_cor he)
+bool	is_possible(t_m_d *m_d, t_c he)
 {
 	if (he.r < 0 || he.r > m_d->row_size || he.c < 0 || he.c > m_d->col_size)
 		return (false);
 	if (m_d->c_c == 0)
 	{
-		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '/')
+		if (m_d->vm[he.r][he.c] == W || m_d->vm[he.r][he.c] == '/')
 			return (false);
-		if (m_d->vali_map[he.r][he.c] == E)
+		if (m_d->vm[he.r][he.c] == E)
 			return (true);
-		m_d->vali_map[he.r][he.c] = '/';
+		m_d->vm[he.r][he.c] = '/';
 	}
 	else
 	{
-		if (m_d->vali_map[he.r][he.c] == W || m_d->vali_map[he.r][he.c] == '\\')
+		if (m_d->vm[he.r][he.c] == W || m_d->vm[he.r][he.c] == '\\')
 			return (false);
-		if (m_d->vali_map[he.r][he.c] == C)
+		if (m_d->vm[he.r][he.c] == C)
 			m_d->c_c--;
-		if (m_d->vali_map[he.r][he.c] != E)
-			m_d->vali_map[he.r][he.c] = '\\';
+		if (m_d->vm[he.r][he.c] != E)
+			m_d->vm[he.r][he.c] = '\\';
 	}
-	if (is_possible(m_d, (t_cor){he.r + 1, he.c}) \
-		|| is_possible(m_d, (t_cor){he.r - 1, he.c}) \
-		|| is_possible(m_d, (t_cor){he.r, he.c + 1}) \
-		|| is_possible(m_d, (t_cor){he.r, he.c - 1}))
+	if (is_possible(m_d, (t_c){he.r + 1, he.c}) \
+		|| is_possible(m_d, (t_c){he.r - 1, he.c}) \
+		|| is_possible(m_d, (t_c){he.r, he.c + 1}) \
+		|| is_possible(m_d, (t_c){he.r, he.c - 1}))
 		return (true);
 	return (false);
 }

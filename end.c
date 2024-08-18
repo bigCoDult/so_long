@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 08:45:13 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 08:59:35 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int	end_game(t_tt *tt)
 	if (a && b && c)
 	{
 		while (rs--)
-			free(tt->m_d->c_map[rs]);
-		free(tt->m_d->c_map);
+			free(tt->m_d->cm[rs]);
+		free(tt->m_d->cm);
 		rs = tt->m_d->row_size;
 		while (rs--)
-			free(tt->m_d->vali_map[rs]);
-		free(tt->m_d->vali_map);
+			free(tt->m_d->vm[rs]);
+		free(tt->m_d->vm);
 	}
 	free(tt->m_d->str);
 	free(tt->m_d);
 	if (a && b && c && d)
-		free(tt->t_d);
+		free(tt->td);
 	free(tt->wd->mp);
 	free(tt->wd);
 	free(tt);
@@ -61,9 +61,9 @@ int	close_window(void *param)
 
 void	destroy_tiles(t_tt *tt)
 {
-	mlx_destroy_image (tt->wd->mp, tt->t_d->ro);
-	mlx_destroy_image (tt->wd->mp, tt->t_d->gr);
-	mlx_destroy_image (tt->wd->mp, tt->t_d->pe);
-	mlx_destroy_image (tt->wd->mp, tt->t_d->ch);
-	mlx_destroy_image (tt->wd->mp, tt->t_d->dr);
+	mlx_destroy_image (tt->wd->mp, tt->td->ro);
+	mlx_destroy_image (tt->wd->mp, tt->td->gr);
+	mlx_destroy_image (tt->wd->mp, tt->td->pe);
+	mlx_destroy_image (tt->wd->mp, tt->td->ch);
+	mlx_destroy_image (tt->wd->mp, tt->td->dr);
 }

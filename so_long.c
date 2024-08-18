@@ -47,7 +47,7 @@ void	so_long(int fd)
 
 int	deal_map(t_tt	*tt)
 {
-	t_cor	person;
+	t_c	person;
 
 	if (!validate_map(tt->m_d))
 	{

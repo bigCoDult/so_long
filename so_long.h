@@ -17,7 +17,7 @@
 # define P 'P'
 # define C 'C'
 # define E 'E'
-# define TL 20
+# define T 20
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -61,31 +61,31 @@ typedef struct s_cor
 {
 	int	r;
 	int	c;
-}	t_cor;
+}	t_c;
 
 typedef struct s_m_d
 {
-	char	**c_map;
-	char	**vali_map;
+	char	**cm;
+	char	**vm;
 	char	*str;
 	int		row_size;
 	int		col_size;
 	int		c_c;
 	int		possible;
-	t_cor	exit;
+	t_c	exit;
 	int		step;
 }	t_m_d;
 
 typedef struct s_tt
 {
 	t_wd	*wd;
-	t_t_d	*t_d;
+	t_t_d	*td;
 	t_m_d	*m_d;
 }	t_tt;
 
 void	so_long(int fd);
 void	init_wd(t_tt *tt);
-void	pi(void *mlx, void *win, void *img, t_cor c);
+void	pi(void *mlx, void *win, void *img, t_c c);
 void	set_str(int fd, t_m_d *m_d);
 int		deal_map(t_tt	*tt);
 void	set_c_map(t_m_d *m_d);
@@ -103,14 +103,14 @@ bool	validate_map(t_m_d *m_d);
 bool	is_square(t_m_d *m_d);
 bool	is_w(t_m_d *m_d);
 bool	is_proper_chars(t_m_d *m_d);
-t_cor	get_cor(t_m_d *m_d, char c);
-bool	is_possible(t_m_d *m_d, t_cor person);
+t_c	get_cor(t_m_d *m_d, char c);
+bool	is_possible(t_m_d *m_d, t_c person);
 void	key_hook(t_tt *tt);
 int		move_person(int key, void *param);
 int		close_window(void *param);
-int		move_way(int key, t_cor person, t_tt *tt);
+int		move_way(int key, t_c person, t_tt *tt);
 void	destroy_tiles(t_tt *tt);
 int		end_game(t_tt *tt);
-t_cor	get_way(int key, t_cor person, t_cor way, t_tt *tt);
+t_c	get_way(int key, t_c person, t_c way, t_tt *tt);
 
 #endif /* SO_LONG_H */

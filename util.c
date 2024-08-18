@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 08:30:12 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:01:47 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name)
 	int		tile_len;
 	char	*path;
 
-	tile_len = TL;
+	tile_len = T;
 	path = template_literal("./tile/.xpm", tile_name, 7);
 	single_tile = mlx_xpm_file_to_image(wd->mp, path, &tile_len, &tile_len);
 	free(path);
