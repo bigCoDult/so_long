@@ -71,7 +71,7 @@ typedef struct s_m_d
 	int		col_size;
 	int		c_c;
 	int		possible;
-	t_c	exit;
+	t_c		exit;
 	int		step;
 }	t_md;
 
