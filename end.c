@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:51:39 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:19:50 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,27 @@ void	destroy_tiles(t_t *t)
 	mlx_destroy_image (t->wd->mp, t->td->p);
 	mlx_destroy_image (t->wd->mp, t->td->h);
 	mlx_destroy_image (t->wd->mp, t->td->d);
+}
+
+int	is_llaw(t_md *md, int col_size, int i, int fst_l)
+{
+	while (md->str[i] != '\0')
+	{
+		i++;
+		if (md->str[i] != W || md->str[i + fst_l - 1] != W)
+			return (false);
+		i += fst_l;
+	}
+	while (md->str[i] != '\0')
+		i++;
+	i -= fst_l;
+	while (fst_l--)
+	{
+		if (md->str[i] != W)
+			return (false);
+		i++;
+	}
+	if (md->str[i] != '\0')
+		return (false);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:51:39 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:19:36 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,7 @@ bool	is_wall(t_md *md)
 		i++;
 	}
 	col_size = i / fst_l;
-	while (md->str[i] != '\0')
-	{
-		i++;
-		if (md->str[i] != W || md->str[i + fst_l - 1] != W)
-			return (false);
-		i += fst_l;
-	}
-	while (md->str[i] != '\0')
-		i++;
-	i -= fst_l;
-	while (fst_l--)
-	{
-		if (md->str[i] != W)
-			return (false);
-		i++;
-	}
-	if (md->str[i] != '\0')
-		return (false);
-	return (true);
+	return (is_llaw(md, col_size, i, fst_l));
 }
 
 bool	is_proper_chars(t_md *md)
