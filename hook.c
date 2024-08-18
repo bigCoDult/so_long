@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:15:29 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:30:14 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	key_hook(t_t *t)
 	param = (void *)t;
 	is_proper_chars(t->md);
 	mlx_hook(t->wd->wp, KeyPress, KeyPressMask, &move_person, param);
-	mlx_hook(t->wd->wp, 17, NoEventMask, &close_window, param);
+	mlx_hook(t->wd->wp, DestroyNotify, NoEventMask, &close_window, param);
 	return ;
 }
 

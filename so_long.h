@@ -27,7 +27,6 @@
 # define KEY_DOWN 65364
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
-# define CLICK_X 17
 
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -112,7 +111,6 @@ int		move_way(int key, t_c person, t_t *t);
 void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
 t_c		get_way(int key, t_c person, t_c way, t_t *t);
-int		free_maps(t_md *md, int rs);
-
+int		free_maps(t_md *md);
 
 #endif /* SO_LONG_H */

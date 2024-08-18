@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:15:38 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:17:09 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	end_game(t_t *t)
 {
-	int	rs;
 	int	a;
 	int	b;
 	int	c;
 	int	d;
 
-	rs = t->md->row_size;
 	a = is_square(t->md);
 	if (a)
 		b = is_w(t->md);
@@ -31,7 +29,7 @@ int	end_game(t_t *t)
 	mlx_destroy_window(t->wd->mp, t->wd->wp);
 	mlx_destroy_display(t->wd->mp);
 	if (a && b && c)
-		free_maps(t->md, rs);
+		free_maps(t->md);
 	free(t->md->str);
 	free(t->md);
 	if (a && b && c && d)
@@ -41,8 +39,10 @@ int	end_game(t_t *t)
 	free(t);
 	return (0);
 }
-int free_maps(t_md *md, int rs)
+int free_maps(t_md *md)
 	{
+		int	rs;
+		rs = md->row_size;
 		while (rs--)
 			free(md->cm[rs]);
 		free(md->cm);
