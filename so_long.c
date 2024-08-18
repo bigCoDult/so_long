@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 13:51:06 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 20:24:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 20:41:20 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_printf("[argc is not 2]\n");
-		return (0);
+		return (1);
 	}
 	if (!validate_ext(argv[1]))
 	{
 		ft_printf("[not proper file ext]\n");
-		return (0);
+		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{	
+		ft_printf("[file don't exist]\n");
+		return (1);
+	}
 	so_long(fd);
 	close(fd);
 	return (0);
