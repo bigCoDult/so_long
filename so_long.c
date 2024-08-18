@@ -16,13 +16,12 @@ int	main(int argc, char **argv)
 {
 	int	fd;
 
-	// if (argc != 2)
-	// {
-	// 	ft_printf("Error\n");
-	// 	return (0);
-	// }
-	// fd = open(argv[1], O_RDONLY);
-	fd = open("map.ber", O_RDONLY);
+	if (argc != 2)
+	{
+		ft_printf("Error\n");
+		return (0);
+	}
+	fd = open(argv[1], O_RDONLY);
 	so_long(fd);
 	close(fd);
 	return (0);

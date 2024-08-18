@@ -1,19 +1,21 @@
-NAME = so_long.a
+NAME = so_long
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
+LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lXrandr
 AR = ar
 ARFLAGS = rcs
 RM = rm -f
 INC = -I.
-SRC = draw.c \
-			end.c \
-			ft_printf.c \
-			ft_pututils.c \
-			hook.c \
-			init.c \
+SRC = \
 			so_long.c \
 			util.c \
+			init.c \
 			validate.c \
+			hook.c \
+			draw.c \
+			end.c \
+			ft_printf.c \
+			ft_pututils.c
 
 OBJ = $(SRC:.c=.o)
 
