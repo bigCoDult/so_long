@@ -128,5 +128,6 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_putll_fd(long long int n, int fd);
 int		ft_puthex_fd(int islower, long long unsigned int n, int fd);
+int		validate_ext(char *str);
 
 #endif /* SO_LONG_H */

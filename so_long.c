@@ -21,6 +21,11 @@ int	main(int argc, char **argv)
 		ft_printf("not proper text input\n");
 		return (0);
 	}
+	if (!validate_ext(argv[1]))
+	{
+		ft_printf("not proper file ext\n");
+		return (0);
+	}
 	fd = open(argv[1], O_RDONLY);
 	so_long(fd);
 	close(fd);
@@ -82,4 +87,17 @@ void	init_wd(t_t *t)
 	t->wd->wp = mlx_new_window(\
 	t->wd->mp, t->wd->size_x, t->wd->size_y, t->wd->title);
 	return ;
+}
+
+int	validate_ext(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (*str == '\0')
+		return (0);
+	if (str[len - 1] != 'r' || str[len - 2] != 'e' \
+	|| str[len - 3] != 'b' || str[len - 4] != '.')
+		return (0);
+	return (1);
 }
