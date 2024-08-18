@@ -1,7 +1,7 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
-LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lXrandr
+LDFLAGS = -L. -lmlx -lX11 -lXext -lXrandr
 RM = rm -f
 INC = -I.
 SRC = \
@@ -20,7 +20,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
