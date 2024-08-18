@@ -1,9 +1,7 @@
-NAME = so_long.a
+NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
 LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lXrandr
-AR = ar
-ARFLAGS = rcs
 RM = rm -f
 INC = -I.
 SRC = \
@@ -22,7 +20,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) $(NAME) $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
