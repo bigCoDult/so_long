@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:17:09 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:50:44 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,19 @@ int	end_game(t_t *t)
 	free(t);
 	return (0);
 }
-int free_maps(t_md *md)
-	{
-		int	rs;
-		rs = md->row_size;
-		while (rs--)
-			free(md->cm[rs]);
-		free(md->cm);
-		rs = md->row_size;
-		while (rs--)
-			free(md->vm[rs]);
-		free(md->vm);
+
+int	free_maps(t_md *md)
+{
+	int	rs;
+
+	rs = md->row_size;
+	while (rs--)
+		free(md->cm[rs]);
+	free(md->cm);
+	rs = md->row_size;
+	while (rs--)
+		free(md->vm[rs]);
+	free(md->vm);
 }
 
 int	close_window(void *param)
