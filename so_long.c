@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 13:51:06 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/16 13:51:06 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 20:24:44 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("not proper text input\n");
+		ft_printf("[argc is not 2]\n");
 		return (0);
 	}
 	if (!validate_ext(argv[1]))
 	{
-		ft_printf("not proper file ext\n");
+		ft_printf("[not proper file ext]\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
