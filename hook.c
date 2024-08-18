@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:30:14 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:25:50 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	key_hook(t_t *t)
 
 	step = 0;
 	t->md->step = 0;
-	printf("step : %d\n", t->md->step++);
+	ft_printf("step : %d\n", t->md->step++);
 	draw_map(t);
 	t->md->exit = get_cor(t->md, E);
 	param = (void *)t;
@@ -53,13 +53,13 @@ int	move_way(int key, t_c person, t_t *t)
 		return (0);
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN \
 	|| key == KEY_A || key == KEY_LEFT || key == KEY_D || key == KEY_RIGHT)
-		printf("step : %d\n", t->md->step++);
+		ft_printf("step : %d\n", t->md->step++);
 	if (t->md->cm[way.r][way.c] == C)
 		t->md->c_c--;
 	if (t->md->cm[way.r][way.c] == E && t->md->c_c == 0)
 	{
 		mlx_loop_end(t->wd->mp);
-		printf("!!!!!!!!!!!!!!!game clear!!!!!!!!!!!!!!!\n");
+		ft_printf("!!!!!!!!!!!!!!!game clear!!!!!!!!!!!!!!!\n");
 	}
 	t->md->cm[person.r][person.c] = Z;
 	if (get_cor(t->md, E).r == -1)

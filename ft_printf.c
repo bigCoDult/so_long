@@ -5,15 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 11:26:58 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/05/11 11:26:58 by sanbaek          ###   ########.fr       */
+/*   Created: 2024/08/18 10:28:19 by sanbaek           #+#    #+#             */
+/*   Updated: 2024/08/18 10:28:19 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int		ft_putfmt_cdux(t_etc *etc, va_list ap, char c);
-int		ft_putfmt_sp(t_etc *etc, va_list ap, char c);
+#include "so_long.h"
 
 int	ft_printf(const char *str, ...)
 {
@@ -36,8 +33,8 @@ int	ft_printf(const char *str, ...)
 		else
 			etc->n += ft_putchar_fd(*str, 1);
 		str++;
+		va_end(ap);
 	}
-	va_end(ap);
 	final_count = etc->n;
 	free(etc);
 	return (final_count);

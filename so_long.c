@@ -60,7 +60,7 @@ int	deal_map(t_t	*t)
 	t->md->possible = is_possible(t->md, person);
 	if (!t->md->possible)
 	{
-		printf("[impossible map]\n");
+		ft_printf("[impossible map]\n");
 		mlx_loop_end(t->wd->mp);
 		return (0);
 	}

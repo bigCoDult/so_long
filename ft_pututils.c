@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_pututils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 15:31:29 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/05/10 15:31:29 by sanbaek          ###   ########.fr       */
+/*   Created: 2024/08/18 10:28:54 by sanbaek           #+#    #+#             */
+/*   Updated: 2024/08/18 10:28:54 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+#include "so_long.h"
 
 int	ft_putchar_fd(char c, int fd)
 {

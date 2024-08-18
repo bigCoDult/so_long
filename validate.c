@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 10:25:05 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:25:50 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	validate_map(t_md *md)
 {
 	if (!is_proper_chars(md))
-		printf("[not proper char]\n");
+		ft_printf("[not proper char]\n");
 	if (!is_square(md))
 	{
-		printf("[not box]\n");
+		ft_printf("[not box]\n");
 		return (0);
 	}
 	if (!is_wall(md))
-		printf("[not wall box]\n");
+		ft_printf("[not wall box]\n");
 	if (is_square(md) && is_wall(md) && is_proper_chars(md))
 		return (1);
 	return (0);
