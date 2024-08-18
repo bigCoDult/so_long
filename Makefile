@@ -1,5 +1,5 @@
 NAME = so_long.a
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
 LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lXrandr
 AR = ar
