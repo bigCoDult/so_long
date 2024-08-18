@@ -103,7 +103,7 @@ bool	validate_map(t_m_d *m_d);
 bool	is_square(t_m_d *m_d);
 bool	is_w(t_m_d *m_d);
 bool	is_proper_chars(t_m_d *m_d);
-t_c	get_cor(t_m_d *m_d, char c);
+t_c		get_cor(t_m_d *m_d, char c);
 bool	is_possible(t_m_d *m_d, t_c person);
 void	key_hook(t_t *t);
 int		move_person(int key, void *param);
@@ -111,6 +111,8 @@ int		close_window(void *param);
 int		move_way(int key, t_c person, t_t *t);
 void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
-t_c	get_way(int key, t_c person, t_c way, t_t *t);
+t_c		get_way(int key, t_c person, t_c way, t_t *t);
+int		free_maps(t_m_d *m_d, int rs);
+
 
 #endif /* SO_LONG_H */

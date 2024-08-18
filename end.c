@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:06:07 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:14:04 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,7 @@ int	end_game(t_t *t)
 	mlx_destroy_window(t->wd->mp, t->wd->wp);
 	mlx_destroy_display(t->wd->mp);
 	if (a && b && c)
-	{
-		while (rs--)
-			free(t->m_d->cm[rs]);
-		free(t->m_d->cm);
-		rs = t->m_d->row_size;
-		while (rs--)
-			free(t->m_d->vm[rs]);
-		free(t->m_d->vm);
-	}
+		free_maps(t->m_d, rs);
 	free(t->m_d->str);
 	free(t->m_d);
 	if (a && b && c && d)
@@ -48,6 +40,16 @@ int	end_game(t_t *t)
 	free(t->wd);
 	free(t);
 	return (0);
+}
+int free_maps(t_m_d *m_d, int rs)
+	{
+		while (rs--)
+			free(m_d->cm[rs]);
+		free(m_d->cm);
+		rs = m_d->row_size;
+		while (rs--)
+			free(m_d->vm[rs]);
+		free(m_d->vm);
 }
 
 int	close_window(void *param)
