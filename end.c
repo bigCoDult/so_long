@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 08:59:35 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:04:23 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	close_window(void *param)
 
 void	destroy_tiles(t_tt *tt)
 {
-	mlx_destroy_image (tt->wd->mp, tt->td->ro);
-	mlx_destroy_image (tt->wd->mp, tt->td->gr);
-	mlx_destroy_image (tt->wd->mp, tt->td->pe);
-	mlx_destroy_image (tt->wd->mp, tt->td->ch);
-	mlx_destroy_image (tt->wd->mp, tt->td->dr);
+	mlx_destroy_image (tt->wd->mp, tt->td->r);
+	mlx_destroy_image (tt->wd->mp, tt->td->g);
+	mlx_destroy_image (tt->wd->mp, tt->td->p);
+	mlx_destroy_image (tt->wd->mp, tt->td->h);
+	mlx_destroy_image (tt->wd->mp, tt->td->d);
 }

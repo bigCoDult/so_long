@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:36:53 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:01:47 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:04:23 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_c	get_cor(t_m_d *m_d, char c)
 
 void	draw_map(t_tt	*tt)
 {
-	int		index;
+	int	index;
 	t_c	c;
 
 	index = 0;
@@ -46,15 +46,15 @@ void	draw_map(t_tt	*tt)
 		while (c.c < tt->m_d->col_size)
 		{
 			if (tt->m_d->cm[c.r][c.c] == W)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->ro, (t_c){T * c.c++, T * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->td->r, (t_c){T * c.c++, T * c.r});
 			else if (tt->m_d->cm[c.r][c.c] == Z)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->gr, (t_c){T * c.c++, T * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->td->g, (t_c){T * c.c++, T * c.r});
 			else if (tt->m_d->cm[c.r][c.c] == P)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->pe, (t_c){T * c.c++, T * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->td->p, (t_c){T * c.c++, T * c.r});
 			else if (tt->m_d->cm[c.r][c.c] == C)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->ch, (t_c){T * c.c++, T * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->td->h, (t_c){T * c.c++, T * c.r});
 			else if (tt->m_d->cm[c.r][c.c] == E)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->dr, (t_c){T * c.c++, T * c.r});
+				pi(tt->wd->mp, tt->wd->wp, tt->td->d, (t_c){T * c.c++, T * c.r});
 		}
 		c.r++;
 	}
@@ -70,10 +70,10 @@ void	*init_tiles(t_tt	*tt)
 	tt->td = malloc(sizeof(t_t_d));
 	if (tt->td == NULL)
 		return (NULL);
-	tt->td->ro = open_xpm(tt->wd, NULL, "rock");
-	tt->td->gr = open_xpm(tt->wd, NULL, "grass");
-	tt->td->pe = open_xpm(tt->wd, NULL, "person");
-	tt->td->ch = open_xpm(tt->wd, NULL, "chest");
-	tt->td->dr = open_xpm(tt->wd, NULL, "door");
+	tt->td->r = open_xpm(tt->wd, NULL, "rock");
+	tt->td->g = open_xpm(tt->wd, NULL, "grass");
+	tt->td->p = open_xpm(tt->wd, NULL, "person");
+	tt->td->h = open_xpm(tt->wd, NULL, "chest");
+	tt->td->d = open_xpm(tt->wd, NULL, "door");
 	return (NULL);
 }

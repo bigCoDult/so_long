@@ -50,11 +50,11 @@ typedef struct s_wd
 
 typedef struct s_t_d
 {
-	void	*ro;
-	void	*gr;
-	void	*pe;
-	void	*ch;
-	void	*dr;
+	void	*r;
+	void	*g;
+	void	*p;
+	void	*h;
+	void	*d;
 }	t_t_d;
 
 typedef struct s_cor
