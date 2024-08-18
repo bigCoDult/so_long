@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 11:38:17 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 16:36:57 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	move_way(int key, t_c person, t_t *t)
 {
 	t_c	way;
 
+	way = (t_c){0, 0};
 	way = get_way(key, person, way);
 	if (t->md->cm[way.r][way.c] == W)
 		return (0);
