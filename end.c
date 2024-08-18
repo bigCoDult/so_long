@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:38:26 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:50:44 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:51:39 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	end_game(t_t *t)
 
 	a = is_square(t->md);
 	if (a)
-		b = is_w(t->md);
+		b = is_wall(t->md);
 	c = is_proper_chars(t->md);
 	d = t->md->possible;
 	if (a && b && c && d)

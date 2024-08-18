@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:55:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:30:28 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:51:39 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ bool	validate_map(t_md *md)
 		printf("[not box]\n");
 		return (false);
 	}
-	if (!is_w(md))
+	if (!is_wall(md))
 		printf("[not wall box]\n");
-	if (is_square(md) && is_w(md) && is_proper_chars(md))
+	if (is_square(md) && is_wall(md) && is_proper_chars(md))
 		return (true);
 	return (false);
 }
@@ -54,7 +54,7 @@ bool	is_square(t_md *md)
 	return (true);
 }
 
-bool	is_w(t_md *md)
+bool	is_wall(t_md *md)
 {
 	int	col_size;
 	int	i;

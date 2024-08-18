@@ -100,7 +100,7 @@ char	*join_s(char *st_s, char *buf);
 void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name);
 bool	validate_map(t_md *md);
 bool	is_square(t_md *md);
-bool	is_w(t_md *md);
+bool	is_wall(t_md *md);
 bool	is_proper_chars(t_md *md);
 t_c		get_cor(t_md *md, char c);
 bool	is_possible(t_md *md, t_c person);
