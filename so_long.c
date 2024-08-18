@@ -24,57 +24,57 @@ int	main(int argc, char **argv)
 
 void	so_long(int fd)
 {
-	t_tt	*tt;
+	t_t	*t;
 
-	tt = malloc(sizeof(t_tt));
-	if (tt == NULL)
+	t = malloc(sizeof(t_t));
+	if (t == NULL)
 		return ;
-	tt->wd = malloc(sizeof(t_wd));
-	if (tt->wd == NULL)
+	t->wd = malloc(sizeof(t_wd));
+	if (t->wd == NULL)
 		return ;
-	tt->m_d = malloc(sizeof(t_m_d));
-	if (tt->m_d == NULL)
+	t->m_d = malloc(sizeof(t_m_d));
+	if (t->m_d == NULL)
 		return ;
-	tt->m_d->row_size = 0;
-	tt->m_d->col_size = 0;
-	set_str(fd, tt->m_d);
-	init_wd(tt);
-	if (deal_map(tt))
-		key_hook(tt);
-	mlx_loop(tt->wd->mp);
-	end_game(tt);
+	t->m_d->row_size = 0;
+	t->m_d->col_size = 0;
+	set_str(fd, t->m_d);
+	init_wd(t);
+	if (deal_map(t))
+		key_hook(t);
+	mlx_loop(t->wd->mp);
+	end_game(t);
 }
 
-int	deal_map(t_tt	*tt)
+int	deal_map(t_t	*t)
 {
 	t_c	person;
 
-	if (!validate_map(tt->m_d))
+	if (!validate_map(t->m_d))
 	{
-		mlx_loop_end(tt->wd->mp);
+		mlx_loop_end(t->wd->mp);
 		return (0);
 	}
-	set_c_map(tt->m_d);
-	set_v_map(tt->m_d);
-	person = get_cor(tt->m_d, P);
-	tt->m_d->possible = is_possible(tt->m_d, person);
-	if (!tt->m_d->possible)
+	set_c_map(t->m_d);
+	set_v_map(t->m_d);
+	person = get_cor(t->m_d, P);
+	t->m_d->possible = is_possible(t->m_d, person);
+	if (!t->m_d->possible)
 	{
 		printf("[impossible map]\n");
-		mlx_loop_end(tt->wd->mp);
+		mlx_loop_end(t->wd->mp);
 		return (0);
 	}
-	init_tiles(tt);
+	init_tiles(t);
 	return (1);
 }
 
-void	init_wd(t_tt *tt)
+void	init_wd(t_t *t)
 {
-	tt->wd->title = "so_long";
-	tt->wd->size_x = tt->m_d->col_size * 20;
-	tt->wd->size_y = tt->m_d->row_size * 20;
-	tt->wd->mp = mlx_init();
-	tt->wd->wp = mlx_new_window(\
-	tt->wd->mp, tt->wd->size_x, tt->wd->size_y, tt->wd->title);
+	t->wd->title = "so_long";
+	t->wd->size_x = t->m_d->col_size * 20;
+	t->wd->size_y = t->m_d->row_size * 20;
+	t->wd->mp = mlx_init();
+	t->wd->wp = mlx_new_window(\
+	t->wd->mp, t->wd->size_x, t->wd->size_y, t->wd->title);
 	return ;
 }

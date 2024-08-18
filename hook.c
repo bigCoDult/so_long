@@ -6,69 +6,69 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 12:39:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:00:14 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:06:07 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	key_hook(t_tt *tt)
+void	key_hook(t_t *t)
 {
 	void	*param;
 	int		step;
 
 	step = 0;
-	tt->m_d->step = 0;
-	printf("step : %d\n", tt->m_d->step++);
-	draw_map(tt);
-	tt->m_d->exit = get_cor(tt->m_d, E);
-	param = (void *)tt;
-	is_proper_chars(tt->m_d);
-	mlx_hook(tt->wd->wp, KeyPress, KeyPressMask, &move_person, param);
-	mlx_hook(tt->wd->wp, 17, NoEventMask, &close_window, param);
+	t->m_d->step = 0;
+	printf("step : %d\n", t->m_d->step++);
+	draw_map(t);
+	t->m_d->exit = get_cor(t->m_d, E);
+	param = (void *)t;
+	is_proper_chars(t->m_d);
+	mlx_hook(t->wd->wp, KeyPress, KeyPressMask, &move_person, param);
+	mlx_hook(t->wd->wp, 17, NoEventMask, &close_window, param);
 	return ;
 }
 
 int	move_person(int key, void *param)
 {
-	t_tt	*tt;
+	t_t	*t;
 	t_c	person;
 	t_c	exit;
 
-	tt = (t_tt *)param;
-	person = get_cor(tt->m_d, P);
+	t = (t_t *)param;
+	person = get_cor(t->m_d, P);
 	if (key == KEY_ESC)
-		mlx_loop_end(tt->wd->mp);
+		mlx_loop_end(t->wd->mp);
 	else
-		move_way(key, person, tt);
+		move_way(key, person, t);
 	return (0);
 }
 
-int	move_way(int key, t_c person, t_tt *tt)
+int	move_way(int key, t_c person, t_t *t)
 {
 	t_c	way;
 
-	way = get_way(key, person, way, tt);
-	if (tt->m_d->cm[way.r][way.c] == W)
+	way = get_way(key, person, way, t);
+	if (t->m_d->cm[way.r][way.c] == W)
 		return (0);
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN \
 	|| key == KEY_A || key == KEY_LEFT || key == KEY_D || key == KEY_RIGHT)
-		printf("step : %d\n", tt->m_d->step++);
-	if (tt->m_d->cm[way.r][way.c] == C)
-		tt->m_d->c_c--;
-	if (tt->m_d->cm[way.r][way.c] == E && tt->m_d->c_c == 0)
+		printf("step : %d\n", t->m_d->step++);
+	if (t->m_d->cm[way.r][way.c] == C)
+		t->m_d->c_c--;
+	if (t->m_d->cm[way.r][way.c] == E && t->m_d->c_c == 0)
 	{
-		mlx_loop_end(tt->wd->mp);
+		mlx_loop_end(t->wd->mp);
 		printf("!!!!!!!!!!!!!!!game clear!!!!!!!!!!!!!!!\n");
 	}
-	tt->m_d->cm[person.r][person.c] = Z;
-	if (get_cor(tt->m_d, E).r == -1)
-		tt->m_d->cm[tt->m_d->exit.r][tt->m_d->exit.c] = E;
-	tt->m_d->cm[way.r][way.c] = P;
-	draw_map(tt);
+	t->m_d->cm[person.r][person.c] = Z;
+	if (get_cor(t->m_d, E).r == -1)
+		t->m_d->cm[t->m_d->exit.r][t->m_d->exit.c] = E;
+	t->m_d->cm[way.r][way.c] = P;
+	draw_map(t);
 }
 
-t_c	get_way(int key, t_c person, t_c way, t_tt *tt)
+t_c	get_way(int key, t_c person, t_c way, t_t *t)
 {
 	way = (t_c){0, 0};
 	if (key == KEY_W || key == KEY_UP)

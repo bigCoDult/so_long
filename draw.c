@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 08:36:53 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:04:23 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/08/18 09:06:07 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,28 @@ t_c	get_cor(t_m_d *m_d, char c)
 	return ((t_c){-1, -1});
 }
 
-void	draw_map(t_tt	*tt)
+void	draw_map(t_t	*t)
 {
 	int	index;
 	t_c	c;
 
 	index = 0;
 	c = (t_c){0, 0};
-	while (c.r < tt->m_d->row_size)
+	while (c.r < t->m_d->row_size)
 	{
 		c.c = 0;
-		while (c.c < tt->m_d->col_size)
+		while (c.c < t->m_d->col_size)
 		{
-			if (tt->m_d->cm[c.r][c.c] == W)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->r, (t_c){T * c.c++, T * c.r});
-			else if (tt->m_d->cm[c.r][c.c] == Z)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->g, (t_c){T * c.c++, T * c.r});
-			else if (tt->m_d->cm[c.r][c.c] == P)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->p, (t_c){T * c.c++, T * c.r});
-			else if (tt->m_d->cm[c.r][c.c] == C)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->h, (t_c){T * c.c++, T * c.r});
-			else if (tt->m_d->cm[c.r][c.c] == E)
-				pi(tt->wd->mp, tt->wd->wp, tt->td->d, (t_c){T * c.c++, T * c.r});
+			if (t->m_d->cm[c.r][c.c] == W)
+				pi(t->wd->mp, t->wd->wp, t->td->r, (t_c){T * c.c++, T * c.r});
+			else if (t->m_d->cm[c.r][c.c] == Z)
+				pi(t->wd->mp, t->wd->wp, t->td->g, (t_c){T * c.c++, T * c.r});
+			else if (t->m_d->cm[c.r][c.c] == P)
+				pi(t->wd->mp, t->wd->wp, t->td->p, (t_c){T * c.c++, T * c.r});
+			else if (t->m_d->cm[c.r][c.c] == C)
+				pi(t->wd->mp, t->wd->wp, t->td->h, (t_c){T * c.c++, T * c.r});
+			else if (t->m_d->cm[c.r][c.c] == E)
+				pi(t->wd->mp, t->wd->wp, t->td->d, (t_c){T * c.c++, T * c.r});
 		}
 		c.r++;
 	}
@@ -65,15 +65,15 @@ void	pi(void *mlx, void *win, void *img, t_c c)
 	mlx_put_image_to_window(mlx, win, img, c.r, c.c);
 }
 
-void	*init_tiles(t_tt	*tt)
+void	*init_tiles(t_t	*t)
 {
-	tt->td = malloc(sizeof(t_t_d));
-	if (tt->td == NULL)
+	t->td = malloc(sizeof(t_t_d));
+	if (t->td == NULL)
 		return (NULL);
-	tt->td->r = open_xpm(tt->wd, NULL, "rock");
-	tt->td->g = open_xpm(tt->wd, NULL, "grass");
-	tt->td->p = open_xpm(tt->wd, NULL, "person");
-	tt->td->h = open_xpm(tt->wd, NULL, "chest");
-	tt->td->d = open_xpm(tt->wd, NULL, "door");
+	t->td->r = open_xpm(t->wd, NULL, "rock");
+	t->td->g = open_xpm(t->wd, NULL, "grass");
+	t->td->p = open_xpm(t->wd, NULL, "person");
+	t->td->h = open_xpm(t->wd, NULL, "chest");
+	t->td->d = open_xpm(t->wd, NULL, "door");
 	return (NULL);
 }
