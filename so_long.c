@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Error\n");
+		ft_printf("not proper text input\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);

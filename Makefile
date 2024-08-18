@@ -1,4 +1,4 @@
-NAME = so_long
+NAME = so_long.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -O0
 LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lXrandr
