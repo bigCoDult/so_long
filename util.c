@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/08/18 09:01:47 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/09/24 00:14:28 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,12 @@ char	*template_literal(char *line, char *word, int location)
 	word_i = 0;
 	while (line_i < location)
 		str[str_i++] = line[line_i++];
-	while (word_i < ft_strlen(word))
+	while (word_i < (int)ft_strlen(word))
 		str[str_i++] = word[word_i++];
 	while (line[line_i] != '\0')
 		str[str_i++] = line[line_i++];
 	str[str_i] = '\0';
 	return (str);
-}
-
-int	ft_strlen(char *s)
-{
-	int	length;
-
-	length = 0;
-	while (s && s[length] != '\0')
-		length++;
-	return (length);
 }
 
 char	*join_s(char *st_s, char *buf)
@@ -89,4 +79,12 @@ void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name)
 	single_tile = mlx_xpm_file_to_image(wd->mp, path, &tile_len, &tile_len);
 	free(path);
 	return (single_tile);
+}
+
+void free_empty(t_t *t)
+{
+	free(t->md->str);
+	free(t->md);
+	free(t->wd);
+	free(t);
 }

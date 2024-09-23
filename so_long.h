@@ -32,6 +32,7 @@
 # include <X11/keysym.h>
 
 # include "./minilibx-linux/mlx.h"
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -39,13 +40,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
-typedef struct s_etc
-{
-	int						n;
-	unsigned int			u;
-	char					*string;
-	long long unsigned int	*ads;
-}	t_etc;
 typedef struct s_wd
 {
 	void	*mp;
@@ -90,6 +84,7 @@ typedef struct s_tt
 	t_md	*md;
 }	t_t;
 
+void	free_empty(t_t *t);
 void	so_long(int fd);
 void	init_wd(t_t *t);
 void	pi(void *mlx, void *win, void *img, t_c c);
@@ -101,7 +96,6 @@ void	set_v_map(t_md *md);
 void	fill_v_map(int r, int index, t_md *md);
 void	*init_tiles(t_t	*t);
 void	draw_map(t_t	*t);
-int		ft_strlen(char *s);
 char	*template_literal(char *line, char *word, int location);
 char	*join_s_till_c(char *s1, char *s2, char c);
 char	*join_s(char *st_s, char *buf);
@@ -121,13 +115,6 @@ void	destroy_tiles(t_t *t);
 int		end_game(t_t *t);
 t_c		get_way(int key, t_c person, t_c way);
 int		free_maps(t_md *md);
-int		ft_printf(const char *str, ...);
-int		ft_putfmt_cdux(t_etc *etc, va_list ap, char c);
-int		ft_putfmt_sp(t_etc *etc, va_list ap, char c);
-int		ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putll_fd(long long int n, int fd);
-int		ft_puthex_fd(int islower, long long unsigned int n, int fd);
 int		validate_ext(char *str);
 
 #endif /* SO_LONG_H */

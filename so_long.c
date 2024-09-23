@@ -53,6 +53,12 @@ void	so_long(int fd)
 	t->md->row_size = 0;
 	t->md->col_size = 0;
 	set_str(fd, t->md);
+	if (t->md->row_size == 0 || t->md->row_size == 1)
+	{
+		free_empty(t);
+		ft_printf("[row is 0 or 1]\n");
+		return ;
+	}
 	init_wd(t);
 	if (deal_map(t))
 		key_hook(t);
