@@ -1,25 +1,35 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
-LDFLAGS = -L. -lmlx -lX11 -lXext -lXrandr
-RM = rm -f
-INC = -I.
+RM = rm -fr
+MLX_DIR = ./minilibx-linux
+MLX = $(MLX_DIR)/libmlx_Linux.a
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr
+INC = -I$(MLX_DIR) -I$(LIBFT_DIR)
 SRC = \
-			so_long.c \
+			main.c \
+			game.c \
+			hook.c \
 			util.c \
 			init.c \
 			validate.c \
-			hook.c \
 			draw.c \
 			end.c \
-			ft_printf.c \
-			ft_pututils.c
+
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
+$(NAME): $(MLX) $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 %.o: %.c
@@ -27,9 +37,12 @@ $(NAME): $(OBJ)
 
 clean:
 	$(RM) $(OBJ)
+	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
