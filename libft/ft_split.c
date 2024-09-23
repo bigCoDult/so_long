@@ -81,10 +81,9 @@ char	**ft_split(char const *str, char separator)
 	t_sentence	sentence;
 
 	sentence.w_c = count_word(str, separator);
-	sentence.words = (char **)ft_calloc(sentence.w_c + 1, sizeof(char *));
-	// 왜 +1이 아니라 +2를 해야되는지 모르겠음
-	// 사실 +1도 왜 필요한지 모르겠음
-	sentence.edge_pair = (size_t *)ft_calloc(sentence.w_c * 2 + 2, sizeof(size_t));
+	sentence.words = (char **)ft_calloc(sentence.w_c + 2, sizeof(char *));
+	sentence.edge_pair = (size_t *)ft_calloc(\
+	sentence.w_c * 2 + 2, sizeof(size_t));
 	if (sentence.words == NULL || sentence.edge_pair == NULL)
 	{
 		free(sentence.words);

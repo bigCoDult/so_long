@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	{	
+	{
 		ft_printf("[file don't exist]\n");
 		return (1);
 	}

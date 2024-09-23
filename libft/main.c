@@ -21,7 +21,7 @@
 // 	while (i++ < 10)
 // 	{
 // 		char *str = ft_split("   lorem   ipsum dolor      ", ' ')[i]
-// 		printf("%s", str);
+// 		ft_printf("%s", str);
 // 	}
 // 	// strlcat
 // 		// size_t size = 0;
@@ -41,22 +41,22 @@
 // 		// // const char *src = NULL;
 // 		// // const char *src2 = NULL;
 // 		// // const char *src2 = NULL;
-// 		// printf("\n");
-// 		// printf("실행전\n");
-// 		// printf("dest : %s\n", dest);
-// 		// printf("src : %s\n", src);
-// 		// printf("size : %zu\n", size);
-// 		// printf("\n");
-// 		// printf("strlcat\n");
-// 		// printf("반환값 : %lu\n", strlcat(dest, src, size));
-// 		// printf("dest  : %s\n", dest);
-// 		// printf("src   : %s\n", src);
-// 		// printf("\n");
-// 		// printf("ft_strlcat\n");
-// 		// printf("반환값 : %zu\n", ft_strlcat(dest2, src2, size2));
-// 		// printf("dest2  : %s\n", dest2);
-// 		// printf("src2   : %s\n", src2);
-// 		// printf("\n");
+// 		// ft_printf("\n");
+// 		// ft_printf("실행전\n");
+// 		// ft_printf("dest : %s\n", dest);
+// 		// ft_printf("src : %s\n", src);
+// 		// ft_printf("size : %zu\n", size);
+// 		// ft_printf("\n");
+// 		// ft_printf("strlcat\n");
+// 		// ft_printf("반환값 : %lu\n", strlcat(dest, src, size));
+// 		// ft_printf("dest  : %s\n", dest);
+// 		// ft_printf("src   : %s\n", src);
+// 		// ft_printf("\n");
+// 		// ft_printf("ft_strlcat\n");
+// 		// ft_printf("반환값 : %zu\n", ft_strlcat(dest2, src2, size2));
+// 		// ft_printf("dest2  : %s\n", dest2);
+// 		// ft_printf("src2   : %s\n", src2);
+// 		// ft_printf("\n");
 
 // 	// strcmp
 // 		// char lhs[99] = "aaaaaaa";
@@ -64,9 +64,9 @@
 // 		// int count = 0;
 // 		// while (count++ < 8)
 // 		// {
-// 		//   printf("\n");
-// 		//   printf("strncmp    : %d\n", strncmp(lhs, rhs, count));
-// 		//   printf("ft_strncmp : %d\n", ft_strncmp(lhs, rhs, count));
+// 		//   ft_printf("\n");
+// 		//   ft_printf("strncmp    : %d\n", strncmp(lhs, rhs, count));
+// 		//   ft_printf("ft_strncmp : %d\n", ft_strncmp(lhs, rhs, count));
 // 		// }
 
 // 	// substr
@@ -77,22 +77,22 @@
 // 		// // char *s2 = "12345";
 // 		// // unsigned int start2 = 10;
 // 		// // size_t len2 = 5;
-// 		// printf("\n");
-// 		// printf("실행전\n");
-// 		// printf("s : %s\n", s);
-// 		// printf("start : %d\n", start);
-// 		// printf("len : %lld\n", len);
-// 		// printf("\n");
-// 		// printf("substr\n");
-// 		// printf("반환값 : %s\n", ft_substr(s, start, len));
-// 		// printf("start  : %d\n", start);
-// 		// printf("len   : %lld\n", len);
-// 		// printf("\n");
-// 		// printf("ft_substr\n");
-// 		// printf("반환값 : %s\n", ft_substr(s2, start2, len2));
-// 		// printf("start2  : %d\n", start2);
-// 		// printf("len2   : %ld\n", len2);
-// 		// printf("\n");
+// 		// ft_printf("\n");
+// 		// ft_printf("실행전\n");
+// 		// ft_printf("s : %s\n", s);
+// 		// ft_printf("start : %d\n", start);
+// 		// ft_printf("len : %lld\n", len);
+// 		// ft_printf("\n");
+// 		// ft_printf("substr\n");
+// 		// ft_printf("반환값 : %s\n", ft_substr(s, start, len));
+// 		// ft_printf("start  : %d\n", start);
+// 		// ft_printf("len   : %lld\n", len);
+// 		// ft_printf("\n");
+// 		// ft_printf("ft_substr\n");
+// 		// ft_printf("반환값 : %s\n", ft_substr(s2, start2, len2));
+// 		// ft_printf("start2  : %d\n", start2);
+// 		// ft_printf("len2   : %ld\n", len2);
+// 		// ft_printf("\n");
 
 // 	return (0);
 // }
@@ -114,7 +114,7 @@
 // 	ft_memset(str, 't', 11);
 // 	str[10] = '\0';
 // 	ft_printf("\n----------------------\n");
-// 	printf("%s\n", str);
+// 	ft_printf("%s\n", str);
 // 	ft_printf("----------------------\n\n");
 // 	free(str);
 // }
@@ -146,9 +146,9 @@
 // {
 // 	char *str;
 // 	str = ft_itoa(2147483649);
-// 	printf("\n----------------------\n");
-// 	printf("%s\n", str);
-// 	printf("----------------------\n\n");
+// 	ft_printf("\n----------------------\n");
+// 	ft_printf("%s\n", str);
+// 	ft_printf("----------------------\n\n");
 // 	free(str);
 // 	return (0);
 // }
@@ -158,9 +158,9 @@
 // {
 // 	char *str;
 // 	str = ft_memchr("1234567890", '5', 10);
-// 	printf("\n----------------------\n");
-// 	printf("%s\n", str);
-// 	printf("----------------------\n\n");
+// 	ft_printf("\n----------------------\n");
+// 	ft_printf("%s\n", str);
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -169,9 +169,9 @@
 // {
 // 	int n;
 // 	n = ft_memcmp("1234567890", "1234500000", 10);
-// 	printf("\n----------------------\n");
-// 	printf("%d\n", n);
-// 	printf("----------------------\n\n");
+// 	ft_printf("\n----------------------\n");
+// 	ft_printf("%d\n", n);
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -181,18 +181,18 @@
 // 	char *str1;
 // 	char *str2;
 // 	char *str3;
-// 	printf("\n----------------------\n");
+// 	ft_printf("\n----------------------\n");
 // 	str1 = (char *)ft_calloc(11, 1);
 // 	ft_memcpy(str1, "abcdeABCDE", 11);
-// 	printf("%s\n", str1);
+// 	ft_printf("%s\n", str1);
 // 	str2 = (char *)ft_calloc(11, 1);
 // 	ft_memcpy(str2, "12345FGHIJ", 11);
-// 	printf("%s\n", str2);
+// 	ft_printf("%s\n", str2);
 // 	ft_memcpy(str1, str2, 10);
-// 	printf("%s\n", str1);
+// 	ft_printf("%s\n", str1);
 // 	free(str1);
 // 	free(str2);
-// 	printf("----------------------\n\n");
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -202,20 +202,20 @@
 // 	char *str1;
 // 	char *str2;
 // 	char *str3;
-// 	printf("\n----------------------\n");
+// 	ft_printf("\n----------------------\n");
 // 	str1 = (char *)ft_calloc(11, 1);
 // 	ft_memmove(str1, "ABCDEABCDE", 11);
-// 	printf("str1 : %s\n", str1);
+// 	ft_printf("str1 : %s\n", str1);
 // 	str2 = (char *)ft_calloc(11, 1);
 // 	ft_memmove(str2, "abcdeabcde", 11);
-// 	printf("str2 : %s\n", str2);
+// 	ft_printf("str2 : %s\n", str2);
 // 	// ft_memmove(str1, str2, 10);
 // 	// ft_memmove(str1, str2, 5);
 // 	ft_memmove(str1, str2, 1);
-// 	printf("\nresult %s\n", str1);
+// 	ft_printf("\nresult %s\n", str1);
 // 	free(str1);
 // 	free(str2);
-// 	printf("----------------------\n\n");
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -240,7 +240,7 @@
 // 		free(words[i--]);
 // 	free(words[0]);
 // 	free(words);
-// 	printf("----------------------\n\n");
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -256,7 +256,7 @@
 // 	str2 = ft_strchr(str1, ' ');
 // 	ft_printf("str2 : %s\n", str2);
 // 	free(str1);
-// 	printf("----------------------\n\n");
+// 	ft_printf("----------------------\n\n");
 // 	return (0);
 // }
 
@@ -273,7 +273,7 @@
 // 	ft_printf("str2 : %s\n", str2);
 // 	free(str1);
 // 	free(str2);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -294,7 +294,7 @@
 // 	ft_striteri(str1, test_striteri);
 // 	ft_printf("str1 : %s\n", str1);
 // 	free(str1);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -315,14 +315,14 @@
 // 	free(str1);
 // 	free(str2);
 // 	free(str3);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
 // strlcat
 // int main(void)
 // {
-// 	printf("\n----------------------\n");
+// 	ft_printf("\n----------------------\n");
 // 	char *str1;
 // 	char *str2;
 // 	char *str3;
@@ -333,7 +333,7 @@
 // 	ft_memmove(str2, "abcdeabcde", 11);
 // 	ft_printf("str2 : %s\n", str2);
 // 	ft_strlcat(str1, str2, 9);
-// 	printf("\nresult %s\n", str1);
+// 	ft_printf("\nresult %s\n", str1);
 // 	free(str1);
 // 	free(str2);
 // 	ft_printf("----------------------\n\n");
@@ -355,7 +355,7 @@
 // 	ft_striteri(str1, test_striteri);
 // 	ft_printf("str1 : %s\n", str1);
 // 	free(str1);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -379,7 +379,7 @@
 // 	ft_printf("str2 : %s\n", str2);
 // 	free(str1);
 // 	free(str2);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -401,7 +401,7 @@
 // 	ft_printf("n : %d\n", n);
 // 	free(str1);
 // 	free(str2);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -424,7 +424,7 @@
 // 	ft_printf("find : %s\n", find);
 // 	free(big);
 // 	free(little);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -441,7 +441,7 @@
 // 	find = ft_strrchr(str, c);
 // 	ft_printf("find : %s\n", find);
 // 	free(str);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -457,7 +457,7 @@
 // 	trimed = ft_strtrim(str, set);
 // 	ft_printf("trimed	: %s\n", trimed);
 // 	// free(str);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }
 
@@ -478,6 +478,6 @@
 // 	ft_printf("sub : %s\n", sub);
 // 	free(str);
 // 	free(sub);
-// 	printf("---------------------------\n\n");
+// 	ft_printf("---------------------------\n\n");
 // 	return (0);
 // }

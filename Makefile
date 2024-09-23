@@ -9,15 +9,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr
 INC = -I$(MLX_DIR) -I$(LIBFT_DIR)
 SRC = \
-			main.c \
-			game.c \
-			hook.c \
-			util.c \
-			init.c \
-			validate.c \
 			draw.c \
 			end.c \
-
+			hook.c \
+			init.c \
+			so_long.c \
+			util.c \
+			validate.c \
 
 OBJ = $(SRC:.c=.o)
 
