@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:14:12 by sanbaek           #+#    #+#             */
-/*   Updated: 2024/09/24 00:14:28 by sanbaek          ###   ########.fr       */
+/*   Updated: 2024/09/24 00:18:41 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	*open_xpm(t_wd *wd, void *single_tile, char *tile_name)
 	return (single_tile);
 }
 
-void free_empty(t_t *t)
+void	free_empty(t_t *t)
 {
 	free(t->md->str);
 	free(t->md);
